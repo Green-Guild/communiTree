@@ -1,10 +1,14 @@
-const express = require('express');
-const authControllers = require('../controllers/authControllers');
+import express from 'express';
+import {
+  showMe,
+  loginUser,
+  logoutUser,
+} from '../controllers/authControllers.js';
 
 const authRouter = express.Router();
 
-authRouter.get('/me', authControllers.showMe);
-authRouter.post('/login', authControllers.loginUser);
-authRouter.delete('/logout', authControllers.logoutUser);
+authRouter.get('/me', showMe);
+authRouter.post('/login', loginUser);
+authRouter.delete('/logout', logoutUser);
 
-module.exports = authRouter;
+export default authRouter;

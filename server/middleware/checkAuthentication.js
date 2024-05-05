@@ -6,4 +6,4 @@ const checkAuthentication = (req, res, next) => {
   return next();
 };
 
-module.exports = checkAuthentication;
+export default checkAuthentication;

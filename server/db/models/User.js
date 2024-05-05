@@ -1,7 +1,7 @@
-const knex = require('../knex');
-const authUtils = require('../../utils/auth-utils');
+import knex from '../knex.js';
+import { isValidPassword, hashPassword } from '../../utils/auth-utils.js';
 
-class User {
+export default class User {
   #passwordHash = null; // a private property
 
   // This constructor is NOT how a controller creates a new user in the database.
@@ -16,9 +16,9 @@ class User {
 
   // This instance method takes in a plain-text password and returns true if it matches
   // the User instance's hashed password.
-  isValidPassword = async (password) => (
-    authUtils.isValidPassword(password, this.#passwordHash)
-  );
+  isValidPassword = async (password) => {
+    isValidPassword(password, this.#passwordHash);
+  };
 
   static async list() {
     const query = `SELECT * FROM users`;
@@ -43,7 +43,7 @@ class User {
 
   static async create(username, password) {
     // hash the plain-text password using bcrypt before storing it in the database
-    const passwordHash = await authUtils.hashPassword(password);
+    const passwordHash = await hashPassword(password);
 
     const query = `INSERT INTO users (username, password_hash)
       VALUES (?, ?) RETURNING *`;
@@ -53,21 +53,20 @@ class User {
   }
 
   // this is an instance method that we can use to update
-  static async update(id, username) { // dynamic queries are easier if you add more properties
+  static async update(id, username) {
+    // dynamic queries are easier if you add more properties
     const query = `
       UPDATE users
       SET username=?
       WHERE id=?
       RETURNING *
-    `
-    const { rows } = await knex.raw(query, [username, id])
+    `;
+    const { rows } = await knex.raw(query, [username, id]);
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
-  };
+  }
 
   static async deleteAll() {
-    return knex('users').del()
+    return knex('users').del();
   }
 }
-
-module.exports = User;

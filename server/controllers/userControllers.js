@@ -1,7 +1,7 @@
-const { isAuthorized } = require('../utils/auth-utils');
-const User = require('../db/models/User');
+import { isAuthorized } from '../utils/auth-utils.js';
+import User from '../db/models/User.js';
 
-exports.createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   const { username, password } = req.body;
 
   // TODO: check if username is taken, and if it is what should you return?
@@ -11,12 +11,12 @@ exports.createUser = async (req, res) => {
   res.send(user);
 };
 
-exports.listUsers = async (req, res) => {
+export const listUsers = async (req, res) => {
   const users = await User.list();
   res.send(users);
 };
 
-exports.showUser = async (req, res) => {
+export const showUser = async (req, res) => {
   const { id } = req.params;
 
   const user = await User.find(id);
@@ -25,7 +25,7 @@ exports.showUser = async (req, res) => {
   res.send(user);
 };
 
-exports.updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   const { username } = req.body;
   const { id } = req.params;
 
@@ -35,6 +35,6 @@ exports.updateUser = async (req, res) => {
   if (!isAuthorized(id, req.session)) return res.sendStatus(403);
 
   const updatedUser = await User.update(id, username);
-  if (!updatedUser) return res.sendStatus(404)
+  if (!updatedUser) return res.sendStatus(404);
   res.send(updatedUser);
 };
