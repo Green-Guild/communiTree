@@ -1,10 +1,10 @@
-const User = require('../models/User');
+import User from '../models/User.js';
+import GoogleUser from '../models/GoogleUser.js';
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.seed = async (knex) => {
-  // Before you have models you can always just do `await knex('table_name').del`
+export const seed = async (knex) => {
   await knex('users').del();
 
   await knex.raw('ALTER SEQUENCE users_id_seq RESTART WITH 1');
