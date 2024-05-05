@@ -14,10 +14,13 @@ import userRouter from './routers/userRouter.js';
 const app = express();
 
 // middleware
-app.use(handleCookieSessions); // adds a session property to each request representing the cookie
+app.use(handleSessions); // adds a session property to each request representing the cookie
 app.use(logRoutes); // print information about each incoming request
 app.use(express.json()); // parse incoming request bodies as JSON
 app.use(express.static(join(import.meta.dirname, '../frontend/dist'))); // Serve static assets from the dist folder of the frontend
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api', authRouter);
 app.use('/api/users', userRouter);
