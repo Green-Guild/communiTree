@@ -1,12 +1,20 @@
 import { isAuthorized } from '../utils/auth-utils.js';
 import User from '../db/models/User.js';
+import { matchedData, validationResult } from 'express-validator';
 
 export const createUser = async (req, res) => {
-  const { username, password } = req.body;
+  const result = validationResult(req);
+  if (!result.isEmpty())
+    return res.status(400).send({ errors: result.array() });
 
-  // TODO: check if username is taken, and if it is what should you return?
+  const { username, password } = matchedData(req);
+
+  const existingUser = await User.findByUsername(username);
+  if (existingUser) {
+    return res.status(400).send({ error: 'Username is already taken.' });
+  }
+
   const user = await User.create(username, password);
-  req.session.userId = user.id;
 
   res.send(user);
 };
