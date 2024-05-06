@@ -9,7 +9,7 @@ export const loginUser = async (req, res) => {
 
   req.session.userId = user.id;
   res.send(user); */
-  res.sendStatus(200);
+  res.send(req.user);
 };
 
 export const logoutUser = (req, res) => {
