@@ -1,11 +1,11 @@
 import knex from '../knex.js';
 
 export default class GoogleUser {
-  constructor({ id, googleId, displayName, photo }) {
+  constructor({ id, google_id, display_name, picture }) {
     this.id = id;
-    this.googleId = googleId;
-    this.displayName = displayName;
-    this.photo = photo;
+    this.google_id = google_id;
+    this.display_name = display_name;
+    this.picture = picture;
   }
 
   static async list() {
@@ -21,19 +21,19 @@ export default class GoogleUser {
     return user ? new GoogleUser(user) : null;
   }
 
-  static async findByGoogleId(googleId) {
+  static async findByGoogleId(google_id) {
     const query = `SELECT * FROM google_users WHERE google_id = ?`;
-    const { rows } = await knex.raw(query, [googleId]);
+    const { rows } = await knex.raw(query, [google_id]);
     const user = rows[0];
     return user ? new GoogleUser(user) : null;
   }
 
-  static async create({ googleId, displayName, picture }) {
+  static async create({ google_id, display_name, picture }) {
     const query = `
       INSERT INTO google_users (google_id, display_name, picture)
       VALUES (?, ?, ?)
       RETURNING *`;
-    const { rows } = await knex.raw(query, [googleId, displayName, picture]);
+    const { rows } = await knex.raw(query, [google_id, display_name, picture]);
     return new GoogleUser(rows[0]);
   }
 }

@@ -2,6 +2,20 @@ import passport from 'passport';
 import { Strategy } from 'passport-google-oauth20';
 import GoogleUser from '../db/models/GoogleUser.js';
 
+// passport.serializeUser((googleUser, done) => {
+//   console.log(googleUser);
+//   done(null, googleUser);
+// });
+
+// passport.deserializeUser(async (user, done) => {
+//   try {
+//     const findUser = await GoogleUser.findByGoogleId(user.googleId);
+//     return findUser ? done(null, findUser) : done(null, null);
+//   } catch (err) {
+//     done(err, null);
+//   }
+// });
+
 export default passport.use(
   new Strategy(
     {
@@ -12,7 +26,6 @@ export default passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log(profile);
         const existingUser = await GoogleUser.findByGoogleId(profile.id);
 
         if (existingUser) {
@@ -20,8 +33,8 @@ export default passport.use(
         }
 
         const newUser = await GoogleUser.create({
-          googleId: profile.id,
-          displayName: profile.displayName,
+          google_id: profile.id,
+          display_name: profile.displayName,
           picture: profile.photos[0].value,
         });
 

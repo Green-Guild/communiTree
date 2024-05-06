@@ -1,6 +1,7 @@
 import passport from 'passport';
 import { Strategy } from 'passport-local';
 import User from '../db/models/User.js';
+import GoogleUser from '../db/models/GoogleUser.js';
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -8,7 +9,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const existingUser = await User.find(id);
+    const existingUser = (await User.find(id)) ?? (await GoogleUser.find(id));
     if (!existingUser) throw new Error('User Not Found');
     done(null, existingUser);
   } catch (err) {
