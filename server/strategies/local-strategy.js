@@ -1,7 +1,6 @@
 import passport from 'passport';
 import { Strategy } from 'passport-local';
 import User from '../db/models/User.js';
-import { isValidPassword } from '../utils/auth-utils.js';
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -22,7 +21,7 @@ export default passport.use(
     try {
       const findUser = await User.findByUsername(username);
       if (!findUser) throw new Error('User not found');
-      if (!isValidPassword(password, findUser.password)) {
+      if (!(await findUser.isValidPassword(password))) {
         throw new Error('Bad Credentials');
       }
       done(null, findUser);
