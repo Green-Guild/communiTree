@@ -17,6 +17,6 @@ export const isValidPassword = async (password, hash) =>
   bcrypt.compare(password, hash).catch((err) => console.error(err.message));
 
 export const isAuthorized = (id, session) => {
-  if (!id || !session || !session.passport.id) return false;
-  return +id === +session.passport.id;
+  if (!id || !session || !session.passport.user) return false;
+  return id === session.passport.id;
 };
