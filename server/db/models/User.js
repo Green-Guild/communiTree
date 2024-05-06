@@ -2,22 +2,17 @@ import knex from '../knex.js';
 import { isValidPassword, hashPassword } from '../../utils/auth-utils.js';
 
 export default class User {
-  #passwordHash = null; // a private property
+  #passwordHash = null;
 
-  // This constructor is NOT how a controller creates a new user in the database.
-  // Instead, it is used by each of the User static methods to hide the hashed
-  // password of users before sending user data to the client. Since #passwordHash
-  // is private, only the isValidPassword instance method can access that value.
+  // only the isValidPassword instance method can access #passwordHash
   constructor({ id, username, password_hash }) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
   }
 
-  // This instance method takes in a plain-text password and returns true if it matches
-  // the User instance's hashed password.
   isValidPassword = async (password) => {
-    isValidPassword(password, this.#passwordHash);
+    return isValidPassword(password, this.#passwordHash);
   };
 
   static async list() {
@@ -42,7 +37,6 @@ export default class User {
   }
 
   static async create(username, password) {
-    // hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await hashPassword(password);
 
     const query = `INSERT INTO users (username, password_hash)
@@ -52,9 +46,8 @@ export default class User {
     return new User(user);
   }
 
-  // this is an instance method that we can use to update
+  // TODO: fix update method
   static async update(id, username) {
-    // dynamic queries are easier if you add more properties
     const query = `
       UPDATE users
       SET username=?
