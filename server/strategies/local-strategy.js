@@ -8,9 +8,9 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const findUser = await User.find(id);
-    if (!findUser) throw new Error('User Not Found');
-    done(null, findUser);
+    const existingUser = await User.find(id);
+    if (!existingUser) throw new Error('User Not Found');
+    done(null, existingUser);
   } catch (err) {
     done(err, null);
   }
@@ -19,12 +19,12 @@ passport.deserializeUser(async (id, done) => {
 export default passport.use(
   new Strategy(async (username, password, done) => {
     try {
-      const findUser = await User.findByUsername(username);
-      if (!findUser) throw new Error('User not found');
-      if (!(await findUser.isValidPassword(password))) {
+      const existingUser = await User.findByUsername(username);
+      if (!existingUser) throw new Error('User not found');
+      if (!(await existingUser.isValidPassword(password))) {
         throw new Error('Bad Credentials');
       }
-      done(null, findUser);
+      done(null, existingUser);
     } catch (err) {
       done(err, null);
     }

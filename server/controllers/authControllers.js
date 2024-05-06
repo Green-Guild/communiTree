@@ -11,7 +11,7 @@ export const loginUser = async (req, res) => {
   res.send(user); */
   req.login(req.user, (err) => {
     if (err) return res.sendStatus(400);
-  res.send(req.user);
+    res.send(req.user);
   });
 };
 

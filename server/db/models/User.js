@@ -18,7 +18,6 @@ export default class User {
   static async list() {
     const query = `SELECT * FROM users`;
     const { rows } = await knex.raw(query);
-    // use the constructor to hide each user's passwordHash
     return rows.map((user) => new User(user));
   }
 
