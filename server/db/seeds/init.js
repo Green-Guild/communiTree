@@ -1,6 +1,4 @@
 import User from '../models/User.js';
-import GoogleUser from '../models/GoogleUser.js';
-import passport from 'passport';
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
