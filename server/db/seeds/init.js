@@ -12,4 +12,5 @@ exports.seed = async (knex) => {
   await User.create('cool_cat', '1234');
   await User.create('l33t-guy', '1234');
   await User.create('wowow', '1234');
+  await User.create('test', 'test');
 };
