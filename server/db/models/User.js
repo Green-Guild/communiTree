@@ -5,10 +5,24 @@ export default class User {
   #passwordHash = null;
 
   // only the isValidPassword instance method can access #passwordHash
-  constructor({ id, username, password_hash }) {
+  constructor({
+    id,
+    username,
+    password_hash,
+    location,
+    display_name,
+    google_id,
+    picture,
+    age,
+  }) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
+    this.location = location;
+    this.display_name = display_name;
+    this.google_id = google_id;
+    this.picture = picture;
+    this.age = age;
   }
 
   isValidPassword = async (password) => {
@@ -35,12 +49,53 @@ export default class User {
     return user ? new User(user) : null;
   }
 
-  static async create(username, password) {
-    const passwordHash = await hashPassword(password);
+  static async findByGoogleId(google_id) {
+    const query = `SELECT * FROM users WHERE google_id = ?`;
+    const { rows } = await knex.raw(query, [google_id]);
+    const user = rows[0];
+    return user ? new User(user) : null;
+  }
 
-    const query = `INSERT INTO users (username, password_hash)
-      VALUES (?, ?) RETURNING *`;
-    const { rows } = await knex.raw(query, [username, passwordHash]);
+  static async createLocalUser({
+    username,
+    password,
+    age,
+    location,
+    display_name,
+    picture,
+  }) {
+    const passwordHash = password ? await hashPassword(password) : null;
+
+    const query = `INSERT INTO users (username, password_hash, age, location, display_name, picture)
+      VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
+    const { rows } = await knex.raw(query, [
+      username,
+      passwordHash,
+      age ?? null,
+      location ?? null,
+      display_name ?? null,
+      picture ?? null,
+    ]);
+    const user = rows[0];
+    return new User(user);
+  }
+
+  static async createGoogleUser({
+    google_id,
+    age,
+    location,
+    display_name,
+    picture,
+  }) {
+    const query = `INSERT INTO users (google_id, age, location, display_name, picture)
+      VALUES (?, ?, ?, ?, ?) RETURNING *`;
+    const { rows } = await knex.raw(query, [
+      google_id,
+      age ?? null,
+      location ?? null,
+      display_name,
+      picture,
+    ]);
     const user = rows[0];
     return new User(user);
   }

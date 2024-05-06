@@ -14,7 +14,7 @@ export const createUser = async (req, res) => {
     return res.status(400).send({ error: 'Username is already taken.' });
   }
 
-  const user = await User.create(username, password);
+  const user = await User.createLocalUser({ username, password });
 
   res.send(user);
 };
