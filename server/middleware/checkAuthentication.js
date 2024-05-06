@@ -1,8 +1,12 @@
-// Is the user logged in?
-// Not specific user, just ANY user
 const checkAuthentication = (req, res, next) => {
-  const { id } = req.session.passport;
-  if (!id) return res.sendStatus(401);
+  if (!req.session.passport || !req.session.passport.user) {
+    return res.sendStatus(401);
+  }
+
+  // if (!req.user || !req.user.id) {
+  //   return res.sendStatus(401);
+  // }
+
   return next();
 };
 
