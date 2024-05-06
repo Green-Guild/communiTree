@@ -16,7 +16,7 @@ export const hashPassword = async (password, saltRounds = 8) =>
 export const isValidPassword = async (password, hash) =>
   bcrypt.compare(password, hash).catch((err) => console.error(err.message));
 
-export const isAuthorized = (userId, session) => {
-  if (!userId || !session || !session.userId) return false;
-  return Number(userId) === Number(session.userId);
+export const isAuthorized = (id, session) => {
+  if (!id || !session || !session.passport.id) return false;
+  return +id === +session.passport.id;
 };
