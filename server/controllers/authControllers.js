@@ -23,3 +23,7 @@ export const logoutUser = (req, res) => {
 export const showMe = async (req, res) => {
   return req.user ? res.send(req.user) : res.sendStatus(401);
 };
+
+export const googleRedirect = async (req, res) => {
+  res.redirect('/');
+};

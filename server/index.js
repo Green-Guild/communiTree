@@ -7,6 +7,7 @@ import handleSessions from './middleware/handleSessions.js';
 import { logRoutes } from './middleware/logRoutes.js';
 import passport from 'passport';
 import './strategies/local-strategy.js';
+import './strategies/google-strategy.js';
 
 import authRouter from './routers/authRouter.js';
 import userRouter from './routers/userRouter.js';
