@@ -12,16 +12,16 @@ Email: info@greenguild.com
 
 **Brooklyn, NY** – Green Guild is thrilled to announce the launch of CommuniTree, a transformative digital platform aimed at addressing the growing loneliness epidemic by reconnecting people through the simple joy of community gardening. With its intuitive design and focus on community engagement, CommuniTree seeks to create a vibrant, socially connected world, where people can replace digital isolation with meaningful, real-life interactions.
 
-### 😞 The Problem 
+### �� The Problem 
 The loneliness epidemic, highlighted by U.S. Surgeon General Dr. Vivek Murthy, is a public health crisis affecting millions. Modern lifestyles, excessive social media use, and urbanization have contributed to feelings of isolation and disconnection. This has serious consequences on mental and physical health, including increased risks of depression, anxiety, heart disease, and stroke.
 
-### 🤔 Our Hypothesis
+### �� Our Hypothesis
 *If communities are provided with increased opportunities for outdoor engagement, then we will see more participation in activities that foster belonging and mitigate loneliness.*
 
-### 📱 Product Overview
+### �� Product Overview
 CommuniTree offers a seamless, user-friendly way for individuals to discover and participate in community gardens and local green events. Users can search by location to find the nearest community garden, volunteer opportunity, or gardening event. The app aims to encourage users to spend more time outdoors, creating a supportive and environmentally conscious community.
 
-### 🏙️  Mission Statement 
+### ��️  Mission Statement 
 CommuniTree aims to combat loneliness and promote a greener world by encouraging people to connect through community gardening. By providing tools for ecological companionship, we aspire to build a more sustainable and connected society.
 
 ### Key Features
@@ -32,7 +32,7 @@ CommuniTree aims to combat loneliness and promote a greener world by encouraging
 - **Notifications:** Receive alerts for new comments, interactions, and nearby gardens.
 - **Accessibility:** Toggle between light and dark themes for ease of use.
 
-### 🏋🏽 Extension Opportunities 
+### ���� Extension Opportunities 
 Future features include a marketplace for gardening supplies and personalized recommendations based on user preferences. Advanced engagement features like virtual workshops and collaborative projects will further enrich the community.
 
 ### About Green Guild

@@ -15,10 +15,26 @@ export const createUserValidationSchema = {
       errorMessage: 'Username must be a string!',
     },
   },
-  // displayName: {
-  //   notEmpty: true,
-  // },
+  displayName: {
+    notEmpty: true,
+  },
   password: {
     notEmpty: true,
   },
+  /*   age: {
+    isInt: {
+      options: {
+        min: 18,
+      },
+      errorMessage: 'Age must be at least 18',
+    },
+  },
+  location: {
+    notEmpty: true,
+  },
+  image: {
+    isURL: {
+      errorMessage: 'Image must be a valid URL',
+    },
+  }, */
 };
