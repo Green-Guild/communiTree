@@ -1,9 +1,5 @@
-// Is the user logged in?
-// Not specific user, just ANY user
 const checkAuthentication = (req, res, next) => {
-  const { userId } = req.session;
-  if (!userId) return res.sendStatus(401);
-  return next();
+  req.isAuthenticated() ? next() : res.sendStatus(401);
 };
 
-module.exports = checkAuthentication;
+export default checkAuthentication;

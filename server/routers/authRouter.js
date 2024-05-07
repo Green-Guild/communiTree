@@ -1,10 +1,22 @@
-const express = require('express');
-const authControllers = require('../controllers/authControllers');
+import express from 'express';
+import {
+  showMe,
+  loginUser,
+  logoutUser,
+  googleRedirect,
+} from '../controllers/authControllers.js';
+import passport from 'passport';
 
 const authRouter = express.Router();
 
-authRouter.get('/me', authControllers.showMe);
-authRouter.post('/login', authControllers.loginUser);
-authRouter.delete('/logout', authControllers.logoutUser);
+authRouter.get('/me', showMe);
+authRouter.post('/login', passport.authenticate('local'), loginUser);
+authRouter.delete('/logout', logoutUser);
 
-module.exports = authRouter;
+authRouter.get('/google', passport.authenticate('google'));
+authRouter.get(
+  '/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  googleRedirect
+);
+export default authRouter;
