@@ -38,4 +38,8 @@ Future features include a marketplace for gardening supplies and personalized re
 ### About Green Guild
 Green Guild is a passionate team focused on empowering people to cultivate sustainable, meaningful relationships through gardening. Our mission is to make digital isolation a thing of the past, one green connection at a time.
 
+<<<<<<< HEAD
 **For more information, visit [our website](https://www.greenguild.com)**
+=======
+**For more information, visit [our website](https://www.greenguild.com)**
+>>>>>>> auth

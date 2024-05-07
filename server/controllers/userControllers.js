@@ -1,22 +1,30 @@
-const { isAuthorized } = require('../utils/auth-utils');
-const User = require('../db/models/User');
+import { isAuthorized } from '../utils/auth-utils.js';
+import User from '../db/models/User.js';
+import { matchedData, validationResult } from 'express-validator';
 
-exports.createUser = async (req, res) => {
-  const { username, password } = req.body;
+export const createUser = async (req, res) => {
+  const result = validationResult(req);
+  if (!result.isEmpty())
+    return res.status(400).send({ errors: result.array() });
 
-  // TODO: check if username is taken, and if it is what should you return?
-  const user = await User.create(username, password);
-  req.session.userId = user.id;
+  const { username, password } = matchedData(req);
+
+  const existingUser = await User.findByUsername(username);
+  if (existingUser) {
+    return res.status(400).send({ error: 'Username is already taken.' });
+  }
+
+  const user = await User.createLocalUser({ username, password });
 
   res.send(user);
 };
 
-exports.listUsers = async (req, res) => {
+export const listUsers = async (req, res) => {
   const users = await User.list();
   res.send(users);
 };
 
-exports.showUser = async (req, res) => {
+export const showUser = async (req, res) => {
   const { id } = req.params;
 
   const user = await User.find(id);
@@ -25,7 +33,7 @@ exports.showUser = async (req, res) => {
   res.send(user);
 };
 
-exports.updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   const { username } = req.body;
   const { id } = req.params;
 
@@ -35,6 +43,6 @@ exports.updateUser = async (req, res) => {
   if (!isAuthorized(id, req.session)) return res.sendStatus(403);
 
   const updatedUser = await User.update(id, username);
-  if (!updatedUser) return res.sendStatus(404)
+  if (!updatedUser) return res.sendStatus(404);
   res.send(updatedUser);
 };
