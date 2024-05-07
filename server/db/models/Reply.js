@@ -1,5 +1,5 @@
-const knex = require('../knex');
-const authUtils = require('../../utils/auth-utils');
+import knex from '../knex.js';
+import authUtils from '../../utils/auth-utils.js';
 
 class Reply {
   constructor({ post_id, user_id, body}) {
@@ -57,4 +57,4 @@ class Reply {
   }
 }
 
-module.exports = Reply;
+export default Reply;

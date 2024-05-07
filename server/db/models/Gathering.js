@@ -1,5 +1,5 @@
-const knex = require('../knex');
-const authUtils = require('../../utils/auth-utils');
+import knex from '../knex.js';
+import authUtils from '../../utils/auth-utils.js';
 
 class Gathering {
   constructor({ title, location, description, host_id, garden_id = null, event_date, image}) {
@@ -61,4 +61,4 @@ class Gathering {
   }
 }
 
-module.exports = Gathering;
+export default Gathering;
