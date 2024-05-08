@@ -1,6 +1,6 @@
 import knex from '../knex.js';
 
-export default class Reply {
+export default class Comment {
   constructor({ id, post_id, user_id, body }) {
     this.id = id;
     this.post_id = post_id;
@@ -13,7 +13,7 @@ export default class Reply {
     SELECT * 
     FROM comments`;
     const { rows } = await knex.raw(query);
-    return rows.map((comment) => new Reply(comment));
+    return rows.map((comment) => new Comment(comment));
   }
 
   static async find(id) {
@@ -23,7 +23,7 @@ export default class Reply {
     WHERE id = ?`;
     const { rows } = await knex.raw(query, [id]);
     const comment = rows[0];
-    return comment ? new Reply(comment) : null;
+    return comment ? new Comment(comment) : null;
   }
 
   static async create({ post_id, user_id, body }) {
@@ -32,7 +32,7 @@ export default class Reply {
     VALUES (?, ?, ?) 
     RETURNING *`;
     const { rows } = await knex.raw(query, [post_id, user_id, body]);
-    return rows[0] ? new Reply(rows[0]) : null;
+    return rows[0] ? new Comment(rows[0]) : null;
   }
 
   static async update({ body, id }) {
@@ -42,7 +42,7 @@ export default class Reply {
     WHERE id = ?
     RETURNING *`;
     const { rows } = await knex.raw(query, [body, id]);
-    return rows[0] ? new Reply(rows[0]) : null;
+    return rows[0] ? new Comment(rows[0]) : null;
   }
 
   static async delete(id) {

@@ -2,7 +2,7 @@ import User from '../models/User.js';
 import Garden from '../models/Garden.js';
 import Event from '../models/Event.js';
 import Post from '../models/Post.js';
-import Reply from '../models/Reply.js';
+import Comment from '../models/Comment.js';
 
 /**
  * @param { import("knex").Knex } knex
@@ -265,19 +265,19 @@ export const seed = async (knex) => {
   });
 
   // Replies
-  const reply1 = await Reply.create({
+  const comment1 = await Comment.create({
     post_id: post1.id,
     body: 'Sunlight is critical. Try moving them to a brighter spot or adjusting the watering schedule.',
     user_id: user1.id,
   });
 
-  const reply2 = await Reply.create({
+  const comment2 = await Comment.create({
     post_id: post2.id,
     body: 'Consider mixing in some more colorful flowers around the edges! Dramatic lilies work well.',
     user_id: user2.id,
   });
 
-  const reply3 = await Reply.create({
+  const comment3 = await Comment.create({
     post_id: post3.id,
     body: 'It depends on the location and soil. How is your watering schedule? Try adjusting it if necessary.',
     user_id: user3.id,
