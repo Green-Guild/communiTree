@@ -14,6 +14,8 @@ export default class User {
     google_id,
     image,
     age = null,
+    created_at,
+    updated_at,
   }) {
     this.id = id;
     this.username = username;
@@ -23,6 +25,8 @@ export default class User {
     this.google_id = google_id;
     this.image = image;
     this.age = age;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
   }
 
   isValidPassword = async (password) => {

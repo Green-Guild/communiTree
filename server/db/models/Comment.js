@@ -1,11 +1,13 @@
 import knex from '../knex.js';
 
 export default class Comment {
-  constructor({ id, post_id, user_id, body }) {
+  constructor({ id, post_id, user_id, body, created_at, updated_at }) {
     this.id = id;
     this.post_id = post_id;
     this.user_id = user_id;
     this.body = body;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
   }
 
   static async list() {

@@ -10,6 +10,8 @@ export default class Event {
     garden_id = null,
     date,
     image,
+    created_at,
+    updated_at,
   }) {
     this.id = id;
     this.title = title;
@@ -19,6 +21,8 @@ export default class Event {
     this.garden_id = garden_id;
     this.date = date;
     this.image = image;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
   }
 
   static async list() {

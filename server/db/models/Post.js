@@ -9,6 +9,7 @@ export default class Post {
     garden_id = null,
     event_id = null,
     created_at,
+    updated_at,
   }) {
     this.id = id;
     this.title = title;
@@ -16,7 +17,8 @@ export default class Post {
     this.user_id = user_id;
     this.garden_id = garden_id;
     this.event_id = event_id;
-    this.creationDate = created_at;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
   }
 
   static async list() {

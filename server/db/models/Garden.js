@@ -9,6 +9,8 @@ export default class Garden {
     description,
     is_public = false,
     owner_id = null,
+    created_at,
+    updated_at,
   }) {
     this.id = id;
     this.name = name;
@@ -17,6 +19,8 @@ export default class Garden {
     this.description = description;
     this.is_public = is_public;
     this.owner_id = owner_id;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
   }
 
   static async list() {
