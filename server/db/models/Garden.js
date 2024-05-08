@@ -1,13 +1,22 @@
 import knex from '../knex.js';
-import authUtils from '../../utils/auth-utils.js';
 
-class Garden {
-  constructor({ name, location, image, description, public = false, owner_id = null}) {
+
+export default class Garden {
+  constructor({
+    id,
+    name,
+    location,
+    image,
+    description,
+    is_public = false,
+    owner_id = null,
+  }) {
+    this.id = id;
     this.name = name;
     this.location = location;
     this.image = image;
     this.description = description;
-    this.public = public
+    this.is_public = is_public;
     this.owner_id = owner_id;
   }
 
@@ -16,7 +25,9 @@ class Garden {
     SELECT * 
     FROM gardens`;
     const { rows } = await knex.raw(query);
-    return rows.map(garden => new Garden(garden));
+
+    return rows.map((garden) => new Garden(garden));
+
   }
 
   static async find(id) {
@@ -29,22 +40,57 @@ class Garden {
     return garden ? new Garden(garden) : null;
   }
 
-  static async create({name,location, image, description, public = false, owner_id = null}) {
+  static async findByOwnerId(owner_id) {
     const query = `
-    INSERT INTO gardens (name, location, image, description, public, owner_id)
+    SELECT * 
+    FROM gardens 
+    WHERE owner_id = ?`;
+    const { rows } = await knex.raw(query, [owner_id]);
+    return rows.map((garden) => new Garden(garden));
+  }
+
+  static async create({
+    name,
+    location,
+    image,
+    description,
+    is_public = false,
+    owner_id = null,
+  }) {
+    const query = `
+    INSERT INTO gardens (name, location, image, description, is_public, owner_id)
     VALUES ( ?, ?, ?, ?, ?, ?) 
     RETURNING *`;
-    const { rows } = await knex.raw(query, [name, location, image, description, public, owner_id]);
+    const { rows } = await knex.raw(query, [
+      name,
+      location,
+      image,
+      description,
+      is_public,
+      owner_id,
+    ]);
     return rows[0] ? new Garden(rows[0]) : null;
   }
 
-  static async update(id, { name, location, image, description, public = false, owner_id }) {
+  static async update(
+    id,
+    { name, location, image, description, is_public = false, owner_id }
+  ) {
     const query = `
     UPDATE gardens
-    SET name = ? location = ?, image = ?, description = ?, public = ?, owner_id  = ? 
+    SET name = ? location = ?, image = ?, description = ?, is_public = ?, owner_id  = ? 
     WHERE id = ?
     RETURNING *`;
-    const { rows } = await knex.raw(query, [name,location, image, description, public, owner_id, id]);
+    const { rows } = await knex.raw(query, [
+      name,
+      location,
+      image,
+      description,
+      is_public,
+      owner_id,
+      id,
+    ]);
+
     return rows[0] ? new Garden(rows[0]) : null;
   }
 
@@ -60,4 +106,3 @@ class Garden {
   }
 }
 
-export default Garden;

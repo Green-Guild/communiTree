@@ -1,402 +1,285 @@
-import User from "../models/User.js";
+import User from '../models/User.js';
+import Garden from '../models/Garden.js';
+import Gathering from '../models/Gathering.js';
+import Post from '../models/Post.js';
+import Reply from '../models/Reply.js';
+
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
 export const seed = async (knex) => {
-  await knex("users").del();
+  await knex('comments').del();
+  await knex('posts').del();
+  await knex('events').del();
+  await knex('gardens').del();
+  await knex('users').del();
 
-  await User.createLocalUser({ username: "test", password: "test" });
+  await User.createLocalUser({
+    username: 'test',
+    password: 'test',
+    display_name: 'test',
+    age: 30,
+    location: '11230',
+    picture: 'https://i.ibb.co/zZj8b3t/ra1.png',
+  });
   await User.createGoogleUser({
-    google_id: "1234",
-    display_name: "google",
+    google_id: '1234',
+    display_name: 'google',
     picture:
-      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
   });
 
   // Users
-  await User.createLocalUser({
-    username: "rafi_barides",
-    display_name: "Rafi Barides",
+  const user1 = await User.createLocalUser({
+    username: 'rafi_barides',
+    display_name: 'Rafi Barides',
     age: 12,
-    location: "11230",
-    picture: "https://i.ibb.co/zZj8b3t/ra1.png",
-    password: "Hello1234",
+    location: '11230',
+    picture: 'https://i.ibb.co/zZj8b3t/ra1.png',
+    password: 'Hello1234',
   });
 
-  await User.createLocalUser({
-    username: "reuben_ogbonna",
-    display_name: "Reuben Ogbonna",
+  const user2 = await User.createLocalUser({
+    username: 'reuben_ogbonna',
+    display_name: 'Reuben Ogbonna',
     age: 27,
-    location: "10001",
+    location: '10001',
     picture:
-      "https://images.squarespace-cdn.com/content/v1/61f2c931c536520a4daa56ec/1643492157717-N0AL5RLVEFW18H1FJGGQ/Reuben+Ogbonna.png",
-    password: "Marcy2024",
+      'https://images.squarespace-cdn.com/content/v1/61f2c931c536520a4daa56ec/1643492157717-N0AL5RLVEFW18H1FJGGQ/Reuben+Ogbonna.png',
+    password: 'Marcy2024',
   });
 
-  await User.createLocalUser({
-    username: "gonzalo_romero",
-    display_name: "Gonzalo Romero",
+  const user3 = await User.createLocalUser({
+    username: 'gonzalo_romero',
+    display_name: 'Gonzalo Romero',
     age: 30,
-    location: "11217",
+    location: '11217',
     picture:
-      "https://media.licdn.com/dms/image/D4E03AQGdNvT3gbIlpg/profile-displayphoto-shrink_200_200/0/1670452125309?e=2147483647&v=beta&t=ZL4KbqIHeGM3isBfeBOIsmOqClOan5ZHker_N9r9kWk",
-    password: "snapSnaps!",
+      'https://media.licdn.com/dms/image/D4E03AQGdNvT3gbIlpg/profile-displayphoto-shrink_200_200/0/1670452125309?e=2147483647&v=beta&t=ZL4KbqIHeGM3isBfeBOIsmOqClOan5ZHker_N9r9kWk',
+    password: 'snapSnaps!',
   });
 
-  await User.createLocalUser({
-    username: "angelica_ibarlucea",
-    display_name: "Angelica Ibarlucea",
+  const user4 = await User.createLocalUser({
+    username: 'angelica_ibarlucea',
+    display_name: 'Angelica Ibarlucea',
     age: 24,
-    location: "11101",
+    location: '11101',
     picture:
-      "https://media.licdn.com/dms/image/D4D03AQGt4w941TYGHg/profile-displayphoto-shrink_800_800/0/1708731163185?e=1720656000&v=beta&t=33oVsvt7EnRo9B_2_J-aWKhf6uzEN4iKe9FrxlF1RTU",
-    password: "newRock12",
+      'https://media.licdn.com/dms/image/D4D03AQGt4w941TYGHg/profile-displayphoto-shrink_800_800/0/1708731163185?e=1720656000&v=beta&t=33oVsvt7EnRo9B_2_J-aWKhf6uzEN4iKe9FrxlF1RTU',
+    password: 'newRock12',
   });
 
-  await User.createLocalUser({
-    username: "motun_b",
-    display_name: "Motun B",
+  const user5 = await User.createLocalUser({
+    username: 'motun_b',
+    display_name: 'Motun B',
     age: 29,
-    location: "11205",
+    location: '11205',
     picture:
-      "https://images.ctfassets.net/5tpkas7gb5io/178TAzhuPPZvs3gv9lhvzg/d8ed331791d3991eff911747071da2dd/Motun_Marcy_Headshot_website.jpg?w=1920&q=75",
-    password: "PlantPower2024",
+      'https://images.ctfassets.net/5tpkas7gb5io/178TAzhuPPZvs3gv9lhvzg/d8ed331791d3991eff911747071da2dd/Motun_Marcy_Headshot_website.jpg?w=1920&q=75',
+    password: 'PlantPower2024',
   });
 
-  await User.createLocalUser({
-    username: "ben_spector",
-    display_name: "Ben Spector",
+  const user6 = await User.createLocalUser({
+    username: 'ben_spector',
+    display_name: 'Ben Spector',
     age: 26,
-    location: "10002",
+    location: '10002',
     picture:
-      "https://images.ctfassets.net/5tpkas7gb5io/5o7VSAHtvgTZCfbHH9J2pi/9e264d065746c554e2e5e61ca5e4f725/Ben_Marcy_Headshot_website.jpg?w=640&q=75",
-    password: "GreenThumbs",
+      'https://images.ctfassets.net/5tpkas7gb5io/5o7VSAHtvgTZCfbHH9J2pi/9e264d065746c554e2e5e61ca5e4f725/Ben_Marcy_Headshot_website.jpg?w=640&q=75',
+    password: 'GreenThumbs',
   });
 
-  await User.createLocalUser({
-    username: "jorge_hadad_rey",
-    display_name: "Jorge Hadad Rey",
+  const user7 = await User.createLocalUser({
+    username: 'jorge_hadad_rey',
+    display_name: 'Jorge Hadad Rey',
     age: 31,
-    location: "10467",
+    location: '10467',
     picture:
-      "https://media.licdn.com/dms/image/D4E03AQFz64tcWff7aA/profile-displayphoto-shrink_800_800/0/1693365857389?e=2147483647&v=beta&t=9WehLn681rvzHGlqAEDlma30vUcmxk3vB2BI8xJoM1A",
-    password: "Jobs4Gardens",
+      'https://media.licdn.com/dms/image/D4E03AQFz64tcWff7aA/profile-displayphoto-shrink_800_800/0/1693365857389?e=2147483647&v=beta&t=9WehLn681rvzHGlqAEDlma30vUcmxk3vB2BI8xJoM1A',
+    password: 'Jobs4Gardens',
   });
 
   // Gardens
-  await Garden.create({
-    location: "10001",
+  const garden1 = await Garden.create({
+    name: 'Marcy Plot',
+    location: '10001',
     image:
-      "https://www.thespruce.com/thmb/IHY_gzo-3Y5terRR2mdPQf0gnSY=/4711x0/filters:no_upscale():max_bytes(150000):strip_icc()/how-to-start-a-garden-from-scratch-2132778-hero-5f6138784a034bad8bf9607ccb18dbed.jpg",
-    description: "The Marcy Plot",
-    public: true,
-    owner_id: 1,
+      'https://www.thespruce.com/thmb/IHY_gzo-3Y5terRR2mdPQf0gnSY=/4711x0/filters:no_upscale():max_bytes(150000):strip_icc()/how-to-start-a-garden-from-scratch-2132778-hero-5f6138784a034bad8bf9607ccb18dbed.jpg',
+    description: 'The Marcy Plot',
+    is_public: true,
+    owner_id: user1.id,
   });
 
-  await Garden.create({
-    location: "11217",
+  const garden2 = await Garden.create({
+    name: 'Green Corner Club',
+    location: '11217',
     image:
-      "https://www.thespruce.com/thmb/IHY_gzo-3Y5terRR2mdPQf0gnSY=/4711x0/filters:no_upscale():max_bytes(150000):strip_icc()/how-to-start-a-garden-from-scratch-2132778-hero-5f6138784a034bad8bf9607ccb18dbed.jpg",
-    description: "Green Corner Club",
-    public: true,
-    owner_id: 2,
+      'https://www.thespruce.com/thmb/IHY_gzo-3Y5terRR2mdPQf0gnSY=/4711x0/filters:no_upscale():max_bytes(150000):strip_icc()/how-to-start-a-garden-from-scratch-2132778-hero-5f6138784a034bad8bf9607ccb18dbed.jpg',
+    description: 'Green Corner Club',
+    is_public: true,
+    owner_id: user2.id,
   });
 
-  await Garden.create({
-    location: "11101",
+  const garden3 = await Garden.create({
+    name: 'Plant Haven',
+    location: '11101',
     image:
-      "https://ogden_images.s3.amazonaws.com/www.sungazette.com/images/2024/05/05162549/05022024-Day-of-Prayer-3-1100x601.jpg",
-    description: "Plant Haven",
-    public: true,
-    owner_id: 3,
+      'https://ogden_images.s3.amazonaws.com/www.sungazette.com/images/2024/05/05162549/05022024-Day-of-Prayer-3-1100x601.jpg',
+    description: 'Plant Haven',
+    is_public: true,
+    owner_id: user3.id,
   });
 
-  await Garden.create({
-    location: "11205",
+  const garden4 = await Garden.create({
+    name: 'Motun Sanctuary',
+    location: '11205',
     image:
-      "https://images.ctfassets.net/5tpkas7gb5io/178TAzhuPPZvs3gv9lhvzg/d8ed331791d3991eff911747071da2dd/Motun_Marcy_Headshot_website.jpg?w=1920&q=75",
+      'https://images.ctfassets.net/5tpkas7gb5io/178TAzhuPPZvs3gv9lhvzg/d8ed331791d3991eff911747071da2dd/Motun_Marcy_Headshot_website.jpg?w=1920&q=75',
     description: "Motun's Respectful Equal Opportunity Garden Sanctuary",
-    public: true,
-    owner_id: 4,
+    is_public: true,
+    owner_id: user4.id,
   });
 
-  await Garden.create({
-    location: "10002",
+  const garden5 = await Garden.create({
+    name: 'Gardenfest',
+    location: '10002',
     image:
-      "https://images.ctfassets.net/5tpkas7gb5io/5o7VSAHtvgTZCfbHH9J2pi/9e264d065746c554e2e5e61ca5e4f725/Ben_Marcy_Headshot_website.jpg?w=640&q=75",
-    description: "Gardenfest",
-    public: true,
-    owner_id: 5,
+      'https://images.ctfassets.net/5tpkas7gb5io/5o7VSAHtvgTZCfbHH9J2pi/9e264d065746c554e2e5e61ca5e4f725/Ben_Marcy_Headshot_website.jpg?w=640&q=75',
+    description: 'Gardenfest',
+    is_public: true,
+    owner_id: user5.id,
   });
 
-  await Garden.create({
-    location: "10467",
+  const garden6 = await Garden.create({
+    name: 'Planter Union',
+    location: '10467',
     image:
-      "https://media.licdn.com/dms/image/D4E03AQFz64tcWff7aA/profile-displayphoto-shrink_800_800/0/1693365857389?e=2147483647&v=beta&t=9WehLn681rvzHGlqAEDlma30vUcmxk3vB2BI8xJoM1A",
-    description: "Planter Union",
-    public: true,
-    owner_id: 6,
-  });
-
-  // Users
-  await User.createLocalUser({
-    username: "rafi_barides",
-    display_name: "Rafi Barides",
-    age: 12,
-    location: "11230",
-    picture: "https://i.ibb.co/zZj8b3t/ra1.png",
-    password: "Hello1234",
-  });
-
-  await User.createLocalUser({
-    username: "reuben_ogbonna",
-    display_name: "Reuben Ogbonna",
-    age: 27,
-    location: "10001",
-    picture:
-      "https://images.squarespace-cdn.com/content/v1/61f2c931c536520a4daa56ec/1643492157717-N0AL5RLVEFW18H1FJGGQ/Reuben+Ogbonna.png",
-    password: "Marcy2024",
-  });
-
-  await User.createLocalUser({
-    username: "gonzalo_romero",
-    display_name: "Gonzalo Romero",
-    age: 30,
-    location: "11217",
-    picture:
-      "https://media.licdn.com/dms/image/D4E03AQGdNvT3gbIlpg/profile-displayphoto-shrink_200_200/0/1670452125309?e=2147483647&v=beta&t=ZL4KbqIHeGM3isBfeBOIsmOqClOan5ZHker_N9r9kWk",
-    password: "snapSnaps!",
-  });
-
-  await User.createLocalUser({
-    username: "angelica_ibarlucea",
-    display_name: "Angelica Ibarlucea",
-    age: 24,
-    location: "11101",
-    picture:
-      "https://media.licdn.com/dms/image/D4D03AQGt4w941TYGHg/profile-displayphoto-shrink_800_800/0/1708731163185?e=1720656000&v=beta&t=33oVsvt7EnRo9B_2_J-aWKhf6uzEN4iKe9FrxlF1RTU",
-    password: "newRock12",
-  });
-
-  await User.createLocalUser({
-    username: "motun_b",
-    display_name: "Motun B",
-    age: 29,
-    location: "11205",
-    picture:
-      "https://images.ctfassets.net/5tpkas7gb5io/178TAzhuPPZvs3gv9lhvzg/d8ed331791d3991eff911747071da2dd/Motun_Marcy_Headshot_website.jpg?w=1920&q=75",
-    password: "PlantPower2024",
-  });
-
-  await User.createLocalUser({
-    username: "ben_spector",
-    display_name: "Ben Spector",
-    age: 26,
-    location: "10002",
-    picture:
-      "https://images.ctfassets.net/5tpkas7gb5io/5o7VSAHtvgTZCfbHH9J2pi/9e264d065746c554e2e5e61ca5e4f725/Ben_Marcy_Headshot_website.jpg?w=640&q=75",
-    password: "GreenThumbs",
-  });
-
-  await User.createLocalUser({
-    username: "jorge_hadad_rey",
-    display_name: "Jorge Hadad Rey",
-    age: 31,
-    location: "10467",
-    picture:
-      "https://media.licdn.com/dms/image/D4E03AQFz64tcWff7aA/profile-displayphoto-shrink_800_800/0/1693365857389?e=2147483647&v=beta&t=9WehLn681rvzHGlAEDlma30vUcmxk3vB2BI8xJoM1A",
-    password: "Jobs4Gardens",
-  });
-
-  // Gardens
-  await Garden.create({
-    location: "10001",
-    title: "The Marcy Plot",
-    image:
-      "https://www.thespruce.com/thmb/IHY_gzo-3Y5terRR2mdPQf0gnSY=/4711x0/filters:no_upscale()/how-to-start-a-garden-from-scratch-2132778-hero-5f6138784a034bad8bf9607ccb18dbed.jpg",
-    description:
-      "A public garden in industry city, offering a variety of crops and floral plants. This is the perfect place to connect with fellow plant enthusiasts.",
-    public: true,
-    owner_id: 1,
-  });
-
-  await Garden.create({
-    location: "11217",
-    title: "Green Corner Club",
-    image:
-      "https://www.thespruce.com/thmb/IHY_gzo-3Y5terRR2mdPQf0gnSY=/4711x0/filters:no_upscale()/how-to-start-a-garden-from-scratch-2132778-hero-5f6138784a034bad8bf9607ccb18dbed.jpg",
-    description:
-      "This urban garden provides a haven for community members to practice eco-friendly planting. It offers a diverse selection of herbs, veggies, and more.",
-    public: true,
-    owner_id: 2,
-  });
-
-  await Garden.create({
-    location: "11101",
-    title: "Plant Haven",
-    image:
-      "https://ogden_images.s3.amazonaws.com/www.sungazette.com/images/2024/05/05162549/05022024-Day-of-Prayer-3-1100x601.jpg",
-    description:
-      "A peaceful oasis where growers can learn new techniques and share their knowledge. Plant Haven aims to bring innovative practices to the community.",
-    public: true,
-    owner_id: 3,
-  });
-
-  await Garden.create({
-    location: "11205",
-    title: "Motun's Respectful Equality and Equity Opportunity For All Garden Sanctuary",
-    image:
-      "https://i.ibb.co/PMyBcHh/Motun-Marcy-Headshot-website.jpg",
-    description:
-      "A welcoming space that promotes sustainable gardening and equal opportunity for all with DEI values. Motun's Sanctuary offers tools and resources for everyone.",
-    public: true,
-    owner_id: 4,
-  });
-
-  await Garden.create({
-    location: "10002",
-    title: "Gardenfest",
-    image:
-      "https://images.ctfassets.net/5tpkas7gb5io/5o7VSAHtvgTZCfbHH9J2pi/9e264d065746c554e2e5e61ca5e4f725/Ben_Marcy_Headshot_website.jpg?w=640&q=75",
-    description:
-      "A festival-like garden offering seasonal events, workshops, and fun challenges. It's an excellent gathering place for those who want to explore new ideas.",
-    public: true,
-    owner_id: 5,
-  });
-
-  await Garden.create({
-    location: "10467",
-    title: "Planter Union",
-    image:
-      "https://media.licdn.com/dms/image/D4E03AQFz64tcWff7aA/profile-displayphoto-shrink_800_800/0/1693365857389?e=2147483647&v=beta&t=9WehLn681rvzHGlAEDlma30vUcmxk3vB2BI8xJoM1A",
-    description:
-      "A public garden with a focus on employment opportunities for aspiring gardeners. It offers training, internships, and career advice.",
-    public: true,
-    owner_id: 6,
+      'https://media.licdn.com/dms/image/D4E03AQFz64tcWff7aA/profile-displayphoto-shrink_800_800/0/1693365857389?e=2147483647&v=beta&t=9WehLn681rvzHGlqAEDlma30vUcmxk3vB2BI8xJoM1A',
+    description: 'Planter Union',
+    is_public: true,
+    owner_id: user6.id,
   });
 
   // Gatherings
-  await Gathering.create({
-    location: "10001",
+  const gathering1 = await Gathering.create({
+    location: '10001',
     description:
-      "A fun-filled day to celebrate the power of plants with music, a potluck, and networking. Reuben Ogbonna is your host, offering a chance to connect with fellow gardeners.",
-    host_id: 1,
-    garden_id: 1,
-    date: "2024-05-10-15-00",
+      'A fun-filled day to celebrate the power of plants with music, a potluck, and networking. Reuben Ogbonna is your host, offering a chance to connect with fellow gardeners.',
+    host_id: user1.id,
+    garden_id: garden1.id,
+    date: '2024-05-10 15:00:00',
     image:
-      "https://ogden_images.s3.amazonaws.com/www.sungazette.com/images/2024/05/05162549/05022024-Day-of-Prayer-3-1100x601.jpg",
-    title: "Reuben Plant Power Parade",
+      'https://ogden_images.s3.amazonaws.com/www.sungazette.com/images/2024/05/05162549/05022024-Day-of-Prayer-3-1100x601.jpg',
+    title: 'Reuben Plant Power Parade',
   });
 
-  await Gathering.create({
-    location: "11217",
+  const gathering2 = await Gathering.create({
+    location: '11217',
     description:
-      "An evening full of sustainable gardening tips and laughter. Gonzalo Romero hosts with a delightful mix of humor and gardening know-how.",
-    host_id: 2,
-    garden_id: 2,
-    date: "2024-05-12-18-00",
-    image: "https://i.ibb.co/zZj8b3t/ra1.png",
+      'An evening full of sustainable gardening tips and laughter. Gonzalo Romero hosts with a delightful mix of humor and gardening know-how.',
+    host_id: user2.id,
+    garden_id: garden2.id,
+    date: '2024-05-10 15:00:00',
+    image: 'https://i.ibb.co/zZj8b3t/ra1.png',
     title: "Gonzo's Sustainable Sass Splash",
   });
 
-  await Gathering.create({
-    location: "11101",
+  const gathering3 = await Gathering.create({
+    location: '11101',
     description:
-      "A gathering focused on growing onions and other root vegetables on the East Coast. Angelica Ibarlucea shares her expertise with hands-on demos.",
-    host_id: 3,
-    garden_id: 3,
-    date: "2024-05-15-20-00",
-    image:
-      "https://i.ibb.co/Kq5xbgS/Angelica-Apples.png",
+      'A gathering focused on growing onions and other root vegetables on the East Coast. Angelica Ibarlucea shares her expertise with hands-on demos.',
+    host_id: user3.id,
+    garden_id: garden3.id,
+    date: '2024-05-10 15:00:00',
+    image: 'https://i.ibb.co/Kq5xbgS/Angelica-Apples.png',
     title: "Angelica's Onions",
   });
 
-  await Gathering.create({
-    location: "11205",
+  const gathering4 = await Gathering.create({
+    location: '11205',
     description:
       "Motun's Plant Meetup brings the latest plant care techniques and trends to the community. Connect with other growers and expand your network.",
-    host_id: 4,
-    garden_id: 4,
-    date: "2024-05-18-11-00",
+    host_id: user4.id,
+    garden_id: garden4.id,
+    date: '2024-05-10 15:00:00',
     image:
-      "https://cdn.britannica.com/42/91642-050-332E5C66/Keukenhof-Gardens-Lisse-Netherlands.jpg",
-    title: "Eco-Summit",
+      'https://cdn.britannica.com/42/91642-050-332E5C66/Keukenhof-Gardens-Lisse-Netherlands.jpg',
+    title: 'Eco-Summit',
   });
 
-  await Gathering.create({
-    location: "10002",
+  const gathering5 = await Gathering.create({
+    location: '10002',
     description:
       "A party that features garden-related projects and activities. Ben Spector's event encourages creativity and networking.",
-    host_id: 5,
-    garden_id: 5,
-    date: "2024-05-20-16-00",
+    host_id: user5.id,
+    garden_id: garden5.id,
+    date: '2024-05-10 15:00:00',
     image:
-      "https://www.bhg.com/thmb/SdH3liapyw5vZZf-LKe_MmgvYuA=/4000x0/filters:no_upscale():strip_icc()/BHG-What-Is-a-Permaculture-Garden-3AWGe3jUq5hAt8vbh3yisf-f3d0c14454b44bf5b319234918574b9e.jpg",
-    title: "Botanical Bash",
+      'https://www.bhg.com/thmb/SdH3liapyw5vZZf-LKe_MmgvYuA=/4000x0/filters:no_upscale():strip_icc()/BHG-What-Is-a-Permaculture-Garden-3AWGe3jUq5hAt8vbh3yisf-f3d0c14454b44bf5b319234918574b9e.jpg',
+    title: 'Botanical Bash',
   });
 
-  await Gathering.create({
-    location: "10467",
+  const gathering6 = await Gathering.create({
+    location: '10467',
     description:
-      "An employment fair for aspiring gardeners seeking career opportunities. Jorge Hadad Rey connects job seekers with exciting new prospects.",
-    host_id: 6,
-    garden_id: 6,
-    date: "2024-05-22-14-00",
+      'An employment fair for aspiring gardeners seeking career opportunities. Jorge Hadad Rey connects job seekers with exciting new prospects.',
+    host_id: user6.id,
+    garden_id: garden6.id,
+    date: '2024-05-10 15:00:00',
     image:
-      "https://www.marthastewart.com/thmb/NbLHicUgeCrSqCtbyKS8c2vmHzI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/garden-trends-hero-d67def0ea07f4129b4011f3d04d7c3f2.jpg",
-    title: "Garden Job Junction",
+      'https://www.marthastewart.com/thmb/NbLHicUgeCrSqCtbyKS8c2vmHzI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/garden-trends-hero-d67def0ea07f4129b4011f3d04d7c3f2.jpg',
+    title: 'Garden Job Junction',
   });
 
   // Posts
-  await Post.create({
-    title: "Help Needed in my Garden!",
+  const post1 = await Post.create({
+    title: 'Help Needed in my Garden!',
     body: "The tomatoes keep wilting. Any ideas on how to save them? I'm looking for practical tips on sunlight and watering.",
-    user_id: 1,
-    garden_id: 1,
-    gathering_id: 1,
+    user_id: user1.id,
+    garden_id: garden1.id,
+    gathering_id: gathering1.id,
   });
 
-  await Post.create({
-    title: "Need Advice",
+  const post2 = await Post.create({
+    title: 'Need Advice',
     body: "How do I bring the perfect dramatic flair to my begonias? I'd love suggestions for colorful companion plants.",
-    user_id: 2,
-    garden_id: 2,
-    gathering_id: 2,
+    user_id: user2.id,
+    garden_id: garden2.id,
+    gathering_id: gathering2.id,
   });
 
-  await Post.create({
-    title: "Onion Tips?",
-    body: "What are some best practices for growing onions on the East Coast? Any advice on soil and spacing would be appreciated.",
-    user_id: 3,
-    garden_id: 3,
-    gathering_id: 3,
+  const post3 = await Post.create({
+    title: 'Onion Tips?',
+    body: 'What are some best practices for growing onions on the East Coast? Any advice on soil and spacing would be appreciated.',
+    user_id: user3.id,
+    garden_id: garden3.id,
+    gathering_id: gathering3.id,
   });
 
-  await Post.create({
-    title: "I need help with my garden!",
+  const post4 = await Post.create({
+    title: 'I need help with my garden!',
     body: "Please help with wilting tomatoes ASAP. I haven't found the right balance with fertilizer or sunlight.",
-    user_id: 4,
-    garden_id: null,
-    gathering_id: 4,
+    user_id: user4.id,
+    gathering_id: gathering4.id,
   });
 
   // Replies
-  await Reply.create({
-    post_id: 1,
-    body: "Sunlight is critical. Try moving them to a brighter spot or adjusting the watering schedule.",
-    user_id: 2,
+  const reply1 = await Reply.create({
+    post_id: post1.id,
+    body: 'Sunlight is critical. Try moving them to a brighter spot or adjusting the watering schedule.',
+    user_id: user1.id,
   });
 
-  await Reply.create({
-    post_id: 2,
-    body: "Consider mixing in some more colorful flowers around the edges! Dramatic lilies work well.",
-    user_id: 3,
+  const reply2 = await Reply.create({
+    post_id: post2.id,
+    body: 'Consider mixing in some more colorful flowers around the edges! Dramatic lilies work well.',
+    user_id: user2.id,
   });
 
-  await Reply.create({
-    post_id: 3,
-    body: "It depends on the location and soil. How is your watering schedule? Try adjusting it if necessary.",
-    user_id: 4,
+  const reply3 = await Reply.create({
+    post_id: post3.id,
+    body: 'It depends on the location and soil. How is your watering schedule? Try adjusting it if necessary.',
+    user_id: user3.id,
   });
 };

@@ -1,8 +1,8 @@
 import knex from '../knex.js';
-import authUtils from '../../utils/auth-utils.js';
 
-class Post {
-  constructor({ title, body, user_id, garden_id = null, event_id = null}) {
+export default class Post {
+  constructor({ id, title, body, user_id, garden_id = null, event_id = null }) {
+    this.id = id;
     this.title = title;
     this.body = body;
     this.user_id = user_id;
@@ -15,7 +15,8 @@ class Post {
     SELECT * 
     FROM posts`;
     const { rows } = await knex.raw(query);
-    return rows.map(posts => new Post(posts));
+
+    return rows.map((posts) => new Post(posts));
   }
 
   static async find(id) {
@@ -28,22 +29,54 @@ class Post {
     return post ? new Post(post) : null;
   }
 
-  static async create({title, body, user_id, garden_id = null, event_id = null }) {
+
+  static async findByUserId(user_id) {
+    const query = `
+    SELECT * 
+    FROM posts 
+    WHERE user_id = ?`;
+    const { rows } = await knex.raw(query, [user_id]);
+    return rows.map((post) => new Post(post));
+  }
+
+  static async create({
+    title,
+    body,
+    user_id,
+    garden_id = null,
+    event_id = null,
+  }) {
+    
     const query = `
     INSERT INTO posts (title, body, user_id, garden_id, event_id)
     VALUES (?, ?, ?, ?, ?) 
     RETURNING *`;
-    const { rows } = await knex.raw(query, [title, body, user_id, garden_id, event_id]);
+
+    const { rows } = await knex.raw(query, [
+      title,
+      body,
+      user_id,
+      garden_id,
+      event_id,
+    ]);
     return rows[0] ? new Post(rows[0]) : null;
   }
 
-  static async update(id, { title, body, garden_id = null, event_id = null }) {
+  static async update(id, { title, body, garden_id, event_id }) {
     const query = `
     UPDATE posts
     SET title = ?, body = ?, garden_id = ?, event_id = ?
     WHERE id = ?
     RETURNING *`;
-    const { rows } = await knex.raw(query, [title, body, garden_id, event_id, id]);
+
+    const { rows } = await knex.raw(query, [
+      title,
+      body,
+      garden_id,
+      event_id,
+      id,
+    ]);
+
     return rows[0] ? new Post(rows[0]) : null;
   }
 
@@ -58,6 +91,4 @@ class Post {
     await knex.raw('DELETE FROM posts');
   }
 }
-
-export default Post;
 

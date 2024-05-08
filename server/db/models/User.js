@@ -9,11 +9,11 @@ export default class User {
     id,
     username,
     password_hash,
-    location,
+    location = null,
     display_name,
     google_id,
     picture,
-    age,
+    age = null,
   }) {
     this.id = id;
     this.username = username;
@@ -59,8 +59,8 @@ export default class User {
   static async createLocalUser({
     username,
     password,
-    age,
-    location,
+    age = null,
+    location = null,
     display_name,
     picture,
   }) {
@@ -71,10 +71,10 @@ export default class User {
     const { rows } = await knex.raw(query, [
       username,
       passwordHash,
-      age ?? null,
-      location ?? null,
-      display_name ?? null,
-      picture ?? null,
+      age,
+      location,
+      display_name,
+      picture,
     ]);
     const user = rows[0];
     return new User(user);
@@ -82,8 +82,8 @@ export default class User {
 
   static async createGoogleUser({
     google_id,
-    age,
-    location,
+    age = null,
+    location = null,
     display_name,
     picture,
   }) {
@@ -91,8 +91,8 @@ export default class User {
       VALUES (?, ?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       google_id,
-      age ?? null,
-      location ?? null,
+      age,
+      location,
       display_name,
       picture,
     ]);
