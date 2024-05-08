@@ -37,6 +37,15 @@ export default class Garden {
     return garden ? new Garden(garden) : null;
   }
 
+  static async findByOwnerId(owner_id) {
+    const query = `
+    SELECT * 
+    FROM gardens 
+    WHERE owner_id = ?`;
+    const { rows } = await knex.raw(query, [owner_id]);
+    return rows.map((garden) => new Garden(garden));
+  }
+
   static async create({
     name,
     location,
@@ -46,7 +55,7 @@ export default class Garden {
     owner_id = null,
   }) {
     const query = `
-    INSERT INTO gardens (name, location, image, description, public, owner_id)
+    INSERT INTO gardens (name, location, image, description, is_public, owner_id)
     VALUES ( ?, ?, ?, ?, ?, ?) 
     RETURNING *`;
     const { rows } = await knex.raw(query, [

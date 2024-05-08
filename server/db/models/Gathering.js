@@ -7,7 +7,7 @@ export default class Gathering {
     location,
     description,
     host_id,
-    garden_id,
+    garden_id = null,
     date,
     image,
   }) {
@@ -37,6 +37,15 @@ export default class Gathering {
     const { rows } = await knex.raw(query, [id]);
     const event = rows[0];
     return event ? new Gathering(event) : null;
+  }
+
+  static async findByHostId(host_id) {
+    const query = `
+    SELECT * 
+    FROM events
+    WHERE host_id = ?`;
+    const { rows } = await knex.raw(query, [host_id]);
+    return rows.map((event) => new Gathering(event));
   }
 
   static async create({

@@ -2,42 +2,70 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-export function up(knex) {
+export async function up(knex) {
+  await knex.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
+
   return knex.schema
-    .createTable('posts', (table) => {
-      table.increments();
-      table.string('title').notNullable();
-      table.string('body').notNullable();
-      table.integer('user_id').notNullable();
-      table.integer('garden_id').nullable();
-      table.integer('event_id').nullable();
-      table.timestamps(true, true);
-    })
     .createTable('gardens', (table) => {
-      table.increments();
+      table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
+
       table.string('name').notNullable();
       table.string('location').notNullable();
       table.string('image').notNullable();
       table.string('description').notNullable();
       table.boolean('is_public').notNullable();
-      table.integer('owner_id').nullable();
-    })
-    .createTable('comments', (table) => {
-      table.increments();
-      table.integer('post_id').notNullable();
-      table.integer('user_id').notNullable();
-      table.string('body').notNullable();
-      table.timestamp(true, true);
+
+      table.uuid('owner_id').nullable();
+      table.foreign('owner_id').references('id').inTable('users');
+
+      table.timestamps(true, true);
     })
     .createTable('events', (table) => {
-      table.increments();
-      table.string('location').notNullable();
-      table.string('description').notNullable();
-      table.integer('host_id').notNullable();
-      table.integer('garden_id').nullable();
-      table.dateTime('date').notNullable();
-      table.text('image').nullable();
+      table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
+
       table.text('title').notNullable();
+      table.string('description').notNullable();
+      table.text('image').nullable();
+      table.string('location').notNullable();
+      table.dateTime('date').notNullable();
+
+      table.uuid('host_id').notNullable();
+      table.foreign('host_id').references('id').inTable('users');
+
+      table.uuid('garden_id').nullable();
+      table.foreign('garden_id').references('id').inTable('gardens');
+
+      table.timestamps(true, true);
+    })
+    .createTable('posts', (table) => {
+      table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
+
+      table.string('title').notNullable();
+      table.string('body').notNullable();
+
+      table.uuid('user_id').notNullable();
+      table.foreign('user_id').references('id').inTable('users');
+
+      table.uuid('garden_id').nullable();
+      table.foreign('garden_id').references('id').inTable('gardens');
+
+      table.uuid('event_id').nullable();
+      table.foreign('event_id').references('id').inTable('events');
+
+      table.timestamps(true, true);
+    })
+    .createTable('comments', (table) => {
+      table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
+
+      table.string('body').notNullable();
+
+      table.uuid('post_id').notNullable();
+      table.foreign('post_id').references('id').inTable('posts');
+
+      table.uuid('user_id').notNullable();
+      table.foreign('user_id').references('id').inTable('users');
+
+      table.timestamp(true, true);
     });
 }
 
@@ -47,8 +75,8 @@ export function up(knex) {
  */
 export function down(knex) {
   return knex.schema
-    .dropTable('posts')
-    .dropTable('gardens')
-    .dropTable('comments')
-    .dropTable('events');
+    .dropTableIfExists('comments')
+    .dropTableIfExists('posts')
+    .dropTableIfExists('gardens')
+    .dropTableIfExists('events');
 }

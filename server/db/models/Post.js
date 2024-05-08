@@ -28,6 +28,15 @@ export default class Post {
     return post ? new Post(post) : null;
   }
 
+  static async findByUserId(user_id) {
+    const query = `
+    SELECT * 
+    FROM posts 
+    WHERE user_id = ?`;
+    const { rows } = await knex.raw(query, [user_id]);
+    return rows.map((post) => new Post(post));
+  }
+
   static async create({
     title,
     body,
