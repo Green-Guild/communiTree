@@ -1,6 +1,6 @@
 import express from 'express';
 import { checkSchema } from 'express-validator';
-import { createUserValidationSchema } from '../utils/validationSchema.js';
+import { createUserValidationSchema } from '../utils/validationSchemas/userValidationSchema.js';
 import {
   listUsers,
   showUser,
