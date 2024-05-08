@@ -1,13 +1,22 @@
 import knex from '../knex.js';
 
 export default class Post {
-  constructor({ id, title, body, user_id, garden_id = null, event_id = null }) {
+  constructor({
+    id,
+    title,
+    body,
+    user_id,
+    garden_id = null,
+    event_id = null,
+    created_at,
+  }) {
     this.id = id;
     this.title = title;
     this.body = body;
     this.user_id = user_id;
     this.garden_id = garden_id;
     this.event_id = event_id;
+    this.creationDate = created_at;
   }
 
   static async list() {
@@ -58,7 +67,7 @@ export default class Post {
     return rows[0] ? new Post(rows[0]) : null;
   }
 
-  static async update(id, { title, body, garden_id, event_id }) {
+  static async update({ title, body, garden_id = null, event_id = null, id }) {
     const query = `
     UPDATE posts
     SET title = ?, body = ?, garden_id = ?, event_id = ?
@@ -73,6 +82,8 @@ export default class Post {
     ]);
     return rows[0] ? new Post(rows[0]) : null;
   }
+
+  // TODO: fix delete (delete comments on post first)
 
   static async delete(id) {
     const query = `
