@@ -73,7 +73,7 @@ export async function up(knex) {
       table.uuid('user_id').notNullable();
       table.foreign('user_id').references('id').inTable('users');
 
-      table.timestamp(true, true);
+      table.timestamps(true, true);
     });
 }
 
