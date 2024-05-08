@@ -1,7 +1,8 @@
 import knex from '../knex.js';
 
 export default class Reply {
-  constructor({ post_id, user_id, body }) {
+  constructor({ id, post_id, user_id, body }) {
+    this.id = id;
     this.post_id = post_id;
     this.user_id = user_id;
     this.body = body;
@@ -34,13 +35,13 @@ export default class Reply {
     return rows[0] ? new Reply(rows[0]) : null;
   }
 
-  static async update(id, { post_id, user_id, body }) {
+  static async update({ body, id }) {
     const query = `
     UPDATE comments
-    SET post_id = ?, user_id = ?, body = ?
+    SET body = ?
     WHERE id = ?
     RETURNING *`;
-    const { rows } = await knex.raw(query, [post_id, user_id, body]);
+    const { rows } = await knex.raw(query, [body, id]);
     return rows[0] ? new Reply(rows[0]) : null;
   }
 
