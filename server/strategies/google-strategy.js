@@ -1,8 +1,8 @@
 import passport from 'passport';
 import { Strategy } from 'passport-google-oauth20';
 import User from '../db/models/User.js';
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default passport.use(
   new Strategy(
@@ -23,7 +23,7 @@ export default passport.use(
         const newUser = await User.createGoogleUser({
           google_id: profile.id,
           display_name: profile.displayName,
-          picture: profile.photos[0].value,
+          image: profile.photos[0].value,
         });
 
         done(null, newUser);

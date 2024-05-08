@@ -12,7 +12,7 @@ export default class User {
     location = null,
     display_name,
     google_id,
-    picture,
+    image,
     age = null,
   }) {
     this.id = id;
@@ -21,7 +21,7 @@ export default class User {
     this.location = location;
     this.display_name = display_name;
     this.google_id = google_id;
-    this.picture = picture;
+    this.image = image;
     this.age = age;
   }
 
@@ -62,11 +62,11 @@ export default class User {
     age = null,
     location = null,
     display_name,
-    picture,
+    image,
   }) {
     const passwordHash = password ? await hashPassword(password) : null;
 
-    const query = `INSERT INTO users (username, password_hash, age, location, display_name, picture)
+    const query = `INSERT INTO users (username, password_hash, age, location, display_name, image)
       VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       username,
@@ -74,7 +74,7 @@ export default class User {
       age,
       location,
       display_name,
-      picture,
+      image,
     ]);
     const user = rows[0];
     return new User(user);
@@ -85,30 +85,46 @@ export default class User {
     age = null,
     location = null,
     display_name,
-    picture,
+    image,
   }) {
-    const query = `INSERT INTO users (google_id, age, location, display_name, picture)
+    const query = `INSERT INTO users (google_id, age, location, display_name, image)
       VALUES (?, ?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       google_id,
       age,
       location,
       display_name,
-      picture,
+      image,
     ]);
     const user = rows[0];
     return new User(user);
   }
 
   // TODO: fix update method
-  static async update(id, username) {
+  static async update({
+    id,
+    username,
+    password,
+    age = null,
+    location = null,
+    display_name,
+    image,
+  }) {
     const query = `
       UPDATE users
-      SET username=?
+      SET username=?, password_hash=?, age=?, location=?, display_name=?, image=?
       WHERE id=?
       RETURNING *
     `;
-    const { rows } = await knex.raw(query, [username, id]);
+    const { rows } = await knex.raw(query, [
+      id,
+      username,
+      password,
+      age,
+      location,
+      display_name,
+      image,
+    ]);
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
   }
