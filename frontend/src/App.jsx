@@ -18,7 +18,7 @@ export default function App() {
 
   return <>
     <SiteHeadingAndNav />
-    <main>
+    <main className='bg-white'>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
