@@ -1,6 +1,6 @@
 import knex from '../knex.js';
 
-export default class Gathering {
+export default class Event {
   constructor({
     id,
     title,
@@ -26,7 +26,7 @@ export default class Gathering {
     SELECT * 
     FROM events`;
     const { rows } = await knex.raw(query);
-    return rows.map((event) => new Gathering(event));
+    return rows.map((event) => new Event(event));
   }
 
   static async find(id) {
@@ -36,7 +36,7 @@ export default class Gathering {
     WHERE id = ?`;
     const { rows } = await knex.raw(query, [id]);
     const event = rows[0];
-    return event ? new Gathering(event) : null;
+    return event ? new Event(event) : null;
   }
 
   static async findByHostId(host_id) {
@@ -45,7 +45,7 @@ export default class Gathering {
     FROM events
     WHERE host_id = ?`;
     const { rows } = await knex.raw(query, [host_id]);
-    return rows.map((event) => new Gathering(event));
+    return rows.map((event) => new Event(event));
   }
 
   static async create({
@@ -53,7 +53,7 @@ export default class Gathering {
     location,
     description,
     host_id,
-    garden_id,
+    garden_id = null,
     date,
     image,
   }) {
@@ -70,7 +70,7 @@ export default class Gathering {
       date ?? 'NOW',
       image,
     ]);
-    return rows[0] ? new Gathering(rows[0]) : null;
+    return rows[0] ? new Event(rows[0]) : null;
   }
 
   static async update(
@@ -92,7 +92,7 @@ export default class Gathering {
       image,
       id,
     ]);
-    return rows[0] ? new Gathering(rows[0]) : null;
+    return rows[0] ? new Event(rows[0]) : null;
   }
 
   static async delete(id) {

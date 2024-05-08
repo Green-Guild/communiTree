@@ -1,6 +1,6 @@
 import User from '../models/User.js';
 import Garden from '../models/Garden.js';
-import Gathering from '../models/Gathering.js';
+import Event from '../models/Event.js';
 import Post from '../models/Post.js';
 import Reply from '../models/Reply.js';
 
@@ -161,8 +161,8 @@ export const seed = async (knex) => {
     owner_id: user6.id,
   });
 
-  // Gatherings
-  const gathering1 = await Gathering.create({
+  // Events
+  const event1 = await Event.create({
     location: '10001',
     description:
       'A fun-filled day to celebrate the power of plants with music, a potluck, and networking. Reuben Ogbonna is your host, offering a chance to connect with fellow gardeners.',
@@ -174,7 +174,7 @@ export const seed = async (knex) => {
     title: 'Reuben Plant Power Parade',
   });
 
-  const gathering2 = await Gathering.create({
+  const event2 = await Event.create({
     location: '11217',
     description:
       'An evening full of sustainable gardening tips and laughter. Gonzalo Romero hosts with a delightful mix of humor and gardening know-how.',
@@ -185,10 +185,10 @@ export const seed = async (knex) => {
     title: "Gonzo's Sustainable Sass Splash",
   });
 
-  const gathering3 = await Gathering.create({
+  const event3 = await Event.create({
     location: '11101',
     description:
-      'A gathering focused on growing onions and other root vegetables on the East Coast. Angelica Ibarlucea shares her expertise with hands-on demos.',
+      'A event focused on growing onions and other root vegetables on the East Coast. Angelica Ibarlucea shares her expertise with hands-on demos.',
     host_id: user3.id,
     garden_id: garden3.id,
     date: '2024-05-10 15:00:00',
@@ -196,7 +196,7 @@ export const seed = async (knex) => {
     title: "Angelica's Onions",
   });
 
-  const gathering4 = await Gathering.create({
+  const event4 = await Event.create({
     location: '11205',
     description:
       "Motun's Plant Meetup brings the latest plant care techniques and trends to the community. Connect with other growers and expand your network.",
@@ -208,7 +208,7 @@ export const seed = async (knex) => {
     title: 'Eco-Summit',
   });
 
-  const gathering5 = await Gathering.create({
+  const event5 = await Event.create({
     location: '10002',
     description:
       "A party that features garden-related projects and activities. Ben Spector's event encourages creativity and networking.",
@@ -220,7 +220,7 @@ export const seed = async (knex) => {
     title: 'Botanical Bash',
   });
 
-  const gathering6 = await Gathering.create({
+  const event6 = await Event.create({
     location: '10467',
     description:
       'An employment fair for aspiring gardeners seeking career opportunities. Jorge Hadad Rey connects job seekers with exciting new prospects.',
@@ -238,7 +238,7 @@ export const seed = async (knex) => {
     body: "The tomatoes keep wilting. Any ideas on how to save them? I'm looking for practical tips on sunlight and watering.",
     user_id: user1.id,
     garden_id: garden1.id,
-    gathering_id: gathering1.id,
+    event_id: event1.id,
   });
 
   const post2 = await Post.create({
@@ -246,7 +246,7 @@ export const seed = async (knex) => {
     body: "How do I bring the perfect dramatic flair to my begonias? I'd love suggestions for colorful companion plants.",
     user_id: user2.id,
     garden_id: garden2.id,
-    gathering_id: gathering2.id,
+    event_id: event2.id,
   });
 
   const post3 = await Post.create({
@@ -254,14 +254,14 @@ export const seed = async (knex) => {
     body: 'What are some best practices for growing onions on the East Coast? Any advice on soil and spacing would be appreciated.',
     user_id: user3.id,
     garden_id: garden3.id,
-    gathering_id: gathering3.id,
+    event_id: event3.id,
   });
 
   const post4 = await Post.create({
     title: 'I need help with my garden!',
     body: "Please help with wilting tomatoes ASAP. I haven't found the right balance with fertilizer or sunlight.",
     user_id: user4.id,
-    gathering_id: gathering4.id,
+    event_id: event4.id,
   });
 
   // Replies
