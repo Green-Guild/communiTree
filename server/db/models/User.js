@@ -110,6 +110,8 @@ export default class User {
     display_name,
     image,
   }) {
+    const passwordHash = password ? await hashPassword(password) : null;
+
     const query = `
       UPDATE users
       SET username=?, password_hash=?, age=?, location=?, display_name=?, image=?
@@ -117,13 +119,13 @@ export default class User {
       RETURNING *
     `;
     const { rows } = await knex.raw(query, [
-      id,
       username,
-      password,
+      passwordHash,
       age,
       location,
       display_name,
       image,
+      id,
     ]);
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;

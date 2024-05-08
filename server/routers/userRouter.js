@@ -18,6 +18,11 @@ userRouter.post('/', checkSchema(createUserValidationSchema), createUser);
 // Express lets us pass a piece of middleware to run for a specific endpoint
 userRouter.get('/', checkAuthentication, listUsers);
 userRouter.get('/:id', checkAuthentication, showUser);
-userRouter.patch('/:id', checkAuthentication, updateUser);
+userRouter.patch(
+  '/:id',
+  checkAuthentication,
+  checkSchema(createUserValidationSchema),
+  updateUser
+);
 
 export default userRouter;
