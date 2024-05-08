@@ -1,5 +1,8 @@
 import knex from '../knex.js';
 
+class Gathering {
+  constructor({ title, location, description, host_id, garden_id = null, event_date, image}) {
+
 export default class Gathering {
   constructor({
     id,
@@ -92,6 +95,7 @@ export default class Gathering {
       image,
       id,
     ]);
+
     return rows[0] ? new Gathering(rows[0]) : null;
   }
 
@@ -106,3 +110,4 @@ export default class Gathering {
     await knex.raw('DELETE FROM events');
   }
 }
+

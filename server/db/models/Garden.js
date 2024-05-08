@@ -1,5 +1,6 @@
 import knex from '../knex.js';
 
+
 export default class Garden {
   constructor({
     id,
@@ -24,7 +25,9 @@ export default class Garden {
     SELECT * 
     FROM gardens`;
     const { rows } = await knex.raw(query);
+
     return rows.map((garden) => new Garden(garden));
+
   }
 
   static async find(id) {
@@ -87,6 +90,7 @@ export default class Garden {
       owner_id,
       id,
     ]);
+
     return rows[0] ? new Garden(rows[0]) : null;
   }
 
@@ -101,3 +105,4 @@ export default class Garden {
     await knex.raw('DELETE FROM gardens');
   }
 }
+

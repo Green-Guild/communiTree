@@ -15,6 +15,7 @@ export default class Post {
     SELECT * 
     FROM posts`;
     const { rows } = await knex.raw(query);
+
     return rows.map((posts) => new Post(posts));
   }
 
@@ -27,6 +28,7 @@ export default class Post {
     const post = rows[0];
     return post ? new Post(post) : null;
   }
+
 
   static async findByUserId(user_id) {
     const query = `
@@ -44,10 +46,12 @@ export default class Post {
     garden_id = null,
     event_id = null,
   }) {
+    
     const query = `
     INSERT INTO posts (title, body, user_id, garden_id, event_id)
     VALUES (?, ?, ?, ?, ?) 
     RETURNING *`;
+
     const { rows } = await knex.raw(query, [
       title,
       body,
@@ -64,6 +68,7 @@ export default class Post {
     SET title = ?, body = ?, garden_id = ?, event_id = ?
     WHERE id = ?
     RETURNING *`;
+
     const { rows } = await knex.raw(query, [
       title,
       body,
@@ -71,6 +76,7 @@ export default class Post {
       event_id,
       id,
     ]);
+
     return rows[0] ? new Post(rows[0]) : null;
   }
 
@@ -85,3 +91,4 @@ export default class Post {
     await knex.raw('DELETE FROM posts');
   }
 }
+

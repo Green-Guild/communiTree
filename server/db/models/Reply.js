@@ -1,7 +1,9 @@
 import knex from '../knex.js';
 
+
 export default class Reply {
   constructor({ post_id, user_id, body }) {
+
     this.post_id = post_id;
     this.user_id = user_id;
     this.body = body;
@@ -12,6 +14,7 @@ export default class Reply {
     SELECT * 
     FROM comments`;
     const { rows } = await knex.raw(query);
+
     return rows.map((comment) => new Reply(comment));
   }
 
@@ -26,6 +29,7 @@ export default class Reply {
   }
 
   static async create({ post_id, user_id, body }) {
+
     const query = `
     INSERT INTO comments (post_id, user_id, body)
     VALUES (?, ?, ?) 
@@ -55,3 +59,4 @@ export default class Reply {
     await knex.raw('DELETE FROM comments');
   }
 }
+
