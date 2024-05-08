@@ -31,7 +31,7 @@ export async function up(knex) {
       table.string('description').notNullable();
       table.text('image').nullable();
       table.string('location').notNullable();
-      table.dateTime('date').notNullable();
+      table.dateTime('event_date').notNullable();
 
       table.uuid('host_id').notNullable();
       table.foreign('host_id').references('id').inTable('users');

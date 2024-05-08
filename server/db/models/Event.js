@@ -8,7 +8,7 @@ export default class Event {
     description,
     host_id,
     garden_id = null,
-    date,
+    event_date,
     image,
     created_at,
     updated_at,
@@ -19,7 +19,7 @@ export default class Event {
     this.description = description;
     this.host_id = host_id;
     this.garden_id = garden_id;
-    this.date = date;
+    this.event_date = event_date;
     this.image = image;
     this.created_at = created_at;
     this.updated_at = updated_at;
@@ -58,11 +58,11 @@ export default class Event {
     description,
     host_id,
     garden_id = null,
-    date,
+    event_date,
     image,
   }) {
     const query = `
-    INSERT INTO events (title, location, description, host_id, garden_id, date, image)
+    INSERT INTO events (title, location, description, host_id, garden_id, event_date, image)
     VALUES (?, ?, ?, ?, ?, ?, ?) 
     RETURNING *`;
     const { rows } = await knex.raw(query, [
@@ -71,7 +71,7 @@ export default class Event {
       description,
       host_id,
       garden_id,
-      date ?? 'NOW',
+      event_date ?? 'NOW',
       image,
     ]);
     return rows[0] ? new Event(rows[0]) : null;
@@ -79,11 +79,11 @@ export default class Event {
 
   static async update(
     id,
-    { title, location, description, host_id, garden_id, date, image }
+    { title, location, description, host_id, garden_id, event_date, image }
   ) {
     const query = `
     UPDATE events
-    SET title = ?, location = ?, description = ?, host_id = ?, garden_id = ?, date  = ? , image = ? 
+    SET title = ?, location = ?, description = ?, host_id = ?, garden_id = ?, event_date  = ? , image = ? 
     WHERE id = ?
     RETURNING *`;
     const { rows } = await knex.raw(query, [
@@ -92,7 +92,7 @@ export default class Event {
       description,
       host_id,
       garden_id,
-      date,
+      event_date,
       image,
       id,
     ]);
