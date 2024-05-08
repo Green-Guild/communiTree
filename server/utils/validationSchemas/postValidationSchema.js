@@ -32,13 +32,13 @@ export const createPostValidationSchema = {
   garden_id: {
     optional: true,
     isUUID: {
-      errorMessage: 'Garden ID must be an id!',
+      errorMessage: 'Garden id must be a valid UUID',
     },
   },
   event_id: {
     optional: true,
     isUUID: {
-      errorMessage: 'Event ID must be an id!',
+      errorMessage: 'Event id must be a valid UUID',
     },
   },
 };
