@@ -42,7 +42,6 @@ export const updatePost = async (req, res) => {
 
   const { title, body, garden_id, event_id } = matchedData(req);
 
-  console.log(title, body, garden_id, event_id, id);
   const post = await Post.find(id);
   if (!isAuthorized(post.user_id, req.session)) return res.sendStatus(403);
 
