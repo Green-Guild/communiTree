@@ -9,6 +9,7 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
+import Community from './pages/Community';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
