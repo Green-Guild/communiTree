@@ -28,6 +28,15 @@ export default class Comment {
     return comment ? new Comment(comment) : null;
   }
 
+  static async findByPostId(post_id) {
+    const query = `
+    SELECT * 
+    FROM comments
+    WHERE post_id = ?`;
+    const { rows } = await knex.raw(query, [post_id]);
+    return rows.map((comment) => new Comment(comment));
+  }
+
   static async create({ post_id, user_id, body }) {
     const query = `
     INSERT INTO comments (post_id, user_id, body)
