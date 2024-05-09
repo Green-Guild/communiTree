@@ -11,6 +11,7 @@ import './strategies/google-strategy.js';
 
 import authRouter from './routers/authRouter.js';
 import userRouter from './routers/userRouter.js';
+import gardenRouter from './routers/gardenRouter.js';
 import eventRouter from './routers/eventRouter.js';
 import postRouter from './routers/postRouter.js';
 import commentRouter from './routers/commentRouter.js';
@@ -28,6 +29,7 @@ app.use(passport.session());
 
 app.use('/api', authRouter);
 app.use('/api/users', userRouter);
+app.use('/api/gardens', gardenRouter);
 app.use('/api/events', eventRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/comments', commentRouter);
