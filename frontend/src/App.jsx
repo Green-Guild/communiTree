@@ -9,6 +9,9 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
+import Gardens from './pages/Gardens';
+import About from './pages/About';
+import Garden from './components/GardenCard';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -26,6 +29,9 @@ export default function App() {
         <Route path='/users' element={<UsersPage />} />
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='*' element={<NotFoundPage />} />
+        <Route path='/gardens' element={<Gardens/>} />
+        <Route path='/about' element={<About/>} />
+        <Route path='/garden' element={<Garden/>} />
       </Routes>
     </main>
   </>;
