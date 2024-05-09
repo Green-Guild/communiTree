@@ -23,13 +23,13 @@ export const createGarden = async ({
   return data;
 };
 
-export const listGardens = async () => {
+export const getAllGardens = async () => {
   const [data, err] = await fetchHandler(baseUrl);
   if (err) return err;
   return data;
 };
 
-export const showGarden = async (id) => {
+export const getGarden = async (id) => {
   const [data, err] = await fetchHandler(`${baseUrl}/${id}`);
   if (err) return err;
   return data;
