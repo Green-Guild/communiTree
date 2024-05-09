@@ -1,6 +1,6 @@
 import knex from '../knex.js';
 
-export default class Gathering {
+export default class Event {
   constructor({
     id,
     title,
@@ -8,8 +8,10 @@ export default class Gathering {
     description,
     host_id,
     garden_id = null,
-    date,
+    event_date,
     image,
+    created_at,
+    updated_at,
   }) {
     this.id = id;
     this.title = title;
@@ -17,8 +19,10 @@ export default class Gathering {
     this.description = description;
     this.host_id = host_id;
     this.garden_id = garden_id;
-    this.date = date;
+    this.event_date = event_date;
     this.image = image;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
   }
 
   static async list() {
@@ -26,7 +30,7 @@ export default class Gathering {
     SELECT * 
     FROM events`;
     const { rows } = await knex.raw(query);
-    return rows.map((event) => new Gathering(event));
+    return rows.map((event) => new Event(event));
   }
 
   static async find(id) {
@@ -36,7 +40,7 @@ export default class Gathering {
     WHERE id = ?`;
     const { rows } = await knex.raw(query, [id]);
     const event = rows[0];
-    return event ? new Gathering(event) : null;
+    return event ? new Event(event) : null;
   }
 
   static async findByHostId(host_id) {
@@ -45,7 +49,7 @@ export default class Gathering {
     FROM events
     WHERE host_id = ?`;
     const { rows } = await knex.raw(query, [host_id]);
-    return rows.map((event) => new Gathering(event));
+    return rows.map((event) => new Event(event));
   }
 
   static async create({
@@ -53,12 +57,12 @@ export default class Gathering {
     location,
     description,
     host_id,
-    garden_id,
-    date,
+    garden_id = null,
+    event_date,
     image,
   }) {
     const query = `
-    INSERT INTO events (title, location, description, host_id, garden_id, date, image)
+    INSERT INTO events (title, location, description, host_id, garden_id, event_date, image)
     VALUES (?, ?, ?, ?, ?, ?, ?) 
     RETURNING *`;
     const { rows } = await knex.raw(query, [
@@ -67,39 +71,45 @@ export default class Gathering {
       description,
       host_id,
       garden_id,
-      date ?? 'NOW',
+      event_date ?? 'NOW',
       image,
     ]);
-    return rows[0] ? new Gathering(rows[0]) : null;
+    return rows[0] ? new Event(rows[0]) : null;
   }
 
-  static async update(
+  static async update({
+    title,
+    location,
+    description,
+    garden_id,
+    event_date,
+    image,
     id,
-    { title, location, description, host_id, garden_id, date, image }
-  ) {
+  }) {
     const query = `
     UPDATE events
-    SET title = ?, location = ?, description = ?, host_id = ?, garden_id = ?, date  = ? , image = ? 
+    SET title = ?, location = ?, description = ?, garden_id = ?, event_date  = ? , image = ? 
     WHERE id = ?
     RETURNING *`;
     const { rows } = await knex.raw(query, [
       title,
       location,
       description,
-      host_id,
       garden_id,
-      date,
+      event_date,
       image,
       id,
     ]);
-    return rows[0] ? new Gathering(rows[0]) : null;
+    return rows[0] ? new Event(rows[0]) : null;
   }
 
   static async delete(id) {
     const query = `
     DELETE FROM events 
     WHERE id = ?`;
-    await knex.raw(query, [id]);
+    try {
+      await knex.raw(query, [id]);
+    } catch (error) {}
   }
 
   static async deleteAll() {

@@ -1,13 +1,24 @@
 import knex from '../knex.js';
 
 export default class Post {
-  constructor({ id, title, body, user_id, garden_id = null, event_id = null }) {
+  constructor({
+    id,
+    title,
+    body,
+    user_id,
+    garden_id = null,
+    event_id = null,
+    created_at,
+    updated_at,
+  }) {
     this.id = id;
     this.title = title;
     this.body = body;
     this.user_id = user_id;
     this.garden_id = garden_id;
     this.event_id = event_id;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
   }
 
   static async list() {
@@ -15,6 +26,7 @@ export default class Post {
     SELECT * 
     FROM posts`;
     const { rows } = await knex.raw(query);
+
     return rows.map((posts) => new Post(posts));
   }
 
@@ -27,6 +39,7 @@ export default class Post {
     const post = rows[0];
     return post ? new Post(post) : null;
   }
+
 
   static async findByUserId(user_id) {
     const query = `
@@ -44,10 +57,12 @@ export default class Post {
     garden_id = null,
     event_id = null,
   }) {
+    
     const query = `
     INSERT INTO posts (title, body, user_id, garden_id, event_id)
     VALUES (?, ?, ?, ?, ?) 
     RETURNING *`;
+
     const { rows } = await knex.raw(query, [
       title,
       body,
@@ -58,12 +73,13 @@ export default class Post {
     return rows[0] ? new Post(rows[0]) : null;
   }
 
-  static async update(id, { title, body, garden_id, event_id }) {
+  static async update({ title, body, garden_id = null, event_id = null, id }) {
     const query = `
     UPDATE posts
     SET title = ?, body = ?, garden_id = ?, event_id = ?
     WHERE id = ?
     RETURNING *`;
+
     const { rows } = await knex.raw(query, [
       title,
       body,
@@ -71,8 +87,11 @@ export default class Post {
       event_id,
       id,
     ]);
+
     return rows[0] ? new Post(rows[0]) : null;
   }
+
+  // TODO: fix delete (delete comments on post first)
 
   static async delete(id) {
     const query = `
@@ -85,3 +104,4 @@ export default class Post {
     await knex.raw('DELETE FROM posts');
   }
 }
+

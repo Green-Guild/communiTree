@@ -6,7 +6,9 @@ export async function up(knex) {
   await knex.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
 
   return knex.schema.createTable('users', (table) => {
-    table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
+    table
+      .uuid('id', { primaryKey: true })
+      .defaultTo(knex.raw('uuid_generate_v4()'));
 
     table.string('google_id').unique();
 

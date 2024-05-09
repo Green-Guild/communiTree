@@ -1,20 +1,56 @@
 // These functions all take in a body and return an options object
 // with the provided body and the remaining options
-import { fetchHandler, getPostOptions, getPatchOptions } from "../utils";
+import { fetchHandler, getPostOptions, getPatchOptions } from '../utils';
 
 const baseUrl = '/api/users';
 
-export const createUser = async ({ username, password }) => (
-  fetchHandler(baseUrl, getPostOptions({ username, password }))
-);
-
-export const getAllUsers = async () => {
-  const [users] = await fetchHandler(baseUrl);
-  return users || [];
+export const createUser = async ({
+  username,
+  password,
+  display_name,
+  location,
+  image,
+}) => {
+  const [user, err] = await fetchHandler(
+    baseUrl,
+    getPostOptions({ username, password, display_name, location, image })
+  );
+  if (err) return err;
+  return user ?? {};
 };
 
-export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
+export const getAllUsers = async () => {
+  const [users, err] = await fetchHandler(baseUrl);
+  if (err) return err;
+  return users ?? [];
+};
 
-export const updateUsername = async ({ id, username }) => (
-  fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username }))
-);
+export const getUser = async (id) => {
+  const [user, err] = fetchHandler(`${baseUrl}/${id}`);
+  if (err) return err;
+  return user ?? {};
+};
+
+export const updateUser = async ({
+  id,
+  username,
+  location,
+  password,
+  image,
+  display_name,
+}) => {
+  const [user, err] = await fetchHandler(
+    `${baseUrl}/${id}`,
+    getPatchOptions({
+      id,
+      username,
+      location,
+      password,
+      image,
+      display_name,
+    })
+  );
+
+  if (err) return err;
+  return user ?? {};
+};

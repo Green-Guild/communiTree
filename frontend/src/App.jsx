@@ -9,9 +9,12 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
+
 import Gardens from './pages/Gardens';
 import About from './pages/About';
 import Garden from './components/GardenCard';
+import Community from './pages/Community';
+
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -19,20 +22,19 @@ export default function App() {
     checkForLoggedInUser().then(setCurrentUser);
   }, [setCurrentUser]);
 
-  return <>
-    <SiteHeadingAndNav />
-    <main>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/sign-up' element={<SignUpPage />} />
-        <Route path='/users' element={<UsersPage />} />
-        <Route path='/users/:id' element={<UserPage />} />
-        <Route path='*' element={<NotFoundPage />} />
-        <Route path='/gardens' element={<Gardens/>} />
-        <Route path='/about' element={<About/>} />
-        <Route path='/garden' element={<Garden/>} />
-      </Routes>
-    </main>
-  </>;
+  return (
+    <>
+      <SiteHeadingAndNav />
+      <main className="bg-white">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/users" element={<UsersPage />} />
+          <Route path="/users/:id" element={<UserPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+    </>
+  );
 }

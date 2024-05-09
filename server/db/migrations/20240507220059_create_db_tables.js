@@ -7,7 +7,9 @@ export async function up(knex) {
 
   return knex.schema
     .createTable('gardens', (table) => {
-      table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
+      table
+        .uuid('id', { primaryKey: true })
+        .defaultTo(knex.raw('uuid_generate_v4()'));
 
       table.string('name').notNullable();
       table.string('location').notNullable();
@@ -21,13 +23,15 @@ export async function up(knex) {
       table.timestamps(true, true);
     })
     .createTable('events', (table) => {
-      table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
+      table
+        .uuid('id', { primaryKey: true })
+        .defaultTo(knex.raw('uuid_generate_v4()'));
 
-      table.text('title').notNullable();
+      table.string('title').notNullable();
       table.string('description').notNullable();
-      table.text('image').nullable();
+      table.string('image').nullable();
       table.string('location').notNullable();
-      table.dateTime('date').notNullable();
+      table.dateTime('event_date').notNullable();
 
       table.uuid('host_id').notNullable();
       table.foreign('host_id').references('id').inTable('users');
@@ -38,7 +42,9 @@ export async function up(knex) {
       table.timestamps(true, true);
     })
     .createTable('posts', (table) => {
-      table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
+      table
+        .uuid('id', { primaryKey: true })
+        .defaultTo(knex.raw('uuid_generate_v4()'));
 
       table.string('title').notNullable();
       table.string('body').notNullable();
@@ -55,7 +61,9 @@ export async function up(knex) {
       table.timestamps(true, true);
     })
     .createTable('comments', (table) => {
-      table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
+      table
+        .uuid('id', { primaryKey: true })
+        .defaultTo(knex.raw('uuid_generate_v4()'));
 
       table.string('body').notNullable();
 
@@ -65,7 +73,7 @@ export async function up(knex) {
       table.uuid('user_id').notNullable();
       table.foreign('user_id').references('id').inTable('users');
 
-      table.timestamp(true, true);
+      table.timestamps(true, true);
     });
 }
 
@@ -77,6 +85,6 @@ export function down(knex) {
   return knex.schema
     .dropTableIfExists('comments')
     .dropTableIfExists('posts')
-    .dropTableIfExists('gardens')
-    .dropTableIfExists('events');
+    .dropTableIfExists('events')
+    .dropTableIfExists('gardens');
 }
