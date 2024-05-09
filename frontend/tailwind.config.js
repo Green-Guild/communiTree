@@ -14,6 +14,9 @@ export default {
       'black': '#282828',
       'white': '#F8F7F4',
     },
+    // boxShadow: {
+    //   'inner-white': 'inset 0 0 10px 0 white', // Adjust the values to your needs
+    // },
     fontFamily: {
       'ubuntu': ['Ubuntu', 'sans-serif'],
     },

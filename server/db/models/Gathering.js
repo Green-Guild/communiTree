@@ -1,8 +1,5 @@
 import knex from '../knex.js';
 
-class Gathering {
-  constructor({ title, location, description, host_id, garden_id = null, event_date, image}) {
-
 export default class Gathering {
   constructor({
     id,

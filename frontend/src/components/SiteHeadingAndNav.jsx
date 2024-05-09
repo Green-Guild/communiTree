@@ -13,7 +13,7 @@ let acc = (
 
 const tabs = ["Community", "Gardens", "Events", "Account"];
 const map = {
-  Community: "/",
+  Community: "/community",
   Gardens: "/",
   Events: "/",
 };
@@ -24,16 +24,15 @@ const accountOptions = [
   { label: "Sign Up", path: "/sign-up", color: "text-bright-orange" },
 ];
 
-const ChipTabs = () => {
+const SiteHeadingAndNav = () => {
   const [selected, setSelected] = useState(tabs[0]);
   const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
 
   return (
     <div className="px-4 py-2 flex justify-between items-center bg-white">
-      {/* Logo */}
       <a className="pulse" id="logo" href="/">
         <img
-          src="https://i.ibb.co/HYZFJrV/logo-trans.png"
+          src="https://i.ibb.co/7vhXpqq/new-logo.png"
           alt="logo"
           style={{ width: "3.5vw", height: "3.5vw" }}
         />
@@ -73,11 +72,13 @@ const ChipTabs = () => {
             </div>
           ) : (
             <NavLink to={map[tab]} key={tab}>
-              <Chip
-                text={tab}
-                selected={selected === tab}
-                setSelected={setSelected}
-              />
+              {
+                <Chip
+                  text={tab}
+                  selected={selected === tab}
+                  setSelected={setSelected}
+                />
+              }
             </NavLink>
           )
         )}
@@ -85,7 +86,6 @@ const ChipTabs = () => {
     </div>
   );
 };
-
 
 const Chip = ({ text, selected, setSelected }) => {
   return (
@@ -109,4 +109,4 @@ const Chip = ({ text, selected, setSelected }) => {
   );
 };
 
-export default ChipTabs;
+export default SiteHeadingAndNav;
