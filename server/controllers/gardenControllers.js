@@ -7,8 +7,7 @@ export const createGarden = async (req, res) => {
   if (!result.isEmpty())
     return res.status(400).send({ errors: result.array() });
 
-  const { name, location, description, image, is_public, owner_id } =
-    matchedData(req);
+  const { name, location, description, image, is_public } = matchedData(req);
 
   const garden = Garden.create({
     name,
@@ -16,7 +15,7 @@ export const createGarden = async (req, res) => {
     description,
     image,
     is_public,
-    owner_id,
+    owner_id: req.user.id,
   });
 
   res.send(garden);
@@ -51,7 +50,6 @@ export const updateGarden = async (req, res) => {
   const updatedGarden = await Garden.update({
     name: name ?? garden.name,
     description: description ?? garden.description,
-    owner_id: owner_id ?? garden.owner_id,
     location: location ?? garden.location,
     image: image ?? garden.image,
     is_public: is_public ?? garden.is_public,

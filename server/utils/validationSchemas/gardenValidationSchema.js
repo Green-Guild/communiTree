@@ -37,12 +37,6 @@ export const createGardenValidationSchema = {
       errorMessage: 'Is public must be a boolean',
     },
   },
-  owner_id: {
-    optional: true,
-    isUUID: {
-      errorMessage: 'Owner ID must be a valid UUID',
-    },
-  },
 };
 
 export const updateGardenValidationSchema = {
@@ -85,12 +79,6 @@ export const updateGardenValidationSchema = {
     optional: true,
     isBoolean: {
       errorMessage: 'Is public must be a boolean',
-    },
-  },
-  owner_id: {
-    optional: true,
-    isUUID: {
-      errorMessage: 'Owner ID must be a valid UUID',
     },
   },
 };

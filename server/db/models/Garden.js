@@ -1,6 +1,5 @@
 import knex from '../knex.js';
 
-
 export default class Garden {
   constructor({
     id,
@@ -31,7 +30,6 @@ export default class Garden {
     const { rows } = await knex.raw(query);
 
     return rows.map((garden) => new Garden(garden));
-
   }
 
   static async find(id) {
@@ -59,7 +57,7 @@ export default class Garden {
     image,
     description,
     is_public = false,
-    owner_id = null,
+    owner_id,
   }) {
     const query = `
     INSERT INTO gardens (name, location, image, description, is_public, owner_id)
@@ -82,12 +80,11 @@ export default class Garden {
     image,
     description,
     is_public = false,
-    owner_id,
     id,
   }) {
     const query = `
     UPDATE gardens
-    SET name = ?, location = ?, image = ?, description = ?, is_public = ?, owner_id  = ? 
+    SET name = ?, location = ?, image = ?, description = ?, is_public = ?
     WHERE id = ?
     RETURNING *`;
     const { rows } = await knex.raw(query, [
@@ -96,7 +93,6 @@ export default class Garden {
       image,
       description,
       is_public,
-      owner_id,
       id,
     ]);
 
@@ -114,4 +110,3 @@ export default class Garden {
     await knex.raw('DELETE FROM gardens');
   }
 }
-
