@@ -46,7 +46,7 @@ export default function SignUpPage() {
   return (
     <>
       <div className="bg-yellow rounded-t-2xl flex flex-col items-center mx-10 mt-5 py-14 h-screen px-40 shadow-sm border-none">
-        {/* <h1>Sign Up</h1> */}
+        {/* Sign Up */}
         <div
           id="form-cont"
           className=" rounded-xl flex w-fit bg-white shadow-md border-none relative h-[24.5rem] overflow-hidden"
@@ -126,17 +126,14 @@ export default function SignUpPage() {
           </Link>
         </p>
 
-        {/* Add the Google button here */}
-        <Link to="/api/google">
-          <button>
-            <img
-              src="https://static.vecteezy.com/system/resources/previews/022/613/027/non_2x/google-icon-logo-symbol-free-png.png"
-              alt="Google Logo"
-              style={{ width: '30px', height: '30px' }}
-            />
-            {/* Google */}
-          </button>
-        </Link>
+        {/* Google */}
+        <button onClick={googleLogin}>
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/022/613/027/non_2x/google-icon-logo-symbol-free-png.png"
+            alt="Google Logo"
+            style={{ width: '30px', height: '30px' }}
+          />
+        </button>
       </div>
     </>
   );
