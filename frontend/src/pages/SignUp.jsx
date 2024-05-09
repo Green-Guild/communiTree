@@ -1,38 +1,46 @@
-import { useContext, useState } from "react";
-import { useNavigate, Navigate, Link } from "react-router-dom";
-import CurrentUserContext from "../contexts/current-user-context";
-import { createUser } from "../adapters/user-adapter";
+import { useContext, useState } from 'react';
+import { useNavigate, Navigate, Link } from 'react-router-dom';
+import CurrentUserContext from '../contexts/current-user-context';
+import { createUser } from '../adapters/user-adapter';
+import { localLogin, googleLogin } from '../adapters/auth-adapter';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-  const [errorText, setErrorText] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [location, setLocation] = useState("");
-  const [name, setName] = useState("");
+  const [errorText, setErrorText] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [location, setLocation] = useState('');
+  const [name, setName] = useState('');
 
   if (currentUser) return <Navigate to="/" />;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorText("");
+    setErrorText('');
     if (!username || !password)
-      return setErrorText("Missing username or password");
+      return setErrorText('Missing username or password');
 
-    const [user, error] = await createUser({ username, password, location });
-    if (error) return setErrorText(error.message);
+    if (!location || !name) return setErrorText('Missing location or name');
 
+    const user = await createUser({
+      username,
+      password,
+      location,
+      display_name: name,
+    });
+
+    await localLogin({ username, password });
     setCurrentUser(user);
-    navigate("/");
+    navigate('/');
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "username") setUsername(value);
-    if (name === "password") setPassword(value);
-    if (location === "location") setLocation(value);
-    if (name === "name") setName(value);
+    if (name === 'username') setUsername(value);
+    if (name === 'password') setPassword(value);
+    if (name === 'location') setLocation(value);
+    if (name === 'name') setName(value);
   };
 
   return (
@@ -112,19 +120,19 @@ export default function SignUpPage() {
         {!!errorText && <p>{errorText}</p>}
 
         <p className="mt-4 text-white">
-          Already have an account with us?{" "}
+          Already have an account with us?{' '}
           <Link to="/login" className="text-bright-orange hover:text-white">
             Log in!
           </Link>
         </p>
 
         {/* Add the Google button here */}
-        <Link to="/">
+        <Link to="/api/google">
           <button>
             <img
               src="https://static.vecteezy.com/system/resources/previews/022/613/027/non_2x/google-icon-logo-symbol-free-png.png"
               alt="Google Logo"
-              style={{ width: "30px", height: "30px" }}
+              style={{ width: '30px', height: '30px' }}
             />
             {/* Google */}
           </button>
