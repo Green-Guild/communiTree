@@ -27,9 +27,9 @@ export async function up(knex) {
         .uuid('id', { primaryKey: true })
         .defaultTo(knex.raw('uuid_generate_v4()'));
 
-      table.text('title').notNullable();
+      table.string('title').notNullable();
       table.string('description').notNullable();
-      table.text('image').nullable();
+      table.string('image').nullable();
       table.string('location').notNullable();
       table.dateTime('event_date').notNullable();
 
