@@ -9,7 +9,12 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
+
+import Gardens from './pages/Gardens';
+import About from './pages/About';
+import Garden from './components/GardenCard';
 import Community from './pages/Community';
+
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
