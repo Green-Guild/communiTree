@@ -1,6 +1,9 @@
 import express from 'express';
 import { checkSchema } from 'express-validator';
-import { createUserValidationSchema } from '../utils/validationSchemas/userValidationSchema.js';
+import {
+  createUserValidationSchema,
+  updateUserValidationSchema,
+} from '../utils/validationSchemas/userValidationSchema.js';
 import {
   listUsers,
   showUser,
@@ -21,7 +24,7 @@ userRouter.get('/:id', checkAuthentication, showUser);
 userRouter.patch(
   '/:id',
   checkAuthentication,
-  checkSchema(createUserValidationSchema),
+  checkSchema(updateUserValidationSchema),
   updateUser
 );
 
