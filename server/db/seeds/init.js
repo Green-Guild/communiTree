@@ -19,7 +19,6 @@ export const seed = async (knex) => {
     username: 'test',
     password: 'test',
     display_name: 'test',
-    age: 30,
     location: '11230',
     image: 'https://i.ibb.co/zZj8b3t/ra1.png',
   });
@@ -34,7 +33,6 @@ export const seed = async (knex) => {
   const user1 = await User.createLocalUser({
     username: 'rafi_barides',
     display_name: 'Rafi Barides',
-    age: 12,
     location: '11230',
     image: 'https://i.ibb.co/zZj8b3t/ra1.png',
     password: 'Hello1234',
@@ -43,7 +41,6 @@ export const seed = async (knex) => {
   const user2 = await User.createLocalUser({
     username: 'reuben_ogbonna',
     display_name: 'Reuben Ogbonna',
-    age: 27,
     location: '10001',
     image:
       'https://images.squarespace-cdn.com/content/v1/61f2c931c536520a4daa56ec/1643492157717-N0AL5RLVEFW18H1FJGGQ/Reuben+Ogbonna.png',
@@ -53,7 +50,6 @@ export const seed = async (knex) => {
   const user3 = await User.createLocalUser({
     username: 'gonzalo_romero',
     display_name: 'Gonzalo Romero',
-    age: 30,
     location: '11217',
     image:
       'https://media.licdn.com/dms/image/D4E03AQGdNvT3gbIlpg/profile-displayphoto-shrink_200_200/0/1670452125309?e=2147483647&v=beta&t=ZL4KbqIHeGM3isBfeBOIsmOqClOan5ZHker_N9r9kWk',
@@ -63,7 +59,6 @@ export const seed = async (knex) => {
   const user4 = await User.createLocalUser({
     username: 'angelica_ibarlucea',
     display_name: 'Angelica Ibarlucea',
-    age: 24,
     location: '11101',
     image:
       'https://media.licdn.com/dms/image/D4D03AQGt4w941TYGHg/profile-displayphoto-shrink_800_800/0/1708731163185?e=1720656000&v=beta&t=33oVsvt7EnRo9B_2_J-aWKhf6uzEN4iKe9FrxlF1RTU',
@@ -73,7 +68,6 @@ export const seed = async (knex) => {
   const user5 = await User.createLocalUser({
     username: 'motun_b',
     display_name: 'Motun B',
-    age: 29,
     location: '11205',
     image:
       'https://images.ctfassets.net/5tpkas7gb5io/178TAzhuPPZvs3gv9lhvzg/d8ed331791d3991eff911747071da2dd/Motun_Marcy_Headshot_website.jpg?w=1920&q=75',
@@ -83,7 +77,6 @@ export const seed = async (knex) => {
   const user6 = await User.createLocalUser({
     username: 'ben_spector',
     display_name: 'Ben Spector',
-    age: 26,
     location: '10002',
     image:
       'https://images.ctfassets.net/5tpkas7gb5io/5o7VSAHtvgTZCfbHH9J2pi/9e264d065746c554e2e5e61ca5e4f725/Ben_Marcy_Headshot_website.jpg?w=640&q=75',
@@ -93,7 +86,6 @@ export const seed = async (knex) => {
   const user7 = await User.createLocalUser({
     username: 'jorge_hadad_rey',
     display_name: 'Jorge Hadad Rey',
-    age: 31,
     location: '10467',
     image:
       'https://media.licdn.com/dms/image/D4E03AQFz64tcWff7aA/profile-displayphoto-shrink_800_800/0/1693365857389?e=2147483647&v=beta&t=9WehLn681rvzHGlqAEDlma30vUcmxk3vB2BI8xJoM1A',

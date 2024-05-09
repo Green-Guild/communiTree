@@ -23,14 +23,6 @@ export const createUserValidationSchema = {
   password: {
     notEmpty: true,
   },
-  age: {
-    isInt: {
-      options: {
-        min: 18,
-      },
-      errorMessage: 'Age must be at least 18',
-    },
-  },
   location: {
     notEmpty: true,
     isString: {
@@ -38,8 +30,9 @@ export const createUserValidationSchema = {
     },
   },
   image: {
-    isURL: {
-      errorMessage: 'Image must be a valid URL',
+    optional: true,
+    isImg: {
+      custom: validateImageUrl,
     },
   },
 };
@@ -69,15 +62,6 @@ export const updateUserValidationSchema = {
   password: {
     optional: true,
     notEmpty: true,
-  },
-  age: {
-    optional: true,
-    isInt: {
-      options: {
-        min: 18,
-      },
-      errorMessage: 'Age must be at least 18',
-    },
   },
   location: {
     optional: true,

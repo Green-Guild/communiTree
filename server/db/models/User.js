@@ -13,7 +13,6 @@ export default class User {
     display_name,
     google_id,
     image,
-    age = null,
     created_at,
     updated_at,
   }) {
@@ -24,7 +23,6 @@ export default class User {
     this.display_name = display_name;
     this.google_id = google_id;
     this.image = image;
-    this.age = age;
     this.created_at = created_at;
     this.updated_at = updated_at;
   }
@@ -63,19 +61,17 @@ export default class User {
   static async createLocalUser({
     username,
     password,
-    age = null,
     location = null,
     display_name,
     image,
   }) {
     const passwordHash = password ? await hashPassword(password) : null;
 
-    const query = `INSERT INTO users (username, password_hash, age, location, display_name, image)
-      VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
+    const query = `INSERT INTO users (username, password_hash, location, display_name, image)
+      VALUES (?, ?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       username,
       passwordHash,
-      age,
       location,
       display_name,
       image,
@@ -86,16 +82,14 @@ export default class User {
 
   static async createGoogleUser({
     google_id,
-    age = null,
     location = null,
     display_name,
     image,
   }) {
-    const query = `INSERT INTO users (google_id, age, location, display_name, image)
-      VALUES (?, ?, ?, ?, ?) RETURNING *`;
+    const query = `INSERT INTO users (google_id, location, display_name, image)
+      VALUES (?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       google_id,
-      age,
       location,
       display_name,
       image,
@@ -109,7 +103,6 @@ export default class User {
     id,
     username,
     password,
-    age = null,
     location = null,
     display_name,
     image,
@@ -118,14 +111,13 @@ export default class User {
 
     const query = `
       UPDATE users
-      SET username=?, password_hash=?, age=?, location=?, display_name=?, image=?
+      SET username=?, password_hash=?, location=?, display_name=?, image=?
       WHERE id=?
       RETURNING *
     `;
     const { rows } = await knex.raw(query, [
       username,
       passwordHash,
-      age,
       location,
       display_name,
       image,

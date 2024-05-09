@@ -9,12 +9,11 @@ export const createUser = async ({
   password,
   display_name,
   location,
-  age,
   image,
 }) => {
   const [user, err] = await fetchHandler(
     baseUrl,
-    getPostOptions({ username, password, display_name, location, age, image })
+    getPostOptions({ username, password, display_name, location, image })
   );
   if (err) return err;
   return user ?? {};
@@ -37,7 +36,6 @@ export const updateUser = async ({
   username,
   location,
   password,
-  age,
   image,
   display_name,
 }) => {
@@ -48,7 +46,6 @@ export const updateUser = async ({
       username,
       location,
       password,
-      age,
       image,
       display_name,
     })

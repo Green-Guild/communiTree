@@ -7,7 +7,7 @@ export const createUser = async (req, res) => {
   if (!result.isEmpty())
     return res.status(400).send({ errors: result.array() });
 
-  const { username, password, display_name, age, location, image } =
+  const { username, password, display_name, location, image } =
     matchedData(req);
 
   const existingUser = await User.findByUsername(username);
@@ -19,7 +19,6 @@ export const createUser = async (req, res) => {
     username,
     password,
     display_name,
-    age,
     location,
     image,
   });
@@ -47,7 +46,7 @@ export const updateUser = async (req, res) => {
   if (!result.isEmpty())
     return res.status(400).send({ errors: result.array() });
 
-  const { username, password, display_name, age, location, image } =
+  const { username, password, display_name, location, image } =
     matchedData(req);
 
   // Not only do users need to be logged in to update a user, they
@@ -61,7 +60,6 @@ export const updateUser = async (req, res) => {
     username: username ?? user.username,
     password: password ?? user.password,
     display_name: display_name ?? user.display_name,
-    age: age ?? user.age,
     location: location ?? user.location,
     image: image ?? user.image,
   });
