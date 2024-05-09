@@ -77,20 +77,24 @@ export default class Event {
     return rows[0] ? new Event(rows[0]) : null;
   }
 
-  static async update(
+  static async update({
+    title,
+    location,
+    description,
+    garden_id,
+    event_date,
+    image,
     id,
-    { title, location, description, host_id, garden_id, event_date, image }
-  ) {
+  }) {
     const query = `
     UPDATE events
-    SET title = ?, location = ?, description = ?, host_id = ?, garden_id = ?, event_date  = ? , image = ? 
+    SET title = ?, location = ?, description = ?, garden_id = ?, event_date  = ? , image = ? 
     WHERE id = ?
     RETURNING *`;
     const { rows } = await knex.raw(query, [
       title,
       location,
       description,
-      host_id,
       garden_id,
       event_date,
       image,
@@ -103,7 +107,9 @@ export default class Event {
     const query = `
     DELETE FROM events 
     WHERE id = ?`;
-    await knex.raw(query, [id]);
+    try {
+      await knex.raw(query, [id]);
+    } catch (error) {}
   }
 
   static async deleteAll() {
