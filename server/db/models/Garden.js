@@ -10,6 +10,8 @@ export default class Garden {
     description,
     is_public = false,
     owner_id = null,
+    created_at,
+    updated_at,
   }) {
     this.id = id;
     this.name = name;
@@ -18,6 +20,8 @@ export default class Garden {
     this.description = description;
     this.is_public = is_public;
     this.owner_id = owner_id;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
   }
 
   static async list() {
@@ -72,13 +76,18 @@ export default class Garden {
     return rows[0] ? new Garden(rows[0]) : null;
   }
 
-  static async update(
+  static async update({
+    name,
+    location,
+    image,
+    description,
+    is_public = false,
+    owner_id,
     id,
-    { name, location, image, description, is_public = false, owner_id }
-  ) {
+  }) {
     const query = `
     UPDATE gardens
-    SET name = ? location = ?, image = ?, description = ?, is_public = ?, owner_id  = ? 
+    SET name = ?, location = ?, image = ?, description = ?, is_public = ?, owner_id  = ? 
     WHERE id = ?
     RETURNING *`;
     const { rows } = await knex.raw(query, [

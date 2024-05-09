@@ -1,6 +1,9 @@
 import express from 'express';
 import { checkSchema } from 'express-validator';
-import { createUserValidationSchema } from '../utils/validationSchema.js';
+import {
+  createUserValidationSchema,
+  updateUserValidationSchema,
+} from '../utils/validationSchemas/userValidationSchema.js';
 import {
   listUsers,
   showUser,
@@ -18,6 +21,11 @@ userRouter.post('/', checkSchema(createUserValidationSchema), createUser);
 // Express lets us pass a piece of middleware to run for a specific endpoint
 userRouter.get('/', checkAuthentication, listUsers);
 userRouter.get('/:id', checkAuthentication, showUser);
-userRouter.patch('/:id', checkAuthentication, updateUser);
+userRouter.patch(
+  '/:id',
+  checkAuthentication,
+  checkSchema(updateUserValidationSchema),
+  updateUser
+);
 
 export default userRouter;

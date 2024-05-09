@@ -18,5 +18,5 @@ export const isValidPassword = async (password, hash) =>
 
 export const isAuthorized = (id, session) => {
   if (!id || !session || !session.passport.user) return false;
-  return id === session.passport.id;
+  return id === session.passport.user;
 };
