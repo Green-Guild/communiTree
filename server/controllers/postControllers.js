@@ -46,10 +46,10 @@ export const updatePost = async (req, res) => {
   if (!isAuthorized(post.user_id, req.session)) return res.sendStatus(403);
 
   const updatedPost = await Post.update({
-    title,
-    body,
-    garden_id,
-    event_id,
+    title: title ?? post.title,
+    body: body ?? post.body,
+    garden_id: garden_id ?? post.garden_id,
+    event_id: event_id ?? post.event_id,
     id,
   });
   if (!updatedPost) return res.sendStatus(404);
