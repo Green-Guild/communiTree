@@ -63,7 +63,7 @@ export default class User {
     password,
     location = null,
     display_name,
-    image,
+    image = null,
   }) {
     const passwordHash = password ? await hashPassword(password) : null;
 
