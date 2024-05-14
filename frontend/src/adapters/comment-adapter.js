@@ -31,6 +31,12 @@ export const getComment = async (id) => {
   return data;
 };
 
+export const getCommentsByPostId = async (post_id) => {
+  const [data, err] = await fetchHandler(`${baseUrl}/post/${post_id}`);
+  if (err) return err;
+  return data;
+};
+
 export const updateComment = async ({ body, post_id }) => {
   const [data, err] = await fetchHandler(
     `${baseUrl}/${id}`,

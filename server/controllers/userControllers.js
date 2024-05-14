@@ -7,8 +7,7 @@ export const createUser = async (req, res) => {
   if (!result.isEmpty())
     return res.status(400).send({ errors: result.array() });
 
-  const { username, password, display_name, location, image } =
-    matchedData(req);
+  const { username, password, display_name, zipcode, image } = matchedData(req);
 
   const existingUser = await User.findByUsername(username);
   if (existingUser) {
@@ -19,7 +18,7 @@ export const createUser = async (req, res) => {
     username,
     password,
     display_name,
-    location,
+    zipcode,
     image,
   });
 
@@ -46,8 +45,7 @@ export const updateUser = async (req, res) => {
   if (!result.isEmpty())
     return res.status(400).send({ errors: result.array() });
 
-  const { username, password, display_name, location, image } =
-    matchedData(req);
+  const { username, password, display_name, zipcode, image } = matchedData(req);
 
   // Not only do users need to be logged in to update a user, they
   // need to be authorized to perform this action for this particular
@@ -60,7 +58,7 @@ export const updateUser = async (req, res) => {
     username: username ?? user.username,
     password: password ?? user.password,
     display_name: display_name ?? user.display_name,
-    location: location ?? user.location,
+    zipcode: zipcode ?? user.zipcode,
     image: image ?? user.image,
   });
   if (!updatedUser) return res.sendStatus(404);

@@ -78,11 +78,11 @@
 
 // export default Post;
 
-import { useEffect, useState } from "react";
-import { getUser } from "../adapters/user-adapter";
+import { useEffect, useState } from 'react';
+import { getUser } from '../adapters/user-adapter';
 
 function Post({ post }) {
-  const [commentText, setCommentText] = useState("");
+  const [commentText, setCommentText] = useState('');
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [isCommentInputVisible, setIsCommentInputVisible] = useState(false);
   const [user, setUser] = useState({});
@@ -168,7 +168,7 @@ function Post({ post }) {
         className="text-white bg-light-yellow w-full p-1 rounded-b-lg"
         onClick={handleToggleComments}
       >
-        {isCommentsVisible ? "Collapse comments" : "View all comments"}
+        {isCommentsVisible ? 'Collapse comments' : 'View all comments'}
       </button>
     </div>
   );

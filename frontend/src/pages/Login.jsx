@@ -63,10 +63,9 @@ export default function LoginPage() {
     event.preventDefault();
     setErrorText("");
     const formData = new FormData(event.target);
-    const [user, error] = await localLogin(Object.fromEntries(formData));
-    if (error) return setErrorText(error.message);
+    const user = await localLogin(Object.fromEntries(formData));
     setCurrentUser(user);
-    navigate(`/users/${user.id}`);
+    navigate(`/`);
   };
 
   if (currentUser) return <Navigate to="/" />;

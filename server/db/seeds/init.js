@@ -19,7 +19,7 @@ export const seed = async (knex) => {
     username: 'test',
     password: 'test',
     display_name: 'test',
-    location: '11230',
+    zipcode: '11230',
     image: 'https://i.ibb.co/zZj8b3t/ra1.png',
   });
   await User.createGoogleUser({
@@ -33,7 +33,7 @@ export const seed = async (knex) => {
   const user1 = await User.createLocalUser({
     username: 'rafi_barides',
     display_name: 'Rafi Barides',
-    location: '11230',
+    zipcode: '11230',
     image: 'https://i.ibb.co/zZj8b3t/ra1.png',
     password: 'Hello1234',
   });
@@ -41,7 +41,7 @@ export const seed = async (knex) => {
   const user2 = await User.createLocalUser({
     username: 'reuben_ogbonna',
     display_name: 'Reuben Ogbonna',
-    location: '10001',
+    zipcode: '10001',
     image:
       'https://images.squarespace-cdn.com/content/v1/61f2c931c536520a4daa56ec/1643492157717-N0AL5RLVEFW18H1FJGGQ/Reuben+Ogbonna.png',
     password: 'Marcy2024',
@@ -50,7 +50,7 @@ export const seed = async (knex) => {
   const user3 = await User.createLocalUser({
     username: 'gonzalo_romero',
     display_name: 'Gonzalo Romero',
-    location: '11217',
+    zipcode: '11217',
     image:
       'https://media.licdn.com/dms/image/D4E03AQGdNvT3gbIlpg/profile-displayphoto-shrink_200_200/0/1670452125309?e=2147483647&v=beta&t=ZL4KbqIHeGM3isBfeBOIsmOqClOan5ZHker_N9r9kWk',
     password: 'snapSnaps!',
@@ -59,7 +59,7 @@ export const seed = async (knex) => {
   const user4 = await User.createLocalUser({
     username: 'angelica_ibarlucea',
     display_name: 'Angelica Ibarlucea',
-    location: '11101',
+    zipcode: '11101',
     image:
       'https://media.licdn.com/dms/image/D4D03AQGt4w941TYGHg/profile-displayphoto-shrink_800_800/0/1708731163185?e=1720656000&v=beta&t=33oVsvt7EnRo9B_2_J-aWKhf6uzEN4iKe9FrxlF1RTU',
     password: 'newRock12',
@@ -68,7 +68,7 @@ export const seed = async (knex) => {
   const user5 = await User.createLocalUser({
     username: 'motun_b',
     display_name: 'Motun B',
-    location: '11205',
+    zipcode: '11205',
     image:
       'https://images.ctfassets.net/5tpkas7gb5io/178TAzhuPPZvs3gv9lhvzg/d8ed331791d3991eff911747071da2dd/Motun_Marcy_Headshot_website.jpg?w=1920&q=75',
     password: 'PlantPower2024',
@@ -77,7 +77,7 @@ export const seed = async (knex) => {
   const user6 = await User.createLocalUser({
     username: 'ben_spector',
     display_name: 'Ben Spector',
-    location: '10002',
+    zipcode: '10002',
     image:
       'https://images.ctfassets.net/5tpkas7gb5io/5o7VSAHtvgTZCfbHH9J2pi/9e264d065746c554e2e5e61ca5e4f725/Ben_Marcy_Headshot_website.jpg?w=640&q=75',
     password: 'GreenThumbs',
@@ -86,7 +86,7 @@ export const seed = async (knex) => {
   const user7 = await User.createLocalUser({
     username: 'jorge_hadad_rey',
     display_name: 'Jorge Hadad Rey',
-    location: '10467',
+    zipcode: '10467',
     image:
       'https://media.licdn.com/dms/image/D4E03AQFz64tcWff7aA/profile-displayphoto-shrink_800_800/0/1693365857389?e=2147483647&v=beta&t=9WehLn681rvzHGlqAEDlma30vUcmxk3vB2BI8xJoM1A',
     password: 'Jobs4Gardens',
@@ -95,7 +95,8 @@ export const seed = async (knex) => {
   // Gardens
   const garden1 = await Garden.create({
     name: 'Marcy Plot',
-    location: '10001',
+    zipcode: '10001',
+    address: '123 Marcy Ave',
     image:
       'https://www.thespruce.com/thmb/IHY_gzo-3Y5terRR2mdPQf0gnSY=/4711x0/filters:no_upscale():max_bytes(150000):strip_icc()/how-to-start-a-garden-from-scratch-2132778-hero-5f6138784a034bad8bf9607ccb18dbed.jpg',
     description: 'The Marcy Plot',
@@ -105,7 +106,8 @@ export const seed = async (knex) => {
 
   const garden2 = await Garden.create({
     name: 'Green Corner Club',
-    location: '11217',
+    zipcode: '11217',
+    address: '123 Marcy Ave',
     image:
       'https://www.thespruce.com/thmb/IHY_gzo-3Y5terRR2mdPQf0gnSY=/4711x0/filters:no_upscale():max_bytes(150000):strip_icc()/how-to-start-a-garden-from-scratch-2132778-hero-5f6138784a034bad8bf9607ccb18dbed.jpg',
     description: 'Green Corner Club',
@@ -115,7 +117,8 @@ export const seed = async (knex) => {
 
   const garden3 = await Garden.create({
     name: 'Plant Haven',
-    location: '11101',
+    zipcode: '11101',
+    address: '123 Marcy Ave',
     image:
       'https://ogden_images.s3.amazonaws.com/www.sungazette.com/images/2024/05/05162549/05022024-Day-of-Prayer-3-1100x601.jpg',
     description: 'Plant Haven',
@@ -125,7 +128,8 @@ export const seed = async (knex) => {
 
   const garden4 = await Garden.create({
     name: 'Motun Sanctuary',
-    location: '11205',
+    zipcode: '11205',
+    address: '123 Marcy Ave',
     image:
       'https://images.ctfassets.net/5tpkas7gb5io/178TAzhuPPZvs3gv9lhvzg/d8ed331791d3991eff911747071da2dd/Motun_Marcy_Headshot_website.jpg?w=1920&q=75',
     description: "Motun's Respectful Equal Opportunity Garden Sanctuary",
@@ -135,7 +139,8 @@ export const seed = async (knex) => {
 
   const garden5 = await Garden.create({
     name: 'Gardenfest',
-    location: '10002',
+    zipcode: '10002',
+    address: '123 Marcy Ave',
     image:
       'https://images.ctfassets.net/5tpkas7gb5io/5o7VSAHtvgTZCfbHH9J2pi/9e264d065746c554e2e5e61ca5e4f725/Ben_Marcy_Headshot_website.jpg?w=640&q=75',
     description: 'Gardenfest',
@@ -145,7 +150,8 @@ export const seed = async (knex) => {
 
   const garden6 = await Garden.create({
     name: 'Planter Union',
-    location: '10467',
+    zipcode: '10467',
+    address: '123 Marcy Ave',
     image:
       'https://media.licdn.com/dms/image/D4E03AQFz64tcWff7aA/profile-displayphoto-shrink_800_800/0/1693365857389?e=2147483647&v=beta&t=9WehLn681rvzHGlqAEDlma30vUcmxk3vB2BI8xJoM1A',
     description: 'Planter Union',
@@ -155,7 +161,8 @@ export const seed = async (knex) => {
 
   // Events
   const event1 = await Event.create({
-    location: '10001',
+    zipcode: '10001',
+    address: '123 Marcy Ave',
     description:
       'A fun-filled day to celebrate the power of plants with music, a potluck, and networking. Reuben Ogbonna is your host, offering a chance to connect with fellow gardeners.',
     host_id: user1.id,
@@ -167,7 +174,8 @@ export const seed = async (knex) => {
   });
 
   const event2 = await Event.create({
-    location: '11217',
+    zipcode: '11217',
+    address: '123 Marcy Ave',
     description:
       'An evening full of sustainable gardening tips and laughter. Gonzalo Romero hosts with a delightful mix of humor and gardening know-how.',
     host_id: user2.id,
@@ -178,7 +186,8 @@ export const seed = async (knex) => {
   });
 
   const event3 = await Event.create({
-    location: '11101',
+    zipcode: '11101',
+    address: '123 Marcy Ave',
     description:
       'A event focused on growing onions and other root vegetables on the East Coast. Angelica Ibarlucea shares her expertise with hands-on demos.',
     host_id: user3.id,
@@ -189,7 +198,8 @@ export const seed = async (knex) => {
   });
 
   const event4 = await Event.create({
-    location: '11205',
+    zipcode: '11205',
+    address: '123 Marcy Ave',
     description:
       "Motun's Plant Meetup brings the latest plant care techniques and trends to the community. Connect with other growers and expand your network.",
     host_id: user4.id,
@@ -201,7 +211,8 @@ export const seed = async (knex) => {
   });
 
   const event5 = await Event.create({
-    location: '10002',
+    zipcode: '10002',
+    address: '123 Marcy Ave',
     description:
       "A party that features garden-related projects and activities. Ben Spector's event encourages creativity and networking.",
     host_id: user5.id,
@@ -213,7 +224,8 @@ export const seed = async (knex) => {
   });
 
   const event6 = await Event.create({
-    location: '10467',
+    zipcode: '10467',
+    address: '123 Marcy Ave',
     description:
       'An employment fair for aspiring gardeners seeking career opportunities. Jorge Hadad Rey connects job seekers with exciting new prospects.',
     host_id: user6.id,
@@ -271,7 +283,7 @@ export const seed = async (knex) => {
 
   const comment3 = await Comment.create({
     post_id: post3.id,
-    body: 'It depends on the location and soil. How is your watering schedule? Try adjusting it if necessary.',
+    body: 'It depends on the zipcode and soil. How is your watering schedule? Try adjusting it if necessary.',
     user_id: user3.id,
   });
 };

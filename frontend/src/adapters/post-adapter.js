@@ -33,6 +33,12 @@ export const getPost = async (id) => {
   return data;
 };
 
+export const getPostsByUserId = async (user_id) => {
+  const [data, err] = await fetchHandler(`${baseUrl}/user/${user_id}`);
+  if (err) return err;
+  return data;
+};
+
 export const updatePost = async ({ title, body, garden_id, event_id }) => {
   const [data, err] = await fetchHandler(
     `${baseUrl}/${id}`,

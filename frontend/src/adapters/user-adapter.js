@@ -8,12 +8,12 @@ export const createUser = async ({
   username,
   password,
   display_name,
-  location,
+  zipcode,
   image,
 }) => {
   const [user, err] = await fetchHandler(
     baseUrl,
-    getPostOptions({ username, password, display_name, location, image })
+    getPostOptions({ username, password, display_name, zipcode, image })
   );
   if (err) return err;
   return user ?? {};
@@ -34,7 +34,7 @@ export const getUser = async (id) => {
 export const updateUser = async ({
   id,
   username,
-  location,
+  zipcode,
   password,
   image,
   display_name,
@@ -44,7 +44,7 @@ export const updateUser = async ({
     getPatchOptions({
       id,
       username,
-      location,
+      zipcode,
       password,
       image,
       display_name,

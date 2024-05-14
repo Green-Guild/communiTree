@@ -9,7 +9,6 @@ export const createComment = async (req, res) => {
 
   const { body, post_id } = matchedData(req);
 
-  console.log(post_id, req.user.id);
   const comment = Comment.create({
     user_id: req.user.id,
     post_id,
@@ -31,6 +30,12 @@ export const showComment = async (req, res) => {
   if (!comment) return res.sendStatus(404);
 
   res.send(comment);
+};
+export const showCommentsByPostId = async (req, res) => {
+  const { id } = req.params;
+  const comments = await Comment.findByPostId(id);
+  if (!comments) return res.sendStatus(404);
+  res.send(comments);
 };
 
 export const updateComment = async (req, res) => {
