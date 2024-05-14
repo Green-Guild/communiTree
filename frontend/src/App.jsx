@@ -13,8 +13,7 @@ import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 
 import Gardens from './pages/Gardens';
-import About from './pages/About';
-import Garden from './components/GardenCard';
+import GardenProfile from './pages/GardenProfile';
 import Community from './pages/Community';
 import HomePage from './pages/Home';
 
@@ -39,6 +38,9 @@ export default function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/gardens" element={<Gardens />} />
+          <Route path="/gardens/:id" element={<GardenProfile />} />
+          
         </Routes>
       </main>
     </div>

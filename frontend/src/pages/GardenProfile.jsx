@@ -1,26 +1,45 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { getGarden } from '../adapters/garden-adapter';
 
 const GardenProfile = () => {
+  const { id } = useParams();
+  const [garden, setGarden] = useState(null);
+
+  useEffect(() => {
+    const fetchGarden = async () => {
+      try {
+        const data = await getGarden(id);
+        setGarden(data);
+      } catch (error) {
+        console.error('Error fetching garden:', error);
+      }
+    };
+
+    fetchGarden();
+  }, [id]);
+
+  const { name, image, description, location } = garden;
+
   return <>
    <main>
     <div>
-      <h1>Motuns Santuary</h1>
+      <h1>{name}</h1>
     </div>
     <div>
-      <img src='https://images.ctfassets.net/5tpkas7gb5io/178TAzhuPPZvs3gv9lhvzg/d8ed331791d3991eff911747071da2dd/Motun_Marcy_Headshot_website.jpg?w=1920&q=75' ></img>
+      <img src={image} alt ={name} ></img>
     </div>
     <div>
       <h2>About</h2>
-      <p>.....</p>
+      <p>{description}</p>
     </div>
 
     <div>
-      <buttons>Directions</buttons>
-      <p>Address</p>
+      <p>{location}</p>
     </div>
   </main>
   </>
 
 };
 export default GardenProfile;
+

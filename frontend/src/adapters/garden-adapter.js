@@ -23,7 +23,8 @@ export const createGarden = async ({
   return data;
 };
 
-export const getAllGardens = async () => {
+export const getAllGardens = async (location = null) => {
+  const url = location ? `${baseUrl}?location=${location}` : baseUrl;
   const [data, err] = await fetchHandler(baseUrl);
   if (err) return err;
   return data;
