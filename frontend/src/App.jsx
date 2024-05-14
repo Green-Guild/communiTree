@@ -18,15 +18,18 @@ import Garden from './components/GardenCard';
 import Community from './pages/Community';
 import HomePage from './pages/Home';
 
-
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
-    checkForLoggedInUser().then(setCurrentUser);
+    const checkForUser = async () => {
+      const user = await checkForLoggedInUser();
+      setCurrentUser(user);
+    };
+    checkForUser();
   }, [setCurrentUser]);
 
   return (
-    <div className='flex-col'>
+    <div className="flex-col">
       <SiteHeadingAndNav />
       <main className="bg-white mt-[10vh]">
         <Routes>
