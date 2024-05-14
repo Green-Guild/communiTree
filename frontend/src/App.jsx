@@ -11,8 +11,7 @@ import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 
 import Gardens from './pages/Gardens';
-import About from './pages/About';
-import Garden from './components/GardenCard';
+import GardenProfile from './pages/GardenProfile';
 import Community from './pages/Community';
 
 
@@ -33,6 +32,9 @@ export default function App() {
           <Route path="/users" element={<UsersPage />} />
           <Route path="/users/:id" element={<UserPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/gardens" element={<Gardens />} />
+          <Route path="/gardens/:id" element={<GardenProfile />} />
+          
         </Routes>
       </main>
     </>
