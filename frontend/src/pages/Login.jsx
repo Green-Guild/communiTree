@@ -49,26 +49,26 @@
 //   );
 // }
 
-import { useContext, useState } from "react";
-import { useNavigate, Navigate, Link } from "react-router-dom";
-import { googleLogin, localLogin } from "../adapters/auth-adapter";
-import CurrentUserContext from "../contexts/current-user-context";
+import { useContext, useState } from 'react';
+import { useNavigate, Navigate, Link } from 'react-router-dom';
+import { googleLogin, localLogin } from '../adapters/auth-adapter';
+import CurrentUserContext from '../contexts/current-user-context';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [errorText, setErrorText] = useState("");
+  const [errorText, setErrorText] = useState('');
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorText("");
+    setErrorText('');
     const formData = new FormData(event.target);
     const user = await localLogin(Object.fromEntries(formData));
     setCurrentUser(user);
-    navigate(`/`);
+    navigate(`/community`);
   };
 
-  if (currentUser) return <Navigate to="/" />;
+  if (currentUser) return <Navigate to="/community" />;
 
   return (
     <>
@@ -120,7 +120,7 @@ export default function LoginPage() {
         {!!errorText && <p>{errorText}</p>}
 
         <p className="mt-4 text-white">
-        Don't have an account?{" "}
+          Don't have an account?{' '}
           <Link to="/sign-up" className="text-bright-orange hover:text-white">
             Sign up!
           </Link>
@@ -131,7 +131,7 @@ export default function LoginPage() {
           <img
             src="https://static.vecteezy.com/system/resources/previews/022/613/027/non_2x/google-icon-logo-symbol-free-png.png"
             alt="Google Logo"
-            style={{ width: "30px", height: "30px" }}
+            style={{ width: '30px', height: '30px' }}
           />
         </button>
       </div>

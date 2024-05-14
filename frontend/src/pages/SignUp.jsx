@@ -13,7 +13,7 @@ export default function SignUpPage() {
   const [zipcode, setZipcode] = useState('');
   const [name, setName] = useState('');
 
-  if (currentUser) return <Navigate to="/" />;
+  if (currentUser) return <Navigate to="/community" />;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,7 +32,7 @@ export default function SignUpPage() {
 
     await localLogin({ username, password });
     setCurrentUser(user);
-    navigate('/');
+    navigate('/community');
   };
 
   const handleChange = (event) => {
