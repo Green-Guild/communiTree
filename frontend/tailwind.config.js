@@ -13,6 +13,8 @@ export default {
       'dark-orange': '#F25922',
       'black': '#282828',
       'white': '#F8F7F4',
+      'about-green': "#3D453B",
+      'light-yellow' : "#f0cca5"
     },
     // boxShadow: {
     //   'inner-white': 'inset 0 0 10px 0 white', // Adjust the values to your needs
@@ -20,7 +22,14 @@ export default {
     fontFamily: {
       'ubuntu': ['Ubuntu', 'sans-serif'],
     },
-    extend: {},
+    // backgroundImage: {
+    //   'custom-gradient': 'linear-gradient(#F8F7F4 ${background}%, #F48437)',
+    // },
+    extend: {
+      backgroundImage: {
+        'custom-shape': "url('/parallax/shape.svg')",
+      },
+    },
   },
   plugins: [],
 }

@@ -26,7 +26,7 @@ export const getAllUsers = async () => {
 };
 
 export const getUser = async (id) => {
-  const [user, err] = fetchHandler(`${baseUrl}/${id}`);
+  const [user, err] = await fetchHandler(`${baseUrl}/${id}`);
   if (err) return err;
   return user ?? {};
 };

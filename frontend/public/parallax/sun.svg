@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 996.744 996.743" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs/>
+<clipPath id="ArtboardFrame">
+<rect height="996.743" width="996.744" x="0" y="0"/>
+</clipPath>
+<g clip-path="url(#ArtboardFrame)" id="sun" vectornator:layerName="sun">
+<path d="M380.342 982.444C112.995 917.264-50.8894 647.689 14.2976 380.342C79.4836 112.994 349.056-50.8892 616.404 14.2974C883.755 79.4844 1047.63 349.056 982.445 616.403C917.265 883.751 647.69 1047.63 380.342 982.444Z" fill="#f48437" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="circle"/>
+</g>
+</svg>

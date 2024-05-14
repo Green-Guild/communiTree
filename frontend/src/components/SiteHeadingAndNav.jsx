@@ -14,14 +14,14 @@ let acc = (
 const tabs = ["Community", "Gardens", "Events", "Account"];
 const map = {
   Community: "/community",
-  Gardens: "/",
-  Events: "/",
+  Gardens: "/gardens",
+  Events: "/events",
 };
 
 const accountOptions = [
-  { label: "Profile", path: "/" },
-  { label: "Settings", path: "/" },
-  { label: "Sign Up", path: "/sign-up", color: "text-bright-orange" },
+  { label: "Profile", path: "/profile" },
+  { label: "Settings", path: "/settings" },
+  { label: "Log In", path: "/login", color: "text-bright-orange" },
 ];
 
 const SiteHeadingAndNav = () => {
@@ -29,7 +29,7 @@ const SiteHeadingAndNav = () => {
   const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
 
   return (
-    <div className="px-4 py-2 flex justify-between items-center bg-white">
+    <div className="z-50 fixed px-4 w-full top-0 py-2 flex justify-between items-center bg-white">
       <a className="pulse" id="logo" href="/">
         <img
           src="https://i.ibb.co/7vhXpqq/new-logo.png"
@@ -57,16 +57,20 @@ const SiteHeadingAndNav = () => {
                   className="absolute top-full mt-2 bg-white shadow-lg rounded-lg font-ubuntu flex flex-col"
                   onMouseLeave={() => setAccountDropdownOpen(false)}
                 >
-                  {accountOptions.map((option) => (
-                    <li key={option.label}>
-                      <NavLink
-                        to={option.path}
-                        className="block px-4 py-2 hover:bg-gray-200 font-ubuntu text-black"
-                      >
-                        {option.label}
-                      </NavLink>
-                    </li>
-                  ))}
+                  {accountOptions.map((option) => {
+                    console.log(option);
+
+                    return (
+                      <li key={option.label}>
+                        <NavLink
+                          to={option.path}
+                          className="block px-4 py-2 hover:bg-gray-200 font-ubuntu text-black"
+                        >
+                          {option.label}
+                        </NavLink>
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </div>

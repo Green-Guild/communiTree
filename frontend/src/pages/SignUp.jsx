@@ -37,14 +37,14 @@ export default function SignUpPage() {
 
   return (
     <>
-      <div className="bg-yellow rounded-t-2xl flex flex-col items-center mx-10 mt-5 py-14 h-screen px-40 shadow-sm border-none">
+      <div className="bg-yellow rounded-t-2xl flex flex-col items-center mx-10 mt-5 py-14 h-full px-40 shadow-sm border-none">
         {/* <h1>Sign Up</h1> */}
         <div
           id="form-cont"
           className=" rounded-xl flex w-fit bg-white shadow-md border-none relative h-[24.5rem] overflow-hidden"
         >
           <img
-            src="https://cdn.discordapp.com/attachments/1092158221579468924/1238141253095522344/rafibarides2_cute_community_gardening_monochome_orange_yellow_s_b70c43c6-fbc4-4618-9116-ef220c335750.png?ex=663e3466&is=663ce2e6&hm=4e1605022567a65129737da2117e8912cc53fd466ca4b5fe8efa23ff57f4f263&"
+            src="https://i.ibb.co/BsnYK8y/rafibarides2-cute-community-gardening-monochome-orange-yellow-s-bdb53699-7073-4eff-bd9c-4885a0913fc0.png"
             alt="welcome-image"
             className="relative inset-0 object-cover object-left w-full h-full max-w-[50%] rounded-tr-2xl"
           />

@@ -12,7 +12,7 @@ const Community = () => {
 
   return (
     <>
-      <div>
+      <div className="flex justify-center items-center ">
         <Forum />
       </div>
       <div>
