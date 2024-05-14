@@ -4,7 +4,8 @@ export default class Garden {
   constructor({
     id,
     name,
-    location,
+    zipcode,
+    address,
     image,
     description,
     is_public = false,
@@ -14,7 +15,8 @@ export default class Garden {
   }) {
     this.id = id;
     this.name = name;
-    this.location = location;
+    this.zipcode = zipcode;
+    this.address = address;
     this.image = image;
     this.description = description;
     this.is_public = is_public;
@@ -53,19 +55,21 @@ export default class Garden {
 
   static async create({
     name,
-    location,
+    zipcode,
+    address,
     image,
     description,
     is_public = false,
     owner_id,
   }) {
     const query = `
-    INSERT INTO gardens (name, location, image, description, is_public, owner_id)
-    VALUES ( ?, ?, ?, ?, ?, ?) 
+    INSERT INTO gardens (name, zipcode, address, image, description, is_public, owner_id)
+    VALUES ( ?, ?, ?, ?, ?, ?, ?) 
     RETURNING *`;
     const { rows } = await knex.raw(query, [
       name,
-      location,
+      zipcode,
+      address,
       image,
       description,
       is_public,
@@ -76,7 +80,8 @@ export default class Garden {
 
   static async update({
     name,
-    location,
+    zipcode,
+    address,
     image,
     description,
     is_public = false,
@@ -84,12 +89,13 @@ export default class Garden {
   }) {
     const query = `
     UPDATE gardens
-    SET name = ?, location = ?, image = ?, description = ?, is_public = ?
+    SET name = ?, zipcode = ?, address = ?, image = ?, description = ?, is_public = ?
     WHERE id = ?
     RETURNING *`;
     const { rows } = await knex.raw(query, [
       name,
-      location,
+      zipcode,
+      address,
       image,
       description,
       is_public,

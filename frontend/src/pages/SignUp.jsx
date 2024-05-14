@@ -10,7 +10,7 @@ export default function SignUpPage() {
   const [errorText, setErrorText] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [location, setLocation] = useState('');
+  const [zipcode, setZipcode] = useState('');
   const [name, setName] = useState('');
 
   if (currentUser) return <Navigate to="/" />;
@@ -21,12 +21,12 @@ export default function SignUpPage() {
     if (!username || !password)
       return setErrorText('Missing username or password');
 
-    if (!location || !name) return setErrorText('Missing location or name');
+    if (!zipcode || !name) return setErrorText('Missing zipcode or name');
 
     const user = await createUser({
       username,
       password,
-      location,
+      zipcode,
       display_name: name,
     });
 
@@ -39,7 +39,7 @@ export default function SignUpPage() {
     const { name, value } = event.target;
     if (name === 'username') setUsername(value);
     if (name === 'password') setPassword(value);
-    if (name === 'location') setLocation(value);
+    if (name === 'zipcode') setZipcode(value);
     if (name === 'name') setName(value);
   };
 
@@ -100,15 +100,15 @@ export default function SignUpPage() {
               value={password}
             />
 
-            <label htmlFor="location">Location</label>
+            <label htmlFor="zipcode">Zipcode</label>
             <input
               className="rounded-lg text-black font-normal p-1"
               autoComplete="off"
               type="text"
-              id="location"
-              name="location"
+              id="zipcode"
+              name="zipcode"
               onChange={handleChange}
-              value={location}
+              value={zipcode}
             />
 
             <button className="text-white bg-bright-orange hover:text-bright-orange hover:bg-white hover:shadow-md shadow-inner hover:shadow-inner-white font-medium rounded-full px-2.5 py-0.5">
