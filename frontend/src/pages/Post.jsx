@@ -145,7 +145,7 @@ function Post({ post }) {
               onClick={handleToggleCommentInput}
             >
               <img
-                src="/public/parallax/chat-icon.svg"
+              src="../../public/parallax/chat.svg"
                 alt="Chat Icon"
                 className="w-10 h-10"
               />

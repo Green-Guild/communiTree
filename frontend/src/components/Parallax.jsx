@@ -116,7 +116,7 @@ function Parallax() {
   }, []);
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden -mt-12">
       <div 
         ref={parallaxRef}
         style={{
@@ -126,7 +126,7 @@ function Parallax() {
       >
         <img
           ref={mountain3}
-          className="absolute bottom-[-12%] w-full z-40"
+          className="absolute bottom-[-14%] w-full z-40"
           src="/parallax/mountain-3.svg"
         />
         <img

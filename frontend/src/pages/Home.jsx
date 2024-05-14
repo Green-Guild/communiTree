@@ -22,15 +22,15 @@ function FadeInSection({ children }) {
 
 function HomePage() {
   return (
-    <>
+    <div>
       <Parallax />
       <div className="bg-about-green text-white flex-col gap-5 ">
         <FadeInSection>
           <div className=" p-12 flex">
-            <h2 className="font-extrabold text-4xl p-7">
-              BLOSSOM IN TOGETHERNESS
+            <h2 className="font-extrabold text-4xl p-7 px-10">
+              BLOSSOM IN <span className="text-light-green">TOGETHERNESS</span>
             </h2>
-            <p className="p-7">
+            <p className="p-7 px-20">
               Loneliness is a growing issue. It's more important than ever to
               spend time together in person. Planting together is a great way to
               meet new people and build friendships around a shared cause. It's
@@ -41,7 +41,7 @@ function HomePage() {
 
         <FadeInSection>
           <div className="bg-custom-shape min-h-[26rem] bg-cover flex items-center">
-            <p className="p-7">
+            <p className="p-7 px-20 mt-5">
               Gathering at community gardens and events is not only a great way
               to build a sense of community but also has proven mental health
               benefits. Studies demonstrate that participating in these
@@ -51,16 +51,20 @@ function HomePage() {
               awareness while building real connections. By coming together to
               cultivate gardens, we nurture both our communities and the planet.
             </p>
-            <h2 className="font-extrabold text-4xl p-7">
-              COMMUNITY IN SUSTAINABILITY
+            <h2 className="font-extrabold text-4xl p-7 px-10 mb-8">
+              COMMUNITY IN{" "}
+              <span className="text-light-green">SUSTAINABILITY</span>
             </h2>
           </div>
         </FadeInSection>
 
         <FadeInSection>
           <div className="p-12  flex">
-            <h2 className="font-extrabold text-4xl p-7">LET'S TOUCH GRASS</h2>
-            <p className="p-7">
+            <h2 className="font-extrabold text-4xl p-7 px-10">
+              LET'S TOUCH
+              <span className="text-light-green"> GRASS</span>
+            </h2>
+            <p className="p-7 px-20">
               Join us in building strong, green communities. Sign up today to
               start a garden, participate, host events, and meet new friends.
               It's time to get outside, connect with nature, and connect with
@@ -71,7 +75,7 @@ function HomePage() {
           </div>
         </FadeInSection>
       </div>
-    </>
+    </div>
   );
 }
 
