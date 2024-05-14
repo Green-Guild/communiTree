@@ -87,6 +87,7 @@ export const updateEventValidationSchema = {
     },
   },
   address: {
+    optional: true,
     isString: {
       errorMessage: 'Address must be a string!',
     },

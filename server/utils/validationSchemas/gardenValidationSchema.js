@@ -21,10 +21,10 @@ export const createGardenValidationSchema = {
     isString: {
       errorMessage: 'Zipcode must be a string!',
     },
-    address: {
-      isString: {
-        errorMessage: 'Address must be a string!',
-      },
+  },
+  address: {
+    isString: {
+      errorMessage: 'Address must be a string!',
     },
   },
   description: {
@@ -74,6 +74,7 @@ export const updateGardenValidationSchema = {
     },
   },
   address: {
+    optional: true,
     isString: {
       errorMessage: 'Address must be a string!',
     },
