@@ -14,6 +14,7 @@ import Gardens from './pages/Gardens';
 import About from './pages/About';
 import Garden from './components/GardenCard';
 import Community from './pages/Community';
+import Events from './pages/Events';
 
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/users" element={<UsersPage />} />
           <Route path="/users/:id" element={<UserPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/events" element={<Events />} />
         </Routes>
       </main>
     </>

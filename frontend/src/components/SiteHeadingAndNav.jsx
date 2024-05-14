@@ -15,7 +15,7 @@ const tabs = ["Community", "Gardens", "Events", "Account"];
 const map = {
   Community: "/community",
   Gardens: "/",
-  Events: "/",
+  Events: "/events",
 };
 
 const accountOptions = [
