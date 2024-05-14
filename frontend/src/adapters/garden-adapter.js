@@ -35,6 +35,12 @@ export const getGarden = async (id) => {
   return data;
 };
 
+export const getGardensByUserId = async (owner_id) => {
+  const [data, err] = await fetchHandler(`${baseUrl}/user/${owner_id}`);
+  if (err) return err;
+  return data;
+};
+
 export const updateGarden = async ({
   id,
   name,

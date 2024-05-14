@@ -38,6 +38,13 @@ export const showEvent = async (req, res) => {
   res.send(event);
 };
 
+export const showEventsByHostId = async (req, res) => {
+  const { id } = req.params;
+  const events = await Event.findByHostId(id);
+  if (!events) return res.sendStatus(404);
+  res.send(events);
+};
+
 export const updateEvent = async (req, res) => {
   const { id } = req.params;
   const result = validationResult(req);
