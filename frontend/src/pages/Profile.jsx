@@ -175,7 +175,11 @@ const Profile = () => {
     return (
       <ul>
         {contributions.map((contribution, index) => (
-          <li key={index}>{contribution.name}</li>
+          <li key={index}>
+            {contributionType === 'gardens'
+              ? contribution.name
+              : contribution.title}
+          </li>
         ))}
       </ul>
     );
