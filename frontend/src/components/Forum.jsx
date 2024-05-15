@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Post from '../pages/Post';
+import Post from './Post';
 import { getAllPosts } from '../adapters/post-adapter';
 
 function Forum() {
@@ -46,7 +46,7 @@ function Forum() {
               className="mb-2 border p-2 rounded-md w-full"
             />
             <button
-              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+              className="px-4 py-2 bg-light-green text-black rounded-md"
               onClick={() => {
                 /* Add new post logic */
               }}

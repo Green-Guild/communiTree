@@ -21,9 +21,9 @@ commentRouter.post(
   checkSchema(createCommentValidationSchema),
   createComment
 );
-commentRouter.get('/', checkAuthentication, listComments);
-commentRouter.get('/:id', checkAuthentication, showComment);
-commentRouter.get('/post/:id', checkAuthentication, showCommentsByPostId);
+commentRouter.get('/', listComments);
+commentRouter.get('/:id', showComment);
+commentRouter.get('/post/:id', showCommentsByPostId);
 commentRouter.patch(
   '/:id',
   checkAuthentication,

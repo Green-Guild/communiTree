@@ -1,22 +1,23 @@
 import { useContext, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import SignUpPage from './pages/SignUp';
-import LoginPage from './pages/Login';
-import SiteHeadingAndNav from './components/SiteHeadingAndNav';
-import NotFoundPage from './pages/NotFound';
 import UserContext from './contexts/current-user-context';
+
+import SiteHeadingAndNav from './components/SiteHeadingAndNav';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
+import LoginPage from './pages/Login';
+import NotFoundPage from './pages/NotFound';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
+import SignUpPage from './pages/SignUp';
+import HomePage from './pages/Home';
 import Profile from './pages/Profile';
-import Settings from './pages/Settings';
 
+import Settings from './pages/Settings';
 import Gardens from './pages/Gardens';
 import About from './pages/About';
 import Garden from './components/GardenCard';
 import Community from './pages/Community';
-import HomePage from './pages/Home';
+import PrivateRoutes from './components/PrivateRoutes';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -38,10 +39,14 @@ export default function App() {
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/users/:id" element={<UserPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
+
+          <Route element={<PrivateRoutes />}>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+          </Route>
           <Route path="/community" element={<Community />} />
+
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
     </div>

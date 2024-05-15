@@ -17,8 +17,8 @@ import checkAuthentication from '../middleware/checkAuthentication.js';
 const gardenRouter = express.Router();
 
 gardenRouter.post('/', checkSchema(createGardenValidationSchema), createGarden);
-gardenRouter.get('/', checkAuthentication, listGardens);
-gardenRouter.get('/:id', checkAuthentication, showGarden);
+gardenRouter.get('/', listGardens);
+gardenRouter.get('/:id', showGarden);
 gardenRouter.get('/user/:id', checkAuthentication, showGardensByOwnerId);
 gardenRouter.patch(
   '/:id',
