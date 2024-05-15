@@ -1,18 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Post from './Post';
-import { getAllPosts } from '../adapters/post-adapter';
+import { getAllPosts, createPost } from '../adapters/post-adapter';
+import CurrentUserContext from '../contexts/current-user-context';
 
 function Forum() {
   const [isAddPostVisible, setIsAddPostVisible] = useState(false);
   const [newPostTitle, setNewPostTitle] = useState('');
   const [newPostBody, setNewPostBody] = useState('');
   const [posts, setPosts] = useState([]);
+  const { currentUser } = useContext(CurrentUserContext);
+
   useEffect(() => {
     const fetchPosts = async () => {
       setPosts(await getAllPosts());
     };
     fetchPosts();
   }, []);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const post = await createPost({
+      title: newPostTitle,
+      body: newPostBody,
+    });
+    setPosts([...posts, post]);
+    setNewPostTitle('');
+    setNewPostBody('');
+    setIsAddPostVisible(false);
+  };
 
   const handleAddPostToggle = () => setIsAddPostVisible(!isAddPostVisible);
   const handleNewPostTitleChange = (e) => setNewPostTitle(e.target.value);
@@ -22,38 +37,48 @@ function Forum() {
     <div className="bg-yellow mt-6 mr-6 ml-6 p-6 rounded-2xl">
       <div className="-forum">
         {/* Add post button */}
-        <button
-          className="p-3 py-1 bg-bright-orange text-white border-dotted rounded-md"
-          onClick={handleAddPostToggle}
-        >
-          +
-        </button>
+        {currentUser && (
+          <button
+            className="p-3 py-1 bg-bright-orange text-white border-dotted rounded-md"
+            onClick={handleAddPostToggle}
+          >
+            +
+          </button>
+        )}
 
         {/* Add post form */}
-        {isAddPostVisible && (
-          <div className="mt-4 p-4 bg-white rounded-md shadow-md">
+        {currentUser && isAddPostVisible && (
+          <form
+            className="mt-4 p-4 bg-white rounded-md shadow-md"
+            aria-labelledby="Create Post Form"
+            onSubmit={handleFormSubmit}
+          >
+            <label htmlFor="title">Title</label>
             <input
+              id="title"
+              name="title"
               type="text"
               value={newPostTitle}
               onChange={handleNewPostTitleChange}
               placeholder="Post title"
               className="mb-2 border p-2 rounded-md w-full"
             />
+            <label htmlFor="body">Body</label>
             <textarea
+              id="body"
+              name="body"
               value={newPostBody}
               onChange={handleNewPostBodyChange}
               placeholder="Post body"
               className="mb-2 border p-2 rounded-md w-full"
             />
             <button
-              className="px-4 py-2 bg-light-green text-black rounded-md"
-              onClick={() => {
-                /* Add new post logic */
-              }}
+              className="px-4 py-2 bg-bright-orange text-black rounded-md"
+              type="submit"
             >
               Post
             </button>
-          </div>
+          </form>
         )}
 
         {/* Display posts */}
