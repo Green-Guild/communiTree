@@ -7,6 +7,7 @@ function Forum() {
   const [isAddPostVisible, setIsAddPostVisible] = useState(false);
   const [newPostTitle, setNewPostTitle] = useState('');
   const [newPostBody, setNewPostBody] = useState('');
+  const [postsUpdated, setPostsUpdated] = useState(false);
   const [posts, setPosts] = useState([]);
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -15,18 +16,20 @@ function Forum() {
       setPosts(await getAllPosts());
     };
     fetchPosts();
-  }, []);
+  }, [setPosts, postsUpdated]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const post = await createPost({
+    await createPost({
       title: newPostTitle,
       body: newPostBody,
     });
-    setPosts([...posts, post]);
+    const updatedPosts = await getAllPosts();
+    setPosts(updatedPosts);
     setNewPostTitle('');
     setNewPostBody('');
     setIsAddPostVisible(false);
+    setPostsUpdated(!postsUpdated);
   };
 
   const handleAddPostToggle = () => setIsAddPostVisible(!isAddPostVisible);
@@ -83,8 +86,8 @@ function Forum() {
 
         {/* Display posts */}
         <div className="mt-4">
-          {posts.map((post, index) => (
-            <Post key={index} post={post} />
+          {posts.map((post) => (
+            <Post key={post.id} post={post} />
           ))}
         </div>
       </div>

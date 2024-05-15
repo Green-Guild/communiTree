@@ -1,26 +1,53 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { getUser } from '../adapters/user-adapter';
+import Comment from './Comment';
 import { getCommentsByPostId } from '../adapters/comment-adapter';
+import { createComment } from '../adapters/comment-adapter';
+import CurrentUserContext from '../contexts/current-user-context';
 
 function Post({ post }) {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState('');
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [isCommentInputVisible, setIsCommentInputVisible] = useState(false);
+  const [commentsUpdated, setCommentsUpdated] = useState(false);
+  const { currentUser } = useContext(CurrentUserContext);
   const [user, setUser] = useState({});
 
   useEffect(() => {
     const fetch = async () => {
       setUser(await getUser(post.user_id));
-      setComments(await getCommentsByPostId(post.id));
+
+      const comments = await getCommentsByPostId(post.id);
+      const commentsWithUser = await Promise.all(
+        comments.map(async (comment) => {
+          const user = await getUser(comment.user_id);
+          return { ...comment, user };
+        })
+      );
+      setComments(commentsWithUser);
     };
     fetch();
-  }, []);
+  }, [setComments, commentsUpdated]);
 
   const handleCommentChange = (e) => setCommentText(e.target.value);
   const handleToggleComments = () => setIsCommentsVisible(!isCommentsVisible);
   const handleToggleCommentInput = () =>
     setIsCommentInputVisible(!isCommentInputVisible);
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (commentText.trim() !== '') {
+      const comment = await createComment({
+        body: commentText,
+        post_id: post.id,
+      });
+      // TODO: figure out why only passing in the wrong user works??????
+      setComments([...comments, { ...comment, user }]);
+      setCommentText('');
+      setCommentsUpdated(!commentsUpdated);
+    }
+  };
 
   return (
     <div className="flex-col w-[50vw] m-9 rounded-xl shadow-sm">
@@ -44,7 +71,7 @@ function Post({ post }) {
 
         <div className="mb-2">
           {isCommentInputVisible && (
-            <>
+            <form onSubmit={handleCommentSubmit}>
               <input
                 type="text"
                 value={commentText}
@@ -53,14 +80,12 @@ function Post({ post }) {
                 className="border p-2 rounded-md w-full pr-6 pl-6"
               />
               <button
-                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md"
-                onClick={() => {
-                  /* Add comment logic */
-                }}
+                className="mt-2 px-4 py-2 bg-bright-orange text-black rounded-md"
+                type="submit"
               >
                 Comment
               </button>
-            </>
+            </form>
           )}
           <div className="relative">
             <button
@@ -77,15 +102,10 @@ function Post({ post }) {
           </div>
         </div>
 
-        {isCommentsVisible && (
-          <ul className="mt-4 space-y-2">
-            {comments.map((comment, index) => (
-              <li key={index} className="p-2 bg-gray-100 rounded-md">
-                {comment.body}
-              </li>
-            ))}
-          </ul>
-        )}
+        {isCommentsVisible &&
+          comments.map((comment, index) => (
+            <Comment key={index} comment={comment} />
+          ))}
       </div>
       <button
         className="text-white bg-light-yellow w-full p-1 rounded-b-lg"
