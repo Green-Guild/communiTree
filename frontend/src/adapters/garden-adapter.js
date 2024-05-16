@@ -9,7 +9,7 @@ const baseUrl = '/api/gardens';
 
 export const createGarden = async ({
   name,
-  location,
+  zipcode,
   description,
   image,
   is_public,
@@ -17,7 +17,7 @@ export const createGarden = async ({
 }) => {
   const [data, err] = await fetchHandler(
     baseUrl,
-    getPostOptions({ name, location, description, image, is_public, owner_id })
+    getPostOptions({ name, zipcode, description, image, is_public, owner_id })
   );
   if (err) return err;
   return data;
@@ -36,10 +36,16 @@ export const getGarden = async (id) => {
   return data;
 };
 
+export const getGardensByUserId = async (owner_id) => {
+  const [data, err] = await fetchHandler(`${baseUrl}/user/${owner_id}`);
+  if (err) return err;
+  return data;
+};
+
 export const updateGarden = async ({
   id,
   name,
-  location,
+  zipcode,
   description,
   image,
   is_public,
@@ -49,7 +55,7 @@ export const updateGarden = async ({
     `${baseUrl}/${id}`,
     getPatchOptions({
       name,
-      location,
+      zipcode,
       description,
       image,
       is_public,

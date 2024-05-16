@@ -10,6 +10,7 @@ import {
   createComment,
   updateComment,
   deleteComment,
+  showCommentsByPostId,
 } from '../controllers/commentControllers.js';
 import checkAuthentication from '../middleware/checkAuthentication.js';
 
@@ -20,8 +21,9 @@ commentRouter.post(
   checkSchema(createCommentValidationSchema),
   createComment
 );
-commentRouter.get('/', checkAuthentication, listComments);
-commentRouter.get('/:id', checkAuthentication, showComment);
+commentRouter.get('/', listComments);
+commentRouter.get('/:id', showComment);
+commentRouter.get('/post/:id', showCommentsByPostId);
 commentRouter.patch(
   '/:id',
   checkAuthentication,

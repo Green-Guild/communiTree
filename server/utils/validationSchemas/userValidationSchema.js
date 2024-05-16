@@ -23,10 +23,10 @@ export const createUserValidationSchema = {
   password: {
     notEmpty: true,
   },
-  location: {
+  zipcode: {
     notEmpty: true,
     isString: {
-      errorMessage: 'Location must be a string!',
+      errorMessage: 'Zipcode must be a string!',
     },
   },
   image: {
@@ -57,23 +57,36 @@ export const updateUserValidationSchema = {
   },
   display_name: {
     optional: true,
-    notEmpty: true,
+    notEmpty: {
+      errorMessage: 'Display name cannot be empty',
+    },
   },
-  password: {
+  zipcode: {
     optional: true,
-    notEmpty: true,
-  },
-  location: {
-    optional: true,
-    notEmpty: true,
+    notEmpty: {
+      errorMessage: 'Zipcode cannot be empty',
+    },
     isString: {
-      errorMessage: 'Location must be a string!',
+      errorMessage: 'Zipcode must be a string!',
     },
   },
   image: {
     optional: true,
     isImg: {
       custom: validateImageUrl,
+    },
+  },
+};
+
+export const updatePasswordValidationSchema = {
+  oldPassword: {
+    notEmpty: {
+      errorMessage: 'Old password cannot be empty',
+    },
+  },
+  newPassword: {
+    notEmpty: {
+      errorMessage: 'New password cannot be empty',
     },
   },
 };

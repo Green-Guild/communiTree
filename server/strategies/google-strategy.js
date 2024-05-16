@@ -1,7 +1,7 @@
-import passport from 'passport';
-import { Strategy } from 'passport-google-oauth20';
-import User from '../db/models/User.js';
-import dotenv from 'dotenv';
+import passport from "passport";
+import { Strategy } from "passport-google-oauth20";
+import User from "../db/models/User.js";
+import dotenv from "dotenv";
 dotenv.config();
 
 export default passport.use(
@@ -9,10 +9,10 @@ export default passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/api/google/callback',
-      scope: ['profile'],
+      callbackURL: "http://localhost:3000/api/google/callback",
+      scope: ["profile"],
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async (_accessToken, _refreshToken, profile, done) => {
       try {
         const existingUser = await User.findByGoogleId(profile.id);
 
@@ -30,6 +30,6 @@ export default passport.use(
       } catch (err) {
         return done(err, null);
       }
-    }
-  )
+    },
+  ),
 );

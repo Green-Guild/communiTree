@@ -9,7 +9,7 @@ export default class User {
     id,
     username,
     password_hash,
-    location = null,
+    zipcode = null,
     display_name,
     google_id,
     image,
@@ -19,7 +19,7 @@ export default class User {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
-    this.location = location;
+    this.zipcode = zipcode;
     this.display_name = display_name;
     this.google_id = google_id;
     this.image = image;
@@ -28,6 +28,7 @@ export default class User {
   }
 
   isValidPassword = async (password) => {
+    console.log(password, this.#passwordHash);
     return isValidPassword(password, this.#passwordHash);
   };
 
@@ -61,18 +62,18 @@ export default class User {
   static async createLocalUser({
     username,
     password,
-    location = null,
+    zipcode = null,
     display_name,
-    image,
+    image = null,
   }) {
     const passwordHash = password ? await hashPassword(password) : null;
 
-    const query = `INSERT INTO users (username, password_hash, location, display_name, image)
+    const query = `INSERT INTO users (username, password_hash, zipcode, display_name, image)
       VALUES (?, ?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       username,
       passwordHash,
-      location,
+      zipcode,
       display_name,
       image,
     ]);
@@ -82,15 +83,15 @@ export default class User {
 
   static async createGoogleUser({
     google_id,
-    location = null,
+    zipcode = null,
     display_name,
     image,
   }) {
-    const query = `INSERT INTO users (google_id, location, display_name, image)
+    const query = `INSERT INTO users (google_id, zipcode, display_name, image)
       VALUES (?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       google_id,
-      location,
+      zipcode,
       display_name,
       image,
     ]);
@@ -98,27 +99,45 @@ export default class User {
     return new User(user);
   }
 
-  // TODO: fix update method
-  static async update({
-    id,
-    username,
-    password,
-    location = null,
-    display_name,
-    image,
-  }) {
-    const passwordHash = password ? await hashPassword(password) : null;
+  static async updatePassword({ oldPassword, id, newPassword }) {
+    const user = await User.find(id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    const isValidOldPassword = await user.isValidPassword(oldPassword);
+    if (!isValidOldPassword) {
+      throw new Error('Invalid old password');
+    }
+
+    const passwordHash = newPassword ? await hashPassword(newPassword) : null;
 
     const query = `
       UPDATE users
-      SET username=?, password_hash=?, location=?, display_name=?, image=?
+      SET password_hash=?
+      WHERE id=?
+      RETURNING *
+    `;
+    const { rows } = await knex.raw(query, [passwordHash, id]);
+    const updatedUser = rows[0];
+    return updatedUser ? new User(updatedUser) : null;
+  }
+
+  static async updateUser({ id, username, zipcode, display_name, image }) {
+    const user = await User.find(id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    const query = `
+      UPDATE users
+      SET username=?, zipcode=?, display_name=?, image=?
       WHERE id=?
       RETURNING *
     `;
     const { rows } = await knex.raw(query, [
       username,
-      passwordHash,
-      location,
+      zipcode,
       display_name,
       image,
       id,
