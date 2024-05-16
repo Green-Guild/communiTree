@@ -22,11 +22,11 @@ const Events = () => {
 
   useEffect(() => {
     if (searchQuery === '') {
-      setSearchResults(gatherings);
+      setSearchResults(gathering);
       return;
     }
 
-    const filteredEvents = gatherings.filter(gathering =>
+    const filteredEvents = gathering.filter(gathering =>
       gathering.location.includes(searchQuery)
     );
 

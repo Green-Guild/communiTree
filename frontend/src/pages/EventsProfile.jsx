@@ -4,9 +4,10 @@ import { getEvent } from '../adapters/event-adapter';
 
 const EventsProfile = () => {
   const { id } = useParams();
-  const [gathering, setGathering] = useState(null);
+  const [gathering, setGathering] = useState({});
   useEffect(() => {
     const fetchEvent = async () => {
+      
       try {
         const data = await getEvent(id);
         setGathering(data);
@@ -16,9 +17,12 @@ const EventsProfile = () => {
     };
 
     fetchEvent();
-  }, [id]);
+  }, []);
 
-  const { title, event_date, description, location,image } = gathering;
+
+  const { title, event_date, description, location, image, } = gathering;
+
+
   return<>
   <main>
     <div>

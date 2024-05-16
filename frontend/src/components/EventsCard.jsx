@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const EventsCard = ({gathering}) => {
-  const { id, title, image, event_date } = gathering;
+  const { id, title, image, event_date, location } = gathering;
 
   return <>
    <main>
