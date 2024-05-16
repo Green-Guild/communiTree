@@ -99,7 +99,6 @@ export default class User {
     return new User(user);
   }
 
-  // TODO: fix update method
   static async updatePassword({ oldPassword, id, newPassword }) {
     const user = await User.find(id);
     if (!user) {

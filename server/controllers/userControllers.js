@@ -45,10 +45,9 @@ export const updateUser = async (req, res) => {
   if (!result.isEmpty())
     return res.status(400).send({ errors: result.array() });
 
-  const { username, oldPassword, newPassword, display_name, zipcode, image } =
-    matchedData(req);
+  const { username, display_name, zipcode, image } = matchedData(req);
 
-  const user = User.find(id);
+  const user = await User.find(id);
   if (!isAuthorized(id, req.session)) return res.sendStatus(403);
 
   const updatedUser = await User.updateUser({

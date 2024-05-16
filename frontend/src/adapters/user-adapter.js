@@ -35,8 +35,6 @@ export const updateUser = async ({
   id,
   username,
   zipcode,
-  oldPassword,
-  newPassword,
   image,
   display_name,
 }) => {

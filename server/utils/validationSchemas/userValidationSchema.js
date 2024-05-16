@@ -57,11 +57,15 @@ export const updateUserValidationSchema = {
   },
   display_name: {
     optional: true,
-    notEmpty: true,
+    notEmpty: {
+      errorMessage: 'Display name cannot be empty',
+    },
   },
   zipcode: {
     optional: true,
-    notEmpty: true,
+    notEmpty: {
+      errorMessage: 'Zipcode cannot be empty',
+    },
     isString: {
       errorMessage: 'Zipcode must be a string!',
     },
