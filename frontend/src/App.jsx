@@ -18,6 +18,9 @@ import Gardens from "./pages/Gardens";
 import GardenProfile from "./pages/GardenProfile";
 import Community from "./pages/Community";
 import PrivateRoutes from "./components/PrivateRoutes";
+import Events from './pages/Events';
+import EventsProfile from './pages/EventsProfile';
+
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -59,7 +62,9 @@ export default function App() {
               <Route path="/gardens/:id" element={<GardenProfile />} />
 
               <Route path="*" element={<NotFoundPage />} />
-            </Routes>
+              <Route path="/events" element={<Events />} />
+          <Route path="/events/:id" element={<EventsProfile />} />
+        </Routes>
           </CSSTransition>
         </TransitionGroup>
       </main>

@@ -30,7 +30,8 @@ export const createEvent = async ({
   return data;
 };
 
-export const getAllEvents = async () => {
+export const getAllEvents = async (location = null) => {
+  const url = location ? `${baseUrl}?location=${location}` : baseUrl;
   const [data, err] = await fetchHandler(baseUrl);
   if (err) return err;
   return data;
