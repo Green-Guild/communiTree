@@ -129,9 +129,9 @@ const Profile = () => {
           ) : (
             <div className="text-center">
               <h2 className="text-xl text-white font-bold">
-                {currentUser?.display_name}
+                {currentUser.display_name}
               </h2>
-              <p className="text-white">{currentUser?.zipcode}</p>
+              <p className="text-white">{currentUser.zipcode}</p>
               <button
                 onClick={handleEditToggle}
                 className="top-0 right-0 bg-white text-black rounded-full px-4 py-2"
