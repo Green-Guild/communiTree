@@ -4,6 +4,10 @@ import Comment from './Comment';
 import { getCommentsByPostId } from '../adapters/comment-adapter';
 import { createComment } from '../adapters/comment-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
+import { capitalizeWords, fetchHandler } from '../utils';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 function Post({ post }) {
   const [comments, setComments] = useState([]);
@@ -13,22 +17,36 @@ function Post({ post }) {
   const [commentsUpdated, setCommentsUpdated] = useState(false);
   const { currentUser } = useContext(CurrentUserContext);
   const [user, setUser] = useState({});
+  const [location, setLocation] = useState('');
 
   useEffect(() => {
     const fetch = async () => {
-      setUser(await getUser(post.user_id));
+      try {
+        const userRes = await getUser(post.user_id);
+        setUser(userRes);
 
-      const comments = await getCommentsByPostId(post.id);
-      const commentsWithUser = await Promise.all(
-        comments.map(async (comment) => {
-          const user = await getUser(comment.user_id);
-          return { ...comment, user };
-        })
-      );
-      setComments(commentsWithUser);
+        const [data, err] = await fetchHandler(
+          `http://ZiptasticAPI.com/${userRes.zipcode}`
+        );
+        if (err) throw new Error(err);
+
+        const parsed = JSON.parse(data);
+        setLocation(`${parsed.city}, ${parsed.state}`);
+
+        const comments = await getCommentsByPostId(post.id);
+        const commentsWithUser = await Promise.all(
+          comments.map(async (comment) => {
+            const user = await getUser(comment.user_id);
+            return { ...comment, user };
+          })
+        );
+        setComments(commentsWithUser);
+      } catch (err) {
+        console.error(err);
+      }
     };
     fetch();
-  }, [setComments, commentsUpdated]);
+  }, []);
 
   const handleCommentChange = (e) => setCommentText(e.target.value);
   const handleToggleComments = () => setIsCommentsVisible(!isCommentsVisible);
@@ -61,7 +79,7 @@ function Post({ post }) {
           <div>
             <p className="font-bold text-yellow">{user.display_name}</p>
             <p className="text-sm text-yellow font-thin ubuntu-light-italic">
-              {user.location} • 2 hours ago{post.created_at}
+              {capitalizeWords(location)} • {dayjs().to(dayjs(post.created_at))}
             </p>
           </div>
         </div>
@@ -92,11 +110,7 @@ function Post({ post }) {
               className="absolute right-0 flex"
               onClick={handleToggleCommentInput}
             >
-              <img
-                src="../../public/parallax/chat-icon.svg"
-                alt="Chat Icon"
-                className="w-10 h-10"
-              />
+              <img src="/chat.svg" alt="Chat Icon" className="w-10 h-10" />
               {/* <span className="ml-2">{isCommentInputVisible ? "Hide comment input" : "Add a comment"}</span> */}
             </button>
           </div>
