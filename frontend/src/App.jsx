@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import UserContext from './contexts/current-user-context';
 
@@ -21,10 +21,13 @@ import PrivateRoutes from './components/PrivateRoutes';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
+  const [userLoading, setUserLoading] = useState(true);
+
   useEffect(() => {
     const checkForUser = async () => {
       const user = await checkForLoggedInUser();
       setCurrentUser(user);
+      setUserLoading(false);
     };
     checkForUser();
   }, [setCurrentUser]);
@@ -34,13 +37,13 @@ export default function App() {
       <SiteHeadingAndNav />
       <main className="bg-white mt-[10vh]">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage userLoading={userLoading} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/users/:id" element={<UserPage />} />
 
-          <Route element={<PrivateRoutes />}>
+          <Route element={<PrivateRoutes userLoading={userLoading} />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
