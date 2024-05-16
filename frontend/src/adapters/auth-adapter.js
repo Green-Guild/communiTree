@@ -7,14 +7,18 @@ export const checkForLoggedInUser = async () => {
   return data;
 };
 
-export const localLogin = async ({ username, password }) =>
-  fetchHandler(`${baseUrl}/login`, getPostOptions({ username, password }));
-
-export const googleLogin = () => {
-  window.location.href = `${baseUrl}/google/`;
+export const localLogin = async ({ username, password }) => {
+  const [data, err] = await fetchHandler(
+    `${baseUrl}/login`,
+    getPostOptions({ username, password })
+  );
+  if (err) return err;
+  return data;
+};
+export const googleLogin = async () => {
+  window.location.href = `${baseUrl}/google`;
 };
 
-// the logout route pretty much can't fail with our setup, but if yours can, change this
 export const logout = async () => {
   await fetchHandler(`${baseUrl}/logout`, deleteOptions);
   return true;

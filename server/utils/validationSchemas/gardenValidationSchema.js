@@ -17,9 +17,14 @@ export const createGardenValidationSchema = {
       errorMessage: 'Name must be a string!',
     },
   },
-  location: {
+  zipcode: {
     isString: {
-      errorMessage: 'Location must be a string!',
+      errorMessage: 'Zipcode must be a string!',
+    },
+  },
+  address: {
+    isString: {
+      errorMessage: 'Address must be a string!',
     },
   },
   description: {
@@ -35,6 +40,11 @@ export const createGardenValidationSchema = {
   is_public: {
     isBoolean: {
       errorMessage: 'Is public must be a boolean',
+    },
+  },
+  address: {
+    isString: {
+      errorMessage: 'Address must be a string!',
     },
   },
 };
@@ -57,10 +67,16 @@ export const updateGardenValidationSchema = {
       errorMessage: 'Name must be a string!',
     },
   },
-  location: {
+  zipcode: {
     optional: true,
     isString: {
-      errorMessage: 'Location must be a string!',
+      errorMessage: 'Zipcode must be a string!',
+    },
+  },
+  address: {
+    optional: true,
+    isString: {
+      errorMessage: 'Address must be a string!',
     },
   },
   description: {

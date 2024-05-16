@@ -27,9 +27,14 @@ export const createEventValidationSchema = {
       custom: validateDate,
     },
   },
-  location: {
+  zipcode: {
     isString: {
-      errorMessage: 'Location must be a string!',
+      errorMessage: 'Zipcode must be a string!',
+    },
+  },
+  address: {
+    isString: {
+      errorMessage: 'Address must be a string!',
     },
   },
   image: {
@@ -75,10 +80,16 @@ export const updateEventValidationSchema = {
       custom: validateDate,
     },
   },
-  location: {
+  zipcode: {
     optional: true,
     isString: {
-      errorMessage: 'Location must be a string!',
+      errorMessage: 'Zipcode must be a string!',
+    },
+  },
+  address: {
+    optional: true,
+    isString: {
+      errorMessage: 'Address must be a string!',
     },
   },
   image: {

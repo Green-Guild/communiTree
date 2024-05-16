@@ -1,6 +1,9 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import CurrentUserContext from '../contexts/current-user-context';
+import { logout } from '../adapters/auth-adapter';
 
 let acc = (
   <img
@@ -11,22 +14,41 @@ let acc = (
   />
 );
 
-const tabs = ["Community", "Gardens", "Events", "Account"];
+const tabs = ['Community', 'Gardens', 'Events', 'Account'];
 const map = {
-  Community: "/community",
-  Gardens: "/gardens",
-  Events: "/events",
+  Community: '/community',
+  Gardens: '/gardens',
+  Events: '/events',
 };
 
 const accountOptions = [
-  { label: "Profile", path: "/profile" },
-  { label: "Settings", path: "/settings" },
-  { label: "Log In", path: "/login", color: "text-bright-orange" },
+  { label: 'Profile', path: '/profile' },
+  { label: 'Settings', path: '/settings' },
 ];
 
 const SiteHeadingAndNav = () => {
   const [selected, setSelected] = useState(tabs[0]);
   const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    setCurrentUser(null);
+    navigate('/');
+  };
+
+  const accountOptions = currentUser
+    ? [
+        { label: 'Profile', path: '/profile' },
+        { label: 'Settings', path: '/settings' },
+        { label: 'Log Out' },
+      ]
+    : [
+        { label: 'Profile', path: '/profile' },
+        { label: 'Settings', path: '/settings' },
+        { label: 'Log In', path: '/login' },
+      ];
 
   return (
     <div className="z-50 fixed px-4 w-full top-0 py-2 flex justify-between items-center bg-white">
@@ -34,14 +56,14 @@ const SiteHeadingAndNav = () => {
         <img
           src="https://i.ibb.co/7vhXpqq/new-logo.png"
           alt="logo"
-          style={{ width: "3.5vw", height: "3.5vw" }}
+          style={{ width: '3.5vw', height: '3.5vw' }}
         />
       </a>
 
       {/* Navigation Tabs */}
       <div className="flex items-center gap-5 ml-auto">
         {tabs.map((tab) =>
-          tab === "Account" ? (
+          tab === 'Account' ? (
             <div
               key={tab}
               className="relative"
@@ -58,13 +80,16 @@ const SiteHeadingAndNav = () => {
                   onMouseLeave={() => setAccountDropdownOpen(false)}
                 >
                   {accountOptions.map((option) => {
-                    console.log(option);
-
                     return (
                       <li key={option.label}>
                         <NavLink
                           to={option.path}
                           className="block px-4 py-2 hover:bg-gray-200 font-ubuntu text-black"
+                          onClick={() => {
+                            if (option.label === 'Log Out') {
+                              handleLogout();
+                            }
+                          }}
                         >
                           {option.label}
                         </NavLink>
@@ -97,15 +122,15 @@ const Chip = ({ text, selected, setSelected }) => {
       onClick={() => setSelected(text)}
       className={`relative px-2.5 py-0.5 rounded-md transition-colors text-sm ${
         selected
-          ? "text-white font-medium"
-          : "text-bright-orange hover:bg-slate-700 font-medium"
+          ? 'text-white font-medium'
+          : 'text-bright-orange hover:bg-slate-700 font-medium'
       }`}
     >
       <span className="relative z-10">{text}</span>
       {selected && (
         <motion.span
           layoutId="pill-tab"
-          transition={{ type: "spring", duration: 0.5 }}
+          transition={{ type: 'spring', duration: 0.5 }}
           className="absolute inset-0 z-0 bg-gradient-to-r from-bright-orange to-bright-orange rounded-full"
         ></motion.span>
       )}

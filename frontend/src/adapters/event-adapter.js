@@ -10,7 +10,7 @@ const baseUrl = '/api/events';
 export const createEvent = async ({
   title,
   description,
-  location,
+  zipcode,
   event_date,
   garden_id,
   image,
@@ -20,7 +20,7 @@ export const createEvent = async ({
     getPostOptions({
       title,
       description,
-      location,
+      zipcode,
       event_date,
       garden_id,
       image,
@@ -42,10 +42,16 @@ export const getEvent = async (id) => {
   return data;
 };
 
+export const getEventsByUserId = async (host_id) => {
+  const [data, err] = await fetchHandler(`${baseUrl}/user/${host_id}`);
+  if (err) return err;
+  return data;
+};
+
 export const updateEvent = async ({
   title,
   description,
-  location,
+  zipcode,
   event_date,
   garden_id,
   image,
@@ -55,7 +61,7 @@ export const updateEvent = async ({
     getPatchOptions({
       title,
       description,
-      location,
+      zipcode,
       event_date,
       garden_id,
       image,
