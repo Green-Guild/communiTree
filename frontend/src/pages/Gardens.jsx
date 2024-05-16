@@ -41,21 +41,24 @@ const Gardens = () => {
   };
 
   return <>
-   <main>
-    <div>
-      <form onSubmit={e => e.preventDefault()}>
+   <main className='mt-6 flex-col items-center'>
+      <form className='border-none flex rounded-full' onSubmit={e => e.preventDefault()}>
         <input
           type="text"
+          className='rounded-full p-1 px-3'
           value={searchQuery}
           onChange={handleSearchChange}
           name="garden"
-          placeholder="Search By Zipcode"
+          placeholder="Search"
           aria-label="Browse through Gardens by entering zipcode"
         />
-        <button aria-label="Submit zipcode" type="submit">Search</button>
-        <button aria-label='Clear Results' type="submit" onClick={handleClearSearch}>Clear</button>
+        <button className='absalute mb-4 -ml-6' aria-label="Submit zipcode" type="submit">
+          <img className='w-4 h-4' src="/search.svg" alt="search" />
+        </button>
+        {/* <button aria-label='Clear Results' type="submit" onClick={handleClearSearch}>Clear</button> */}
       </form>
-    </div>
+
+    <div className='bg-yellow  p-5 flex-col justify-center align-middle items-center h-full rounded-t-xl m-16 mb-0'>
     <div>
       {currentUser && <NewGardenForm ownerId={currentUser.id} />}
     </div>
@@ -67,6 +70,7 @@ const Gardens = () => {
         </li>
         ))}
       </ul>
+    </div>
     </div>
   </main>
 </>

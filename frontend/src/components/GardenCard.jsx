@@ -1,25 +1,33 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const GardenCard = ({garden}) => {
+const GardenCard = ({ garden }) => {
   const { id, name, image, location } = garden;
 
-  return <>
-   <main>
-      <div>
-        <Link to={`/gardens/${id}`}>
-        <h1>{name}</h1>
-        </Link>
-      </div>
-      <div>
-        <img src={image} alt={`${name} Garden`} />
-      </div>
+  return (
+    <>
+      <main className="bg-white rounded-2xl m-6 flex shadow-sm hover:scale-105 hover:shadow-lg hover:shadow-light-yellow transition duration-300 ease-in-out">
+        <div>
+          <img
+            src={image}
+            className="left-0 h-28 w-40 object-cover rounded-l-xl"
+            alt={`${name} Garden`}
+          />
+        </div>
+        {/* skew-x-6 */}
 
-      <div>
-        <p>Zipcode: {location}</p>
-      </div>
-    </main>
-  </>
-
+        <div className="bg-white -skew-x-6 -ml-4 rounded-r-2xl p-6 border-l-8 border-yellow ">
+          <div className="skew-x-[6deg]">
+            <Link to={`/gardens/${id}`}>
+              <h1 className="font-extrabold text-bright-orange text-2xl">
+                {name}
+              </h1>
+            </Link>
+            <p className="font-normal text-yellow text-sm">{location}</p>
+          </div>
+        </div>
+      </main>
+    </>
+  );
 };
 export default GardenCard;

@@ -51,3 +51,34 @@ export const amPmConverter = (time) => {
   hour = hour % 12 || 12;
   return `${hour}:${minute} ${suffix}`;
 };
+
+export const getLocationByZip = async (zipCode) => {
+  const zipString = String(zipCode);
+  const url = `http://ZiptasticAPI.com/${zipString}`;
+
+  try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const locationData = await response.json();
+
+      if (locationData && locationData.city && locationData.state) {
+          console.log(`${locationData.city}, ${locationData.state}`);
+      } else {
+          console.log('Location data not available');
+      }
+  } catch (error) {
+      console.error('Error fetching data:', error.message);
+  }
+};
+
+export function capitalizeWords(str) {
+  return str.toLowerCase().replace(/\b\w/g, function(char) {
+    return char.toUpperCase();
+  });
+}
+
+

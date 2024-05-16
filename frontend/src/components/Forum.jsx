@@ -21,11 +21,12 @@ function Forum() {
   const handleNewPostBodyChange = (e) => setNewPostBody(e.target.value);
 
   return (
-    <div className='bg-yellow mt-6 mr-6 ml-6 p-6 rounded-2xl'>
+    
+    <div className='bg-yellow mt-6 mr-6 ml-6 p-6 rounded-t-xl h-full mb-0'>
     <div className='-forum'>
       {/* Add post button */}
       <button
-        className='p-3 py-1 bg-bright-orange text-white border-dotted rounded-md'
+        className='p-3 flex-col py-1 bg-bright-orange text-white border-dotted rounded-md'
         onClick={handleAddPostToggle}
       >
         +
@@ -33,7 +34,7 @@ function Forum() {
 
       {/* Add post form */}
       {isAddPostVisible && (
-        <div className='mt-4 p-4 bg-white rounded-md shadow-md'>
+        <div className='mt-6 p-6 bg-white rounded-md shadow-md'>
           <input
             type='text'
             value={newPostTitle}
