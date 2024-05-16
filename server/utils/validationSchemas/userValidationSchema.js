@@ -59,10 +59,6 @@ export const updateUserValidationSchema = {
     optional: true,
     notEmpty: true,
   },
-  password: {
-    optional: true,
-    notEmpty: true,
-  },
   zipcode: {
     optional: true,
     notEmpty: true,
@@ -74,6 +70,19 @@ export const updateUserValidationSchema = {
     optional: true,
     isImg: {
       custom: validateImageUrl,
+    },
+  },
+};
+
+export const updatePasswordValidationSchema = {
+  oldPassword: {
+    notEmpty: {
+      errorMessage: 'Old password cannot be empty',
+    },
+  },
+  newPassword: {
+    notEmpty: {
+      errorMessage: 'New password cannot be empty',
     },
   },
 };

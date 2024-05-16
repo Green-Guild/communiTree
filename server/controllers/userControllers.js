@@ -45,21 +45,38 @@ export const updateUser = async (req, res) => {
   if (!result.isEmpty())
     return res.status(400).send({ errors: result.array() });
 
-  const { username, password, display_name, zipcode, image } = matchedData(req);
+  const { username, oldPassword, newPassword, display_name, zipcode, image } =
+    matchedData(req);
 
-  // Not only do users need to be logged in to update a user, they
-  // need to be authorized to perform this action for this particular
-  // user (users should only be able to change their own profiles)
   const user = User.find(id);
   if (!isAuthorized(id, req.session)) return res.sendStatus(403);
 
-  const updatedUser = await User.update({
+  const updatedUser = await User.updateUser({
     id,
     username: username ?? user.username,
-    password: password ?? user.password,
     display_name: display_name ?? user.display_name,
     zipcode: zipcode ?? user.zipcode,
     image: image ?? user.image,
+  });
+  if (!updatedUser) return res.sendStatus(404);
+  res.send(updatedUser);
+};
+
+export const updatePassword = async (req, res) => {
+  const { id } = req.params;
+  const result = validationResult(req);
+  if (!result.isEmpty())
+    return res.status(400).send({ errors: result.array() });
+
+  const { oldPassword, newPassword } = matchedData(req);
+
+  if (!isAuthorized(id, req.session)) return res.sendStatus(403);
+  console.log(oldPassword, newPassword);
+
+  const updatedUser = await User.updatePassword({
+    id,
+    oldPassword,
+    newPassword,
   });
   if (!updatedUser) return res.sendStatus(404);
   res.send(updatedUser);

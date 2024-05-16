@@ -35,19 +35,31 @@ export const updateUser = async ({
   id,
   username,
   zipcode,
-  password,
+  oldPassword,
+  newPassword,
   image,
   display_name,
 }) => {
   const [user, err] = await fetchHandler(
     `${baseUrl}/${id}`,
     getPatchOptions({
-      id,
       username,
       zipcode,
-      password,
       image,
       display_name,
+    })
+  );
+
+  if (err) return err;
+  return user ?? {};
+};
+
+export const updatePassword = async ({ id, oldPassword, newPassword }) => {
+  const [user, err] = await fetchHandler(
+    `${baseUrl}/password/${id}`,
+    getPatchOptions({
+      oldPassword,
+      newPassword,
     })
   );
 

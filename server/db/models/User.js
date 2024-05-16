@@ -28,6 +28,7 @@ export default class User {
   }
 
   isValidPassword = async (password) => {
+    console.log(password, this.#passwordHash);
     return isValidPassword(password, this.#passwordHash);
   };
 
@@ -99,25 +100,44 @@ export default class User {
   }
 
   // TODO: fix update method
-  static async update({
-    id,
-    username,
-    password,
-    zipcode = null,
-    display_name,
-    image,
-  }) {
-    const passwordHash = password ? await hashPassword(password) : null;
+  static async updatePassword({ oldPassword, id, newPassword }) {
+    const user = await User.find(id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    const isValidOldPassword = await user.isValidPassword(oldPassword);
+    if (!isValidOldPassword) {
+      throw new Error('Invalid old password');
+    }
+
+    const passwordHash = newPassword ? await hashPassword(newPassword) : null;
 
     const query = `
       UPDATE users
-      SET username=?, password_hash=?, zipcode=?, display_name=?, image=?
+      SET password_hash=?
+      WHERE id=?
+      RETURNING *
+    `;
+    const { rows } = await knex.raw(query, [passwordHash, id]);
+    const updatedUser = rows[0];
+    return updatedUser ? new User(updatedUser) : null;
+  }
+
+  static async updateUser({ id, username, zipcode, display_name, image }) {
+    const user = await User.find(id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    const query = `
+      UPDATE users
+      SET username=?, zipcode=?, display_name=?, image=?
       WHERE id=?
       RETURNING *
     `;
     const { rows } = await knex.raw(query, [
       username,
-      passwordHash,
       zipcode,
       display_name,
       image,

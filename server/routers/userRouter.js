@@ -2,6 +2,7 @@ import express from 'express';
 import { checkSchema } from 'express-validator';
 import {
   createUserValidationSchema,
+  updatePasswordValidationSchema,
   updateUserValidationSchema,
 } from '../utils/validationSchemas/userValidationSchema.js';
 import {
@@ -9,6 +10,7 @@ import {
   showUser,
   createUser,
   updateUser,
+  updatePassword,
 } from '../controllers/userControllers.js';
 import checkAuthentication from '../middleware/checkAuthentication.js';
 
@@ -26,6 +28,12 @@ userRouter.patch(
   checkAuthentication,
   checkSchema(updateUserValidationSchema),
   updateUser
+);
+userRouter.patch(
+  '/password/:id',
+  checkAuthentication,
+  checkSchema(updatePasswordValidationSchema),
+  updatePassword
 );
 
 export default userRouter;
