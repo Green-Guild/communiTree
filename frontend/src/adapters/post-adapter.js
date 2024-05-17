@@ -39,6 +39,12 @@ export const getPostsByUserId = async (user_id) => {
   return data;
 };
 
+export const searchPosts = async (query) => {
+  const [data, err] = await fetchHandler(`${baseUrl}/search/${query}`);
+  if (err) return err;
+  return data;
+};
+
 export const updatePost = async ({ title, body, garden_id, event_id }) => {
   const [data, err] = await fetchHandler(
     `${baseUrl}/${id}`,

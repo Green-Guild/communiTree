@@ -41,6 +41,13 @@ export const showPostsByUserId = async (req, res) => {
   res.send(posts);
 };
 
+export const searchPosts = async (req, res) => {
+  const { query } = req.params;
+  const posts = await Post.search(query);
+  if (!posts) return res.sendStatus(404);
+  res.send(posts);
+};
+
 export const updatePost = async (req, res) => {
   const { id } = req.params;
   const result = validationResult(req);

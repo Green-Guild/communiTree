@@ -11,6 +11,7 @@ import {
   updatePost,
   deletePost,
   showPostsByUserId,
+  searchPosts,
 } from '../controllers/postControllers.js';
 import checkAuthentication from '../middleware/checkAuthentication.js';
 
@@ -20,6 +21,7 @@ postRouter.post('/', checkSchema(createPostValidationSchema), createPost);
 postRouter.get('/', listPosts);
 postRouter.get('/:id', showPost);
 postRouter.get('/user/:id', showPostsByUserId);
+postRouter.get('/search/:query', searchPosts);
 postRouter.patch(
   '/:id',
   checkAuthentication,

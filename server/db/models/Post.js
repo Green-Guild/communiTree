@@ -40,13 +40,22 @@ export default class Post {
     return post ? new Post(post) : null;
   }
 
-
   static async findByUserId(user_id) {
     const query = `
     SELECT * 
     FROM posts 
     WHERE user_id = ?`;
     const { rows } = await knex.raw(query, [user_id]);
+    return rows.map((post) => new Post(post));
+  }
+
+  static async search(query) {
+    const searchQuery = `
+      SELECT * 
+      FROM posts 
+      WHERE title ILIKE ? OR body ILIKE ?`;
+
+    const { rows } = await knex.raw(searchQuery, [`%${query}%`, `%${query}%`]);
     return rows.map((post) => new Post(post));
   }
 
@@ -57,7 +66,6 @@ export default class Post {
     garden_id = null,
     event_id = null,
   }) {
-    
     const query = `
     INSERT INTO posts (title, body, user_id, garden_id, event_id)
     VALUES (?, ?, ?, ?, ?) 
@@ -104,4 +112,3 @@ export default class Post {
     await knex.raw('DELETE FROM posts');
   }
 }
-

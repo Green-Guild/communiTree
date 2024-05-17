@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import Post from './Post';
-import { getAllPosts, createPost } from '../adapters/post-adapter';
+import { getAllPosts, createPost, searchPosts } from '../adapters/post-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 
-function Forum() {
+function Forum({ query }) {
   const [isAddPostVisible, setIsAddPostVisible] = useState(false);
   const [newPostTitle, setNewPostTitle] = useState('');
   const [newPostBody, setNewPostBody] = useState('');
@@ -13,10 +13,10 @@ function Forum() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      setPosts(await getAllPosts());
+      setPosts(query ? await searchPosts(query) : await getAllPosts());
     };
     fetchPosts();
-  }, [setPosts, postsUpdated]);
+  }, [setPosts, postsUpdated, query]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +37,6 @@ function Forum() {
   const handleNewPostBodyChange = (e) => setNewPostBody(e.target.value);
 
   return (
-    
     <div className="bg-yellow mt-6 mr-6 ml-6 p-6 rounded-t-xl h-full mb-0">
       <div className="-forum">
         {/* Add post button */}
