@@ -1,7 +1,7 @@
-import { useState } from "react";
-import Forum from "../components/Forum";
-import Notifications from "../components/Notifications";
-import React from "react";
+import { useState } from 'react';
+import Forum from '../components/Forum';
+import Notifications from '../components/Notifications';
+import React from 'react';
 
 const Community = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -19,7 +19,6 @@ const Community = () => {
         <input
           type="text"
           className="rounded-full p-1 px-3"
-          onChange={console.log('hi')}
           name="garden"
           placeholder="Search"
           aria-label="Browse through Gardens by entering zipcode"
@@ -29,14 +28,9 @@ const Community = () => {
           aria-label="Submit zipcode"
           type="submit"
         >
-          <img
-            className="w-4 h-4"
-            src="/search.svg"
-            alt="search"
-          />
+          <img className="w-4 h-4" src="/search.svg" alt="search" />
         </button>
       </form>
-
 
       <div className="flex justify-center items-center ">
         <Forum />
@@ -47,10 +41,7 @@ const Community = () => {
           onClick={toggleNotifications}
         >
           {/* {showNotifications ? "Hide Notifications" : "Show Notifications"} */}
-          <img
-            className="w-6 h-6"
-            src="/notification.svg"
-          />
+          <img className="w-6 h-6" src="/notification.svg" />
         </button>
         {showNotifications && <Notifications />}
       </div>

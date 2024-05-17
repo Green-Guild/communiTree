@@ -28,7 +28,6 @@ export default class User {
   }
 
   isValidPassword = async (password) => {
-    console.log(password, this.#passwordHash);
     return isValidPassword(password, this.#passwordHash);
   };
 

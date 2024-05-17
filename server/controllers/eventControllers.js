@@ -57,8 +57,6 @@ export const updateEvent = async (req, res) => {
   const event = await Event.find(id);
   if (!isAuthorized(event.host_id, req.session)) return res.sendStatus(403);
 
-  console.log(event, title);
-
   const updatedEvent = await Event.update({
     title: title ?? event.title,
     zipcode: zipcode ?? event.zipcode,

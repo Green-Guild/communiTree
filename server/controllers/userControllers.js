@@ -70,7 +70,6 @@ export const updatePassword = async (req, res) => {
   const { oldPassword, newPassword } = matchedData(req);
 
   if (!isAuthorized(id, req.session)) return res.sendStatus(403);
-  console.log(oldPassword, newPassword);
 
   const updatedUser = await User.updatePassword({
     id,

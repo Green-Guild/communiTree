@@ -1,8 +1,8 @@
-import { useRef, useEffect, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { Link } from "react-router-dom";
-import CyclingWords from "./CyclingWords";
+import { useRef, useEffect, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { Link } from 'react-router-dom';
+import CyclingWords from './CyclingWords';
 
 function Parallax() {
   const [background, setBackground] = useState(20);
@@ -26,8 +26,8 @@ function Parallax() {
         defaults: { duration: 1 },
         scrollTrigger: {
           trigger: parallaxRef.current,
-          start: "top top",
-          end: "1300 bottom",
+          start: 'top top',
+          end: '1300 bottom',
           scrub: true,
           pin: true,
           onUpdate: (self) => {
@@ -39,21 +39,21 @@ function Parallax() {
       tl.to(
         mountain3.current,
         {
-          y: "-=80",
+          y: '-=80',
         },
         0
       );
       tl.to(
         mountain2.current,
         {
-          y: "-=30",
+          y: '-=30',
         },
         0
       );
       tl.to(
         mountain1.current,
         {
-          y: "+=50",
+          y: '+=50',
         },
         0
       );
@@ -75,7 +75,7 @@ function Parallax() {
       tl.to(
         cloudsLeft.current,
         {
-          x: "-20%",
+          x: '-20%',
           opacity: 0,
         },
         0
@@ -83,7 +83,7 @@ function Parallax() {
       tl.to(
         cloudsRight.current,
         {
-          x: "20%",
+          x: '20%',
           opacity: 0,
         },
         0
@@ -91,14 +91,14 @@ function Parallax() {
       tl.to(
         sun.current,
         {
-          y: "+=100",
+          y: '+=100',
         },
         0
       );
       tl.to(
         copy.current,
         {
-          y: "-250%",
+          y: '-250%',
           opacity: 1,
         },
         0
@@ -117,7 +117,7 @@ function Parallax() {
 
   return (
     <div className="overflow-hidden -mt-12">
-      <div 
+      <div
         ref={parallaxRef}
         style={{
           background: `linear-gradient(#F8F7F4 ${background}%, #F48437 )`,
@@ -174,9 +174,6 @@ function Parallax() {
           <CyclingWords></CyclingWords>
           <Link
             to="/sign-up"
-            onClick={() => {
-              console.log("hi");
-            }}
             className="z-50 text-white m-3 bg-yellow py-1 px-3 font-ubuntu font-medium rounded-full"
           >
             Discover more
