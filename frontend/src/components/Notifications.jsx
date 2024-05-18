@@ -32,6 +32,10 @@ const Notifications = () => {
       setNotifications(otherUsersComments);
     };
     fetchNotifications();
+
+    const intervalId = setInterval(fetchNotifications, 5000);
+
+    return () => clearInterval(intervalId);
   }, [setNotifications]);
 
   return (
