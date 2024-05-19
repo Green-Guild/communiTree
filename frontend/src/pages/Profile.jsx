@@ -3,7 +3,12 @@ import CurrentUserContext from '../contexts/current-user-context';
 import { getPostsByUserId } from '../adapters/post-adapter';
 import { getEventsByUserId } from '../adapters/event-adapter';
 import { getGardensByUserId } from '../adapters/garden-adapter';
+import { generateUploadButton } from '@uploadthing/react';
 import { updateUser } from '../adapters/user-adapter';
+
+const UploadButton = generateUploadButton({
+  url: 'http://localhost:3000/api/uploads',
+});
 
 const Profile = () => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
@@ -78,6 +83,18 @@ const Profile = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-yellow mt-6 mr-6 ml-6 rounded-3xl">
       <div className="flex flex-col items-center">
+        <UploadButton
+          endpoint="imageUploader"
+          skipPolling
+          onClientUploadComplete={(file) => {
+            console.log('uploaded', file);
+            alert('Upload complete');
+          }}
+          onUploadError={(error) => {
+            console.error(error, error.cause);
+            alert('Upload failed');
+          }}
+        />
         <img
           src={
             currentUser.image ??
