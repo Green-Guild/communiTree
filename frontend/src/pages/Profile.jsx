@@ -3,12 +3,8 @@ import CurrentUserContext from '../contexts/current-user-context';
 import { getPostsByUserId } from '../adapters/post-adapter';
 import { getEventsByUserId } from '../adapters/event-adapter';
 import { getGardensByUserId } from '../adapters/garden-adapter';
-import { generateUploadButton } from '@uploadthing/react';
 import { updateUser } from '../adapters/user-adapter';
-
-const UploadButton = generateUploadButton({
-  url: 'http://localhost:3000/api/uploads',
-});
+import { UploadButton } from '../uploadthing';
 
 const Profile = () => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);

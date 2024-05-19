@@ -3,6 +3,7 @@ import { useNavigate, Navigate, Link } from 'react-router-dom';
 import CurrentUserContext from '../contexts/current-user-context';
 import { createUser } from '../adapters/user-adapter';
 import { localLogin, googleLogin } from '../adapters/auth-adapter';
+import { UploadButton } from '../uploadthing';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ export default function SignUpPage() {
   const [errorText, setErrorText] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [image, setImage] = useState('')
   const [zipcode, setZipcode] = useState('');
   const [name, setName] = useState('');
 
@@ -27,6 +29,7 @@ export default function SignUpPage() {
       username,
       password,
       zipcode,
+      image,
       display_name: name,
     });
 
@@ -66,6 +69,32 @@ export default function SignUpPage() {
             <h2 id="create-heading" className="text-center text-bright-orange">
               Sign Up
             </h2>
+
+            <label htmlFor='image'>Image</label>
+            <UploadButton
+              endpoint='imageUploader'
+              skipPolling
+              onClientUploadComplete={(file) => {
+                setImage(file.url)
+                console.log('uploaded', file)
+              }}
+              onUploadError={(error) => {
+                console.error(error, error.cause);
+                alert('Upload failed');
+              }}
+              content={{
+                button({ ready }) {
+                  if (ready) return <div>Upload stuff</div>;
+
+                  return "Getting ready...";
+                },
+                allowedContent({ ready, fileTypes, isUploading }) {
+                  if (!ready) return "Checking what you allow";
+                  if (isUploading) return "Seems like stuff is uploading";
+                  return `Stuff you can upload: ${fileTypes.join(", ")}`;
+                },
+              }}
+            />
 
             <label htmlFor="name">Name</label>
             <input
