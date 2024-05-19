@@ -80,13 +80,15 @@ function Post({ post }) {
         </div>
 
         {isCommentsVisible && (
+          <div>
           <ul className="mt-4 space-y-2">
             {comments.map((comment, index) => (
-              <li key={index} className="p-2 bg-gray-100 rounded-md">
+              <li key={index} className="p-2 rounded-md">
                 {comment.body}
               </li>
             ))}
           </ul>
+          </div>
         )}
       </div>
       <button

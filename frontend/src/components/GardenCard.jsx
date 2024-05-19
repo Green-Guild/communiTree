@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const GardenCard = ({ garden }) => {
-  const { id, name, image, location } = garden;
+  const { id, name, image, address } = garden;
 
   return (
-    <>
+    <div>
       <main className="bg-white rounded-2xl m-6 flex shadow-sm hover:scale-105 hover:shadow-lg hover:shadow-light-yellow transition duration-300 ease-in-out">
         <div>
           <img
@@ -23,11 +23,11 @@ const GardenCard = ({ garden }) => {
                 {name}
               </h1>
             </Link>
-            <p className="font-normal text-yellow text-sm">{location}</p>
+            <p className="font-normal text-yellow text-sm">{address}</p>
           </div>
         </div>
       </main>
-    </>
+    </div>
   );
 };
 export default GardenCard;

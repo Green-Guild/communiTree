@@ -37,19 +37,17 @@ function Forum({ query }) {
   const handleNewPostBodyChange = (e) => setNewPostBody(e.target.value);
 
   return (
-    <div className="bg-yellow mt-6 mr-6 ml-6 p-6 rounded-t-xl h-full mb-0">
+    <div className="bg-yellow flex flex-col items-center mt-6 w-[70vw] mr-6 ml-6 p-6 rounded-t-xl h-full min-h-[70vh] mb-0 relative">
       <div className="-forum">
-        {/* Add post button */}
         {currentUser && (
           <button
-            className="p-3 flex-col py-1 bg-bright-orange text-white border-dotted rounded-md"
+            className="absolute top-0 right-0 m-6 p-3 py-1 bg-bright-orange text-white border-dotted rounded-md button-bulge"
             onClick={handleAddPostToggle}
           >
             +
           </button>
         )}
 
-        {/* Add post form */}
         {currentUser && isAddPostVisible && (
           <form
             className="mt-4 p-4 bg-white rounded-md shadow-md"
@@ -84,12 +82,15 @@ function Forum({ query }) {
           </form>
         )}
 
-        {/* Display posts */}
-        <div className="mt-4">
-          {posts.map((post) => (
+        {posts.length > 0 ? (
+          posts.map((post) => (
             <Post key={post.id} post={post} />
-          ))}
-        </div>
+          ))
+        ) : (
+          <div className="text-center text-white mt-24">
+            <p>It's a little quiet here. <span className="text-dark-orange cursor-pointer" onClick={handleAddPostToggle}>create a post</span> on this topic!</p>
+          </div>
+        )}
       </div>
     </div>
   );

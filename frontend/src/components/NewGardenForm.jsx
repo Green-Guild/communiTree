@@ -10,9 +10,9 @@ const NewGardenForm = ({ ownerId }) => {
 
   return (
     <>
-      <div>
+      <div className="relative">
         <button
-          className="p-3 flex-col py-1 bg-bright-orange text-white border-dotted rounded-md"
+          className="absolute top-0 right-0 p-3 py-1 bg-bright-orange text-white border-dotted rounded-md button-bulge"
           onClick={toggleForm}
         >
           +

@@ -174,7 +174,7 @@ function Parallax() {
           <CyclingWords></CyclingWords>
           <Link
             to="/sign-up"
-            className="z-50 text-white m-3 bg-yellow py-1 px-3 font-ubuntu font-medium rounded-full"
+            className="button-bulge z-50 text-white m-3 bg-yellow py-1 px-3 font-ubuntu font-medium rounded-full"
           >
             Discover more
           </Link>

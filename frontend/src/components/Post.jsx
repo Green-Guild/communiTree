@@ -7,6 +7,7 @@ import CurrentUserContext from '../contexts/current-user-context';
 import { capitalizeWords, fetchHandler } from '../utils';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { capitalizeFirstChar } from '../utils';
 dayjs.extend(relativeTime);
 
 function Post({ post }) {
@@ -79,7 +80,7 @@ function Post({ post }) {
           <div>
             <p className="font-bold text-yellow">{user.display_name}</p>
             <p className="text-sm text-yellow font-thin ubuntu-light-italic">
-              {capitalizeWords(location)} • {dayjs().to(dayjs(post.created_at))}
+              {capitalizeWords(location)} • {capitalizeFirstChar(dayjs().to(dayjs(post.created_at)))}
             </p>
           </div>
         </div>
@@ -107,7 +108,7 @@ function Post({ post }) {
           )}
           <div className="relative">
             <button
-              className="absolute right-0 flex"
+              className="absolute button-bulge right-0 flex"
               onClick={handleToggleCommentInput}
             >
               <img src="/chat.svg" alt="Chat Icon" className="w-10 h-10" />

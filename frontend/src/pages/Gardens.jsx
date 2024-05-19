@@ -62,7 +62,7 @@ const Gardens = () => {
     <div>
       {currentUser && <NewGardenForm ownerId={currentUser.id} />}
     </div>
-    <div>
+    <div className='mt-14'>
       <ul>
         {searchResults.map(garden => (
         <li key={garden.id}>

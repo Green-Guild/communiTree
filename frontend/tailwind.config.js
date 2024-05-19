@@ -14,23 +14,26 @@ export default {
       'black': '#282828',
       'white': '#F8F7F4',
       'about-green': "#3D453B",
-      'light-yellow' : "#f0cca5"
+      'light-yellow' : "#f0cca5",
+      'comment-orange' : '#ede1df'
     },
-    // boxShadow: {
-    //   'inner-white': 'inset 0 0 10px 0 white', // Adjust the values to your needs
-    // },
     fontFamily: {
       'ubuntu': ['Ubuntu', 'sans-serif'],
     },
-    // backgroundImage: {
-    //   'custom-gradient': 'linear-gradient(#F8F7F4 ${background}%, #F48437)',
-    // },
     extend: {
       backgroundImage: {
         'custom-shape': "url('/parallax/shape.svg')",
       },
+      keyframes: {
+        'bounce-back': {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.05)' },
+        }
+      },
+      animation: {
+        'bounce-back': 'bounce-back 0.5s ease-out',
+      }
     },
   },
   plugins: [],
 }
-

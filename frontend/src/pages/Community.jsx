@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import Forum from '../components/Forum';
-import Notifications from '../components/Notifications';
-import { searchPosts } from '../adapters/post-adapter';
+import { useState } from "react";
+import Forum from "../components/Forum";
+import Notifications from "../components/Notifications";
+import { searchPosts } from "../adapters/post-adapter";
 
 const Community = () => {
   const [showNotifications, setShowNotifications] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
@@ -34,7 +34,6 @@ const Community = () => {
         />
         <button className="mb-4 -ml-6" aria-label="Submit query" type="submit">
           <img className="w-4 h-4" src="/search.svg" alt="search" />
-          SEARCh
         </button>
       </form>
 
@@ -42,12 +41,12 @@ const Community = () => {
         <Forum query={searchQuery} />
       </div>
       <div>
-        <button
-          className="bottom-1 right-1 m-6 fixed bg-yellow rounded-full p-2"
-          onClick={toggleNotifications}
-        >
-          {/* {showNotifications ? "Hide Notifications" : "Show Notifications"} */}
-          <img className="w-6 h-6" src="/notification.svg" />
+        <button className="notification-button" onClick={toggleNotifications}>
+          <img
+            className="w-6 h-6"
+            src="/notification.svg"
+            alt="Notifications"
+          />
         </button>
         {showNotifications && <Notifications />}
       </div>

@@ -32,7 +32,7 @@ export const seed = async (knex) => {
   // Users
   const user1 = await User.createLocalUser({
     username: 'rafi_barides',
-    display_name: 'Rafi Barides',
+    display_name: 'Rafi Barides 2',
     zipcode: '11230',
     image: 'https://i.ibb.co/zZj8b3t/ra1.png',
     password: 'Hello1234',
@@ -272,18 +272,18 @@ export const seed = async (knex) => {
   const comment1 = await Comment.create({
     post_id: post1.id,
     body: 'Sunlight is critical. Try moving them to a brighter spot or adjusting the watering schedule.',
-    user_id: user1.id,
+    user_id: user2.id,
   });
 
   const comment2 = await Comment.create({
     post_id: post2.id,
     body: 'Consider mixing in some more colorful flowers around the edges! Dramatic lilies work well.',
-    user_id: user2.id,
+    user_id: user3.id,
   });
 
   const comment3 = await Comment.create({
     post_id: post3.id,
     body: 'It depends on the zipcode and soil. How is your watering schedule? Try adjusting it if necessary.',
-    user_id: user3.id,
+    user_id: user1.id,
   });
 };

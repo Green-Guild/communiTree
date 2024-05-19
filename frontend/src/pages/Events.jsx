@@ -1,15 +1,15 @@
-import { useState, useEffect, useContext } from 'react';
-import { getAllEvents } from '../adapters/event-adapter';
-import EventsCard from '../components/EventsCard';
-import CurrentUserContext from '../contexts/current-user-context';
-import NewEventForm from '../components/NewEventForm';
+import { useState, useEffect, useContext } from "react";
+import { getAllEvents } from "../adapters/event-adapter";
+import EventsCard from "../components/EventsCard";
+import CurrentUserContext from "../contexts/current-user-context";
+import NewEventForm from "../components/NewEventForm";
 
 const Events = () => {
   const [gathering, setGathering] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const { currentUser } = useContext(CurrentUserContext);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await getAllEvents();
@@ -21,55 +21,69 @@ const Events = () => {
   }, []);
 
   useEffect(() => {
-    if (searchQuery === '') {
+    if (searchQuery === "") {
       setSearchResults(gathering);
       return;
     }
 
-    const filteredEvents = gathering.filter(gathering =>
+    const filteredEvents = gathering.filter((gathering) =>
       gathering.location.includes(searchQuery)
     );
 
     setSearchResults(filteredEvents);
   }, [searchQuery, gathering]);
 
-  const handleSearchChange = e => {
+  const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
   const handleClearSearch = () => {
-    setSearchQuery('');
+    setSearchQuery("");
   };
 
-  return <>
-   <main>
-    <div>
-      <form onSubmit={e => e.preventDefault()}>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={handleSearchChange}
-          name="Event"
-          placeholder="Search By Zipcode"
-          aria-label="Browse through events by entering zipcode"
-        />
-        <button aria-label="Submit zipcode" type="submit">Search</button>
-        <button aria-label='Clear Results' type="submit" onClick={handleClearSearch}>Clear</button>
-      </form>
-    </div>
-    <div>
-      {currentUser && <NewEventForm ownerId={currentUser.id} />}
-    </div>
-    <div>
-      <ul>
-        {searchResults.map(gathering => (
-        <li key={gathering.id}>
-          <EventsCard gathering={gathering} /> 
-        </li>
-        ))}
-      </ul>
-    </div>
-  </main>
-</>
+  return (
+    <>
+      <div className="flex justify-center items-center">
+        <main className="mt-6 flex-col items-center">
+          <form
+            className="border-none flex rounded-full"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              type="text"
+              className="rounded-full p-1 px-3"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              name="Event"
+              placeholder="Search"
+              aria-label="Browse through events by entering zipcode"
+            />
+            <button
+              className="absalute mb-4 -ml-6"
+              aria-label="Submit zipcode"
+              type="submit"
+            >
+              <img className="w-4 h-4" src="/search.svg" alt="search" />
+            </button>
+          </form>
 
+          <div className="bg-yellow flex flex-col items-center mt-6 w-[90vw] mr-6 ml-6 p-6 rounded-t-xl h-full min-h-[70vh] mb-0 relative">
+            <div>
+              {currentUser && <NewEventForm ownerId={currentUser.id} />}
+            </div>
+            <div className="flex flex-wrap justify-center m-12">
+              <ul className="w-full grid grid-cols-3 gap-8">
+                {searchResults.map((gathering) => (
+                  <li key={gathering.id} className="flex justify-center">
+                    <EventsCard gathering={gathering} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </main>
+      </div>
+    </>
+  );
 };
+
 export default Events;

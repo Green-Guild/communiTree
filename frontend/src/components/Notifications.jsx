@@ -39,13 +39,14 @@ const Notifications = () => {
   }, [setNotifications]);
 
   return (
+    <div className='h-screen w-48 bg-yellow'>
     <div className="flex flex-col">
       {notifications.map((comment, index) => {
         const commentSnippet = `${comment.body.substring(0, 20)}...`;
         const formattedTime = amPmConverter(comment.created_at);
 
         return (
-          <div key={index} className="flex-row">
+          <div key={index} className="h-screen w-48 bg-yellow flex-row">
             <img
               src={comment.user.image}
               alt={comment.user.display_name}
@@ -57,6 +58,7 @@ const Notifications = () => {
           </div>
         );
       })}
+    </div>
     </div>
   );
 };
