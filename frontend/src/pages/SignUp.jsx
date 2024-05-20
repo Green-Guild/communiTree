@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, Navigate, Link } from 'react-router-dom';
 import CurrentUserContext from '../contexts/current-user-context';
 import { createUser } from '../adapters/user-adapter';
 import { localLogin, googleLogin } from '../adapters/auth-adapter';
+import { UploadButton } from '../uploadthing';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -10,6 +11,12 @@ export default function SignUpPage() {
   const [errorText, setErrorText] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [image, setImage] = useState(
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'
+  );
+  const [display, setDisplay] = useState(
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'
+  );
   const [zipcode, setZipcode] = useState('');
   const [name, setName] = useState('');
 
@@ -27,6 +34,7 @@ export default function SignUpPage() {
       username,
       password,
       zipcode,
+      image,
       display_name: name,
     });
 
@@ -66,6 +74,32 @@ export default function SignUpPage() {
             <h2 id="create-heading" className="text-center text-bright-orange">
               Sign Up
             </h2>
+
+            {/* TODO: make pfp auto update on file upload */}
+            <img src={image} alt="HI" className="h-4 w-4" />
+            <UploadButton
+              className="ut-button:rounded-full ut-button:h-12 ut-button:w-12"
+              endpoint="imageUploader"
+              skipPolling
+              onClientUploadComplete={async (files) => {
+                setTimeout(() => {
+                  setImage(files[0].url);
+                }, 1000);
+              }}
+              onUploadError={(error) => {
+                console.error(error, error.cause);
+                alert('Upload failed');
+              }}
+              content={{
+                button({ ready }) {
+                  return ready ? (
+                    <img src={image} alt="Profile picture" />
+                  ) : (
+                    <p className="text-black">Uploading...</p>
+                  );
+                },
+              }}
+            />
 
             <label htmlFor="name">Name</label>
             <input
