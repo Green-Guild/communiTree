@@ -1,24 +1,24 @@
-import { useEffect, useState, useContext } from 'react';
-import { getUser } from '../adapters/user-adapter';
-import Comment from './Comment';
-import { getCommentsByPostId } from '../adapters/comment-adapter';
-import { createComment } from '../adapters/comment-adapter';
-import CurrentUserContext from '../contexts/current-user-context';
-import { capitalizeWords, fetchHandler } from '../utils';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import { capitalizeFirstChar } from '../utils';
+import { useEffect, useState, useContext } from "react";
+import { getUser } from "../adapters/user-adapter";
+import Comment from "./Comment";
+import { getCommentsByPostId } from "../adapters/comment-adapter";
+import { createComment } from "../adapters/comment-adapter";
+import CurrentUserContext from "../contexts/current-user-context";
+import { capitalizeWords, fetchHandler } from "../utils";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { capitalizeFirstChar } from "../utils";
 dayjs.extend(relativeTime);
 
 function Post({ post }) {
   const [comments, setComments] = useState([]);
-  const [commentText, setCommentText] = useState('');
+  const [commentText, setCommentText] = useState("");
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [isCommentInputVisible, setIsCommentInputVisible] = useState(false);
   const [commentsUpdated, setCommentsUpdated] = useState(false);
   const { currentUser } = useContext(CurrentUserContext);
   const [user, setUser] = useState({});
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState("");
 
   useEffect(() => {
     const fetch = async () => {
@@ -56,7 +56,7 @@ function Post({ post }) {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (commentText.trim() !== '') {
+    if (commentText.trim() !== "") {
       await createComment({
         body: commentText,
         post_id: post.id,
@@ -69,9 +69,17 @@ function Post({ post }) {
         })
       );
       setComments(commentsWithUser);
-      setCommentText('');
+      setCommentText("");
       setCommentsUpdated(!commentsUpdated);
     }
+  };
+
+  const renderPostBody = (text) => {
+    return text.split(' ').map((word, index) => (
+      word.includes('#') 
+        ? <span key={index} className="text-yellow">{word} </span>
+        : word + ' '
+    ));
   };
 
   return (
@@ -86,17 +94,26 @@ function Post({ post }) {
           <div>
             <p className="font-bold text-yellow">{user.display_name}</p>
             <p className="text-sm text-yellow font-thin ubuntu-light-italic">
-              {capitalizeWords(location)} • {capitalizeFirstChar(dayjs().to(dayjs(post.created_at)))}
+              {capitalizeWords(location)} •{" "}
+              {capitalizeFirstChar(dayjs().to(dayjs(post.created_at)))}
             </p>
           </div>
         </div>
 
         <h3 className="text-xl font-semibold mb-2 pr-6 pl-6">{post.title}</h3>
-        <p className="text-black mb-2 pr-6 pl-6">{post.body}</p>
+
+        {/* In this p tag, any word that has a # in it should be yellow (text-yellow)*/}
+        {/* <p className="text-black mb-2 pr-6 pl-6">{post.body}</p> */}
+        <p className="text-black mb-2 pr-6 pl-6">
+        {renderPostBody(post.body)}
+      </p>
 
         <div className="mb-2 rounded-lg border-none">
           {isCommentInputVisible && (
-            <form className='rounded-lg border-none' onSubmit={handleCommentSubmit}>
+            <form
+              className="rounded-lg border-none"
+              onSubmit={handleCommentSubmit}
+            >
               <input
                 type="text"
                 value={commentText}
@@ -132,7 +149,7 @@ function Post({ post }) {
         className="text-white bg-light-yellow w-full p-1 rounded-b-lg"
         onClick={handleToggleComments}
       >
-        {isCommentsVisible ? 'Collapse comments' : 'View all comments'}
+        {isCommentsVisible ? "Collapse comments" : "View all comments"}
       </button>
     </div>
   );

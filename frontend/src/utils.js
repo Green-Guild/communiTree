@@ -1,3 +1,5 @@
+
+
 const basicFetchOptions = {
   method: "GET",
   credentials: "include",
@@ -44,13 +46,17 @@ export const fetchHandler = async (url, options = {}) => {
 };
 
 export const amPmConverter = (time) => {
-  const parts = time.split("-");
-  let hour = parseInt(parts[3], 10);
-  const minute = parts[4];
-  const suffix = hour >= 12 ? "PM" : "AM";
-  hour = hour % 12 || 12;
+  // Extract the time part from the timestamp
+  const timePart = time.split('T')[1]; // This gets us "19:13:36.812Z"
+  const parts = timePart.split(':'); // Split the time into parts
+  let hour = parseInt(parts[0], 10); // Get the hour from the first part
+  const minute = parts[1]; // Get minutes
+  const suffix = hour >= 12 ? 'PM' : 'AM';
+  hour = hour % 12 || 12; // Convert hour to 12-hour format
   return `${hour}:${minute} ${suffix}`;
 };
+
+
 
 export const getLocationByZip = async (zipCode) => {
   const zipString = String(zipCode);
@@ -85,6 +91,7 @@ export function capitalizeFirstChar(str) {
   if (!str) return str;
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
 
 
 
