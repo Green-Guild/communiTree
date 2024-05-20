@@ -1,6 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import Post from './Post';
-import { getAllPosts, createPost, searchPosts } from '../adapters/post-adapter';
+import {
+  getAllPosts,
+  createPost,
+  searchPosts,
+  getPostsByHashtag,
+} from '../adapters/post-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 
 function Forum({ query }) {
@@ -13,7 +18,13 @@ function Forum({ query }) {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      setPosts(query ? await searchPosts(query) : await getAllPosts());
+      if (query) {
+        setPosts(
+          query.startsWith('#')
+            ? await getPostsByHashtag(query.slice(1))
+            : await searchPosts(query)
+        );
+      } else setPosts(await getAllPosts());
     };
     fetchPosts();
   }, [setPosts, postsUpdated, query]);
@@ -38,7 +49,9 @@ function Forum({ query }) {
 
   return (
     <div className="bg-yellow max-w-[80vw] flex flex-col items-center p-6 rounded-t-xl h-full min-h-[70vh] mb-0 relative">
-            <p className='text-white bg-white bg-opacity-30 rounded-full px-4'>Community</p>
+      <p className="text-white bg-white bg-opacity-30 rounded-full px-4">
+        Community
+      </p>
       <div className="-forum">
         {currentUser && (
           <button
@@ -84,12 +97,19 @@ function Forum({ query }) {
         )}
 
         {posts.length > 0 ? (
-          posts.map((post) => (
-            <Post key={post.id} post={post} />
-          ))
+          posts.map((post) => <Post key={post.id} post={post} />)
         ) : (
           <div className="text-center text-white mt-24">
-            <p>It's a little quiet here. <span className="text-dark-orange cursor-pointer" onClick={handleAddPostToggle}>create a post</span> on this topic!</p>
+            <p>
+              It's a little quiet here.{' '}
+              <span
+                className="text-dark-orange cursor-pointer"
+                onClick={handleAddPostToggle}
+              >
+                create a post
+              </span>{' '}
+              on this topic!
+            </p>
           </div>
         )}
       </div>

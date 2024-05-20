@@ -1,11 +1,10 @@
-import { useState } from "react";
-import Forum from "../components/Forum";
-import Notifications from "../components/Notifications";
-import { searchPosts } from "../adapters/post-adapter";
+import { useState } from 'react';
+import Forum from '../components/Forum';
+import Notifications from '../components/Notifications';
 
 const Community = () => {
   const [showNotifications, setShowNotifications] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
@@ -42,7 +41,7 @@ const Community = () => {
       </button>
       <div
         className={`flex flex-row mt-6 mr-6 ml-6 ${
-          showNotifications ? "justify-start" : "justify-center"
+          showNotifications ? 'justify-start' : 'justify-center'
         }`}
       >
         <div className="flex justify-center flex-auto">

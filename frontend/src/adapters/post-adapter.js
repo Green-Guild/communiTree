@@ -45,6 +45,14 @@ export const searchPosts = async (query) => {
   return data;
 };
 
+export const getPostsByHashtag = async (hashtag) => {
+  const [data, err] = await fetchHandler(
+    `${baseUrl}/search/hashtag/${hashtag}`
+  );
+  if (err) return err;
+  return data;
+};
+
 export const updatePost = async ({ title, body, garden_id, event_id }) => {
   const [data, err] = await fetchHandler(
     `${baseUrl}/${id}`,
