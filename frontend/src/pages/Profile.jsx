@@ -11,6 +11,7 @@ const Profile = () => {
   const [contributionType, setContributionType] = useState('posts');
   const [contributions, setContributions] = useState([]);
   const [editMode, setEditMode] = useState(false);
+  const [image, setImage] = useState(currentUser.image);
   const [editData, setEditData] = useState({
     username: currentUser.username ?? '',
     display_name: currentUser.display_name ?? '',
@@ -43,9 +44,11 @@ const Profile = () => {
     const { name, value } = e.target;
     setEditData((prev) => ({ ...prev, [name]: value }));
   };
-  const handleEditSubmit = async () => {
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
     const updatedUser = await updateUser({
       id: currentUser.id,
+      image,
       ...editData,
     });
     setCurrentUser(updatedUser);
@@ -79,29 +82,40 @@ const Profile = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-yellow mt-6 mr-6 ml-6 rounded-3xl">
       <div className="flex flex-col items-center">
-        <UploadButton
-          endpoint="imageUploader"
-          skipPolling
-          onClientUploadComplete={(file) => {
-            console.log('uploaded', file);
-            alert('Upload complete');
-          }}
-          onUploadError={(error) => {
-            console.error(error, error.cause);
-            alert('Upload failed');
-          }}
-        />
-        <img
-          src={
-            currentUser.image ??
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'
-          }
-          alt="Profile"
-          className="rounded-full border-4 border-yellow w-20 h-20 shadow-md mb-4"
-        />
+        {!editMode && (
+          <img
+            src={currentUser.image}
+            alt="Profile"
+            className="rounded-full border-4 border-yellow w-20 h-20 shadow-md mb-4"
+          />
+        )}
         <div>
+          {/* TODO: make pfp auto update on file upload */}
           {editMode ? (
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleEditSubmit}>
+              <UploadButton
+                className="ut-button:rounded-full ut-button:border-4 ut-button:border-yellow ut-button:w-20 ut-button:h-20 ut-button:shadow-md"
+                endpoint="imageUploader"
+                skipPolling
+                onClientUploadComplete={(files) => {
+                  setTimeout(() => {
+                    setImage(files[0].url);
+                  }, 1000);
+                }}
+                onUploadError={(error) => {
+                  console.error(error, error.cause);
+                  alert('Upload failed');
+                }}
+                content={{
+                  button({ ready }) {
+                    return ready ? (
+                      <img src={image} alt="Profile picture" />
+                    ) : (
+                      <p className="text-black">Uploading...</p>
+                    );
+                  },
+                }}
+              />
               <label htmlFor="username">Username</label>
               <input
                 type="text"
@@ -127,8 +141,8 @@ const Profile = () => {
                 className="input"
               />
               <button
-                onClick={handleEditSubmit}
                 className="bg-bright-orange text-white rounded-full px-4 py-2"
+                type="submit"
               >
                 Save
               </button>

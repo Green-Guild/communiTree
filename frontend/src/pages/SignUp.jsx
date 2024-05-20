@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, Navigate, Link } from 'react-router-dom';
 import CurrentUserContext from '../contexts/current-user-context';
 import { createUser } from '../adapters/user-adapter';
@@ -11,7 +11,12 @@ export default function SignUpPage() {
   const [errorText, setErrorText] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState(
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'
+  );
+  const [display, setDisplay] = useState(
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'
+  );
   const [zipcode, setZipcode] = useState('');
   const [name, setName] = useState('');
 
@@ -70,13 +75,16 @@ export default function SignUpPage() {
               Sign Up
             </h2>
 
-            <label htmlFor='image'>Image</label>
+            {/* TODO: make pfp auto update on file upload */}
+            <img src={image} alt="HI" className="h-4 w-4" />
             <UploadButton
-              endpoint='imageUploader'
+              className="ut-button:rounded-full ut-button:h-12 ut-button:w-12"
+              endpoint="imageUploader"
               skipPolling
-              onClientUploadComplete={(file) => {
-                setImage(file.url)
-                console.log('uploaded', file)
+              onClientUploadComplete={async (files) => {
+                setTimeout(() => {
+                  setImage(files[0].url);
+                }, 1000);
               }}
               onUploadError={(error) => {
                 console.error(error, error.cause);
@@ -84,14 +92,11 @@ export default function SignUpPage() {
               }}
               content={{
                 button({ ready }) {
-                  if (ready) return <div>Upload stuff</div>;
-
-                  return "Getting ready...";
-                },
-                allowedContent({ ready, fileTypes, isUploading }) {
-                  if (!ready) return "Checking what you allow";
-                  if (isUploading) return "Seems like stuff is uploading";
-                  return `Stuff you can upload: ${fileTypes.join(", ")}`;
+                  return ready ? (
+                    <img src={image} alt="Profile picture" />
+                  ) : (
+                    <p className="text-black">Uploading...</p>
+                  );
                 },
               }}
             />
