@@ -477,9 +477,8 @@ export const seed = async (knex) => {
 
   const post1 = await Post.create({
     title: "Best time to plant tomatoes?",
-    body: "I'm new to gardening and want to plant tomatoes. What's the best time of year to start?",
-    user_id: user1.id,
-    hashtags: ["#gardening", "#tomatoes", "#planting"],
+    body: "I'm new to gardening and want to plant tomatoes. What's the best time of year to start? #gardening #tomatoes #planting",
+    user_id: user1.id
   });
   
   const comment1_1 = await Comment.create({
@@ -490,9 +489,8 @@ export const seed = async (knex) => {
   
   const post2 = await Post.create({
     title: "Indoor herb garden tips?",
-    body: "I live in an apartment with limited outdoor space. Any tips for starting an indoor herb garden?",
-    user_id: user2.id,
-    hashtags: ["#herbgarden", "#indoorplants", "#gardening"],
+    body: "I live in an apartment with limited outdoor space. Any tips for starting an indoor herb garden? #herbgarden #indoorplants #gardening",
+    user_id: user2.id
   });
   
   const comment2_1 = await Comment.create({
@@ -502,10 +500,9 @@ export const seed = async (knex) => {
   });
   
   const post3 = await Post.create({
-    title: "Happy Birthday Motun!",
-    body: "Planting cucumbers this weekend, any advice?",
-    user_id: user3.id,
-    hashtags: ["#cucumbers", "#planting", "#gardening"],
+    title: "First time with cucumbers",
+    body: "Planting cucumbers this weekend, any advice? #cucumbers",
+    user_id: user3.id
   });
   
   const comment3_1 = await Comment.create({
@@ -516,9 +513,8 @@ export const seed = async (knex) => {
   
   const post4 = await Post.create({
     title: "Best soil for succulents?",
-    body: "I'm trying to grow succulents but they're not thriving. What soil mix do you recommend?",
-    user_id: user4.id,
-    hashtags: ["#succulents", "#soil", "#gardening"],
+    body: "I'm trying to grow succulents but they're not thriving. What soil mix do you recommend? #succulents #soil",
+    user_id: user4.id
   });
   
   const comment4_1 = await Comment.create({
@@ -529,9 +525,8 @@ export const seed = async (knex) => {
   
   const post5 = await Post.create({
     title: "Garden tools recommendations?",
-    body: "What are some essential garden tools for a beginner?",
-    user_id: user5.id,
-    hashtags: ["#gardentools", "#beginner", "#gardening"],
+    body: "What are some essential garden tools for a beginner? #gardentools #beginner #gardening",
+    user_id: user5.id
   });
   
   const comment5_1 = await Comment.create({
@@ -548,9 +543,8 @@ export const seed = async (knex) => {
   
   const post6 = await Post.create({
     title: "Composting basics?",
-    body: "I'm interested in starting composting. What should I know before I begin?",
-    user_id: user6.id,
-    hashtags: ["#composting", "#sustainability", "#gardening"],
+    body: "I'm interested in starting composting. What should I know before I begin? #sustainability",
+    user_id: user6.id
   });
   
   const comment6_1 = await Comment.create({
@@ -567,9 +561,8 @@ export const seed = async (knex) => {
   
   const post7 = await Post.create({
     title: "Raised bed gardening?",
-    body: "I'm considering building raised beds for my garden. What are the benefits?",
-    user_id: user7.id,
-    hashtags: ["#raisedbeds", "#gardening", "#benefits"],
+    body: "I'm considering building raised beds for my garden. What are the benefits? #raisedbed",
+    user_id: user7.id
   });
   
   const comment7_1 = await Comment.create({
@@ -580,9 +573,8 @@ export const seed = async (knex) => {
   
   const post8 = await Post.create({
     title: "Companion planting?",
-    body: "What are some good companion plants for tomatoes?",
-    user_id: user8.id,
-    hashtags: ["#companionplanting", "#tomatoes", "#gardening"],
+    body: "What are some good companion plants for tomatoes? #companionplanting #tomatoes",
+    user_id: user8.id
   });
   
   const comment8_1 = await Comment.create({
@@ -599,9 +591,8 @@ export const seed = async (knex) => {
   
   const post9 = await Post.create({
     title: "Dealing with pests?",
-    body: "What's the best way to deal with aphids in my garden?",
-    user_id: user9.id,
-    hashtags: ["#pests", "#aphids", "#gardening"],
+    body: "What's the best way to deal with aphids in my garden? pests #aphids #gardening",
+    user_id: user9.id
   });
   
   const comment9_1 = await Comment.create({
@@ -612,9 +603,8 @@ export const seed = async (knex) => {
   
   const post10 = await Post.create({
     title: "Watering schedule?",
-    body: "How often should I water my vegetable garden?",
-    user_id: user10.id,
-    hashtags: ["#watering", "#vegetables", "#gardening"],
+    body: "How often should I water my vegetable garden? #watering #vegetables",
+    user_id: user10.id
   });
   
   const comment10_1 = await Comment.create({
@@ -625,9 +615,8 @@ export const seed = async (knex) => {
   
   const post11 = await Post.create({
     title: "Starting seeds indoors?",
-    body: "I'm planning to start seeds indoors for the first time. Any tips?",
-    user_id: user11.id,
-    hashtags: ["#seeds", "#indoorgardening", "#gardening"],
+    body: "I'm planning to start seeds indoors for the first time. Any tips? #indoorgardening",
+    user_id: user11.id
   });
   
   const comment11_1 = await Comment.create({
@@ -644,9 +633,8 @@ export const seed = async (knex) => {
   
   const post12 = await Post.create({
     title: "Garden layout ideas?",
-    body: "I'm redesigning my garden layout. Any ideas for a small urban space?",
-    user_id: user12.id,
-    hashtags: ["#gardenlayout", "#urbangardening", "#gardening"],
+    body: "I'm redesigning my garden layout. Any ideas for a small urban space? #gardenlayout #urbangardening #gardening",
+    user_id: user12.id
   });
   
   const comment12_1 = await Comment.create({
