@@ -1,13 +1,12 @@
-import { useEffect, useState, useContext } from "react";
-import { getUser } from "../adapters/user-adapter";
-import Comment from "./Comment";
-import { getCommentsByPostId } from "../adapters/comment-adapter";
-import { createComment } from "../adapters/comment-adapter";
-import CurrentUserContext from "../contexts/current-user-context";
-import { capitalizeWords, fetchHandler } from "../utils";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import { capitalizeFirstChar } from "../utils";
+import { useEffect, useState } from 'react';
+import { getUser } from '../adapters/user-adapter';
+import Comment from './Comment';
+import { getCommentsByPostId } from '../adapters/comment-adapter';
+import { createComment } from '../adapters/comment-adapter';
+import { capitalizeWords, fetchHandler } from '../utils';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { capitalizeFirstChar } from '../utils';
 dayjs.extend(relativeTime);
 
 function Post({ post }) {
@@ -16,7 +15,6 @@ function Post({ post }) {
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [isCommentInputVisible, setIsCommentInputVisible] = useState(false);
   const [commentsUpdated, setCommentsUpdated] = useState(false);
-  const { currentUser } = useContext(CurrentUserContext);
   const [user, setUser] = useState({});
   const [location, setLocation] = useState("");
 
