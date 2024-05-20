@@ -43,7 +43,7 @@ const Events = () => {
   return (
     <>
       <div className="flex justify-center items-center">
-        <main className="mt-6 flex-col items-center">
+        <main className="flex-col items-center">
           <form
             className="border-none flex rounded-full"
             onSubmit={(e) => e.preventDefault()}
@@ -67,10 +67,12 @@ const Events = () => {
           </form>
 
           <div className="bg-yellow flex flex-col items-center mt-6 w-[90vw] mr-6 ml-6 p-6 rounded-t-xl h-full min-h-[70vh] mb-0 relative">
+          <p className='text-white bg-white bg-opacity-30 rounded-full px-4'>Events</p>
             <div>
               {currentUser && <NewEventForm ownerId={currentUser.id} />}
             </div>
             <div className="flex flex-wrap justify-center m-12">
+            {/* <div className="overflow-auto m-12" style={{ maxHeight: '50vh' }}> */}
               <ul className="w-full grid grid-cols-3 gap-8">
                 {searchResults.map((gathering) => (
                   <li key={gathering.id} className="flex justify-center">

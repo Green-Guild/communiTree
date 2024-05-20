@@ -88,9 +88,9 @@ function Post({ post }) {
         <h3 className="text-xl font-semibold mb-2 pr-6 pl-6">{post.title}</h3>
         <p className="text-black mb-2 pr-6 pl-6">{post.body}</p>
 
-        <div className="mb-2">
+        <div className="mb-2 rounded-lg border-none">
           {isCommentInputVisible && (
-            <form onSubmit={handleCommentSubmit}>
+            <form className='rounded-lg border-none' onSubmit={handleCommentSubmit}>
               <input
                 type="text"
                 value={commentText}
@@ -99,10 +99,10 @@ function Post({ post }) {
                 className="border p-2 rounded-md w-full pr-6 pl-6"
               />
               <button
-                className="mt-2 px-4 py-2 bg-bright-orange text-black rounded-md"
+                className="px-3 p-1 bg-bright-orange text-white rounded-full button-bulge"
                 type="submit"
               >
-                Comment
+                Reply
               </button>
             </form>
           )}

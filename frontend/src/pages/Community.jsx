@@ -37,18 +37,22 @@ const Community = () => {
         </button>
       </form>
 
-      <div className="flex justify-center items-center ">
-        <Forum query={searchQuery} />
-      </div>
-      <div>
-        <button className="notification-button" onClick={toggleNotifications}>
-          <img
-            className="w-6 h-6"
-            src="/notification.svg"
-            alt="Notifications"
-          />
-        </button>
-        {showNotifications && <Notifications />}
+      <button className="notification-button" onClick={toggleNotifications}>
+        <img className="w-6 h-6" src="/notification.svg" alt="Notifications" />
+      </button>
+      <div
+        className={`flex flex-row mt-6 mr-6 ml-6 ${
+          showNotifications ? "justify-start" : "justify-center"
+        }`}
+      >
+        <div className="flex justify-center flex-auto">
+          <Forum query={searchQuery} />
+        </div>
+        {showNotifications && (
+          <div className="flex justify-center">
+            <Notifications />
+          </div>
+        )}
       </div>
     </>
   );

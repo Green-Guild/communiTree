@@ -39,7 +39,8 @@ const Notifications = () => {
   }, [setNotifications]);
 
   return (
-    <div className='h-screen w-48 bg-yellow'>
+    <div className='h-full bg-opacity-70 w-[25vw] flex flex-col items-center bg-yellow p-6 rounded-t-xl mb-0'>
+      <p className='text-white bg-white bg-opacity-30 rounded-full px-4'>Notifications</p>
     <div className="flex flex-col">
       {notifications.map((comment, index) => {
         const commentSnippet = `${comment.body.substring(0, 20)}...`;
