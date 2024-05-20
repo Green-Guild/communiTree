@@ -5,6 +5,7 @@ import { getEventsByUserId } from '../adapters/event-adapter';
 import { getGardensByUserId } from '../adapters/garden-adapter';
 import { updateUser } from '../adapters/user-adapter';
 import { UploadButton } from '../uploadthing';
+import Post from '../components/Post';
 
 const Profile = () => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
@@ -70,8 +71,8 @@ const Profile = () => {
       <ul>
         {contributions.map((contribution, index) => (
           <li key={index}>
-            {contributionType === 'gardens'
-              ? contribution.name
+            {contributionType === 'posts'
+              ? <Post post={contribution}/> 
               : contribution.title}
           </li>
         ))}
@@ -80,7 +81,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-yellow mt-6 mr-6 ml-6 rounded-3xl">
+    <div className="flex flex-col items-center justify-center h-screen bg-yellow mt-6 mr-6 ml-6 rounded-t-3xl">
       <div className="flex flex-col items-center">
         {!editMode && (
           <img
@@ -169,8 +170,8 @@ const Profile = () => {
           )}
         </div>
       </div>
-      <div className="mt-10 bg-white rounded-lg p-6 w-2/3">
-        <label htmlFor="contributionType" className="font-bold">
+      <div className="mt-10 bg-white bg-opacity-90 rounded-lg p-6 w-2/3">
+        <label htmlFor="contributionType" className="font-bold text-bright-orange">
           Contributions:{' '}
         </label>
         <select

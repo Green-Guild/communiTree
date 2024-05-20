@@ -72,7 +72,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <div className="bg-yellow rounded-t-2xl flex flex-col items-center mx-10 mt-5 py-14 h-screen px-40 shadow-sm border-none">
+      <div className="bg-yellow rounded-t-2xl flex flex-col items-center mx-10 mt-5 py-10 h-screen px-40 shadow-sm border-none">
         <div
           id="form-cont"
           className="rounded-xl flex w-fit bg-white shadow-md border-none relative h-[24.5rem] overflow-hidden"
@@ -87,7 +87,7 @@ export default function LoginPage() {
           <form
             onSubmit={handleSubmit}
             aria-labelledby="login-heading"
-            className="border-none font-semibold"
+            className="border-none font-semibold text-sm"
           >
             <h2 id="login-heading" className="text-center text-bright-orange">
               Welcome Back!
