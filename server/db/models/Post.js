@@ -8,6 +8,7 @@ export default class Post {
     user_id,
     garden_id = null,
     event_id = null,
+    hashtags = [],
     created_at,
     updated_at,
   }) {
@@ -17,6 +18,7 @@ export default class Post {
     this.user_id = user_id;
     this.garden_id = garden_id;
     this.event_id = event_id;
+    this.hashtags = hashtags;
     this.created_at = created_at;
     this.updated_at = updated_at;
   }
@@ -59,6 +61,15 @@ export default class Post {
     return rows.map((post) => new Post(post));
   }
 
+  static async findByHashtag(hashtag) {
+    const query = `
+    SELECT * 
+    FROM posts 
+    WHERE ? = ANY(hashtags)`;
+    const { rows } = await knex.raw(query, [hashtag]);
+    return rows.map((post) => new Post(post));
+  }
+
   static async create({
     title,
     body,
@@ -66,9 +77,12 @@ export default class Post {
     garden_id = null,
     event_id = null,
   }) {
+    const hashtags = body.match(/#\w+/g) || [];
+    const cleanedHashtags = hashtags.map((hashtag) => hashtag.slice(1));
+
     const query = `
-    INSERT INTO posts (title, body, user_id, garden_id, event_id)
-    VALUES (?, ?, ?, ?, ?) 
+    INSERT INTO posts (title, body, user_id, garden_id, event_id, hashtags)
+    VALUES (?, ?, ?, ?, ?, ?) 
     RETURNING *`;
 
     const { rows } = await knex.raw(query, [
@@ -77,14 +91,18 @@ export default class Post {
       user_id,
       garden_id,
       event_id,
+      cleanedHashtags,
     ]);
     return rows[0] ? new Post(rows[0]) : null;
   }
 
   static async update({ title, body, garden_id = null, event_id = null, id }) {
+    const hashtags = body.match(/#\w+/g) || [];
+    const cleanedHashtags = hashtags.map((hashtag) => hashtag.slice(1));
+
     const query = `
     UPDATE posts
-    SET title = ?, body = ?, garden_id = ?, event_id = ?
+    SET title = ?, body = ?, garden_id = ?, event_id = ?, hashtags = ?
     WHERE id = ?
     RETURNING *`;
 
@@ -93,6 +111,7 @@ export default class Post {
       body,
       garden_id,
       event_id,
+      cleanedHashtags,
       id,
     ]);
 

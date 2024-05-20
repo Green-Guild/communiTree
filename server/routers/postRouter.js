@@ -12,6 +12,7 @@ import {
   deletePost,
   showPostsByUserId,
   searchPosts,
+  showPostsByHashtag,
 } from '../controllers/postControllers.js';
 import checkAuthentication from '../middleware/checkAuthentication.js';
 
@@ -22,6 +23,7 @@ postRouter.get('/', listPosts);
 postRouter.get('/:id', showPost);
 postRouter.get('/user/:id', showPostsByUserId);
 postRouter.get('/search/:query', searchPosts);
+postRouter.get('/search/hashtag/:hashtag', showPostsByHashtag);
 postRouter.patch(
   '/:id',
   checkAuthentication,

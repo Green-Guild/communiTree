@@ -1,6 +1,7 @@
 import Post from '../db/models/Post.js';
 import { validationResult, matchedData } from 'express-validator';
 import { isAuthorized } from '../utils/auth-utils.js';
+import { hash } from 'bcrypt';
 
 export const createPost = async (req, res) => {
   const result = validationResult(req);
@@ -44,6 +45,13 @@ export const showPostsByUserId = async (req, res) => {
 export const searchPosts = async (req, res) => {
   const { query } = req.params;
   const posts = await Post.search(query);
+  if (!posts) return res.sendStatus(404);
+  res.send(posts);
+};
+
+export const showPostsByHashtag = async (req, res) => {
+  const { hashtag } = req.params;
+  const posts = await Post.findByHashtag(hashtag);
   if (!posts) return res.sendStatus(404);
   res.send(posts);
 };
