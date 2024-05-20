@@ -8,7 +8,6 @@ import { UploadButton } from '../uploadthing';
 import GardenCard from '../components/GardenCard';
 import EventCard from '../components/EventsCard';
 import Post from '../components/Post';
-import Post from '../components/Post';
 
 const Profile = () => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
