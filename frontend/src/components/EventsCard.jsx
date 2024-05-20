@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const EventsCard = ({ gathering }) => {
-  const { id, title, image, event_date, address } = gathering;
+const EventsCard = ({ event }) => {
+  const { id, title, image, event_date, address } = event;
 
   return (
     <>
@@ -17,7 +17,9 @@ const EventsCard = ({ gathering }) => {
           </div>
 
           <div className="p-4 text-wrap text-center flex flex-col items-center">
-            <h1 className="text-xl  text-bright-orange font-semibold">{title}</h1>
+            <h1 className="text-xl  text-bright-orange font-semibold">
+              {title}
+            </h1>
             <p className="text-sm  text-yellow font-thin ubuntu-light-italic">
               {address}
             </p>

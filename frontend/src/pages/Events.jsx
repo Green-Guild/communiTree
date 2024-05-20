@@ -1,19 +1,19 @@
-import { useState, useEffect, useContext } from "react";
-import { getAllEvents } from "../adapters/event-adapter";
-import EventsCard from "../components/EventsCard";
-import CurrentUserContext from "../contexts/current-user-context";
-import NewEventForm from "../components/NewEventForm";
+import { useState, useEffect, useContext } from 'react';
+import { getAllEvents } from '../adapters/event-adapter';
+import EventsCard from '../components/EventsCard';
+import CurrentUserContext from '../contexts/current-user-context';
+import NewEventForm from '../components/NewEventForm';
 
 const Events = () => {
-  const [gathering, setGathering] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [event, setEvent] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const { currentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getAllEvents();
-      setGathering(data);
+      setEvent(data);
       setSearchResults(data);
     };
 
@@ -21,23 +21,23 @@ const Events = () => {
   }, []);
 
   useEffect(() => {
-    if (searchQuery === "") {
-      setSearchResults(gathering);
+    if (searchQuery === '') {
+      setSearchResults(event);
       return;
     }
 
-    const filteredEvents = gathering.filter((gathering) =>
-      gathering.location.includes(searchQuery)
+    const filteredEvents = event.filter((event) =>
+      event.location.includes(searchQuery)
     );
 
     setSearchResults(filteredEvents);
-  }, [searchQuery, gathering]);
+  }, [searchQuery, event]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
   const handleClearSearch = () => {
-    setSearchQuery("");
+    setSearchQuery('');
   };
 
   return (
@@ -67,16 +67,18 @@ const Events = () => {
           </form>
 
           <div className="bg-yellow flex flex-col items-center mt-6 w-[90vw] mr-6 ml-6 p-6 rounded-t-xl h-full min-h-[70vh] mb-0 relative">
-          <p className='text-white bg-white bg-opacity-30 rounded-full px-4'>Events</p>
+            <p className="text-white bg-white bg-opacity-30 rounded-full px-4">
+              Events
+            </p>
             <div>
               {currentUser && <NewEventForm ownerId={currentUser.id} />}
             </div>
             <div className="flex flex-wrap justify-center m-12">
-            {/* <div className="overflow-auto m-12" style={{ maxHeight: '50vh' }}> */}
+              {/* <div className="overflow-auto m-12" style={{ maxHeight: '50vh' }}> */}
               <ul className="w-full grid grid-cols-3 gap-8">
-                {searchResults.map((gathering) => (
-                  <li key={gathering.id} className="flex justify-center">
-                    <EventsCard gathering={gathering} />
+                {searchResults.map((event) => (
+                  <li key={event.id} className="flex justify-center">
+                    <EventsCard event={event} />
                   </li>
                 ))}
               </ul>

@@ -4,13 +4,12 @@ import { getEvent } from '../adapters/event-adapter';
 
 const EventsProfile = () => {
   const { id } = useParams();
-  const [gathering, setGathering] = useState({});
+  const [event, setEvent] = useState({});
   useEffect(() => {
     const fetchEvent = async () => {
-      
       try {
         const data = await getEvent(id);
-        setGathering(data);
+        setEvent(data);
       } catch (error) {
         console.error('Error fetching event:', error);
       }
@@ -19,33 +18,31 @@ const EventsProfile = () => {
     fetchEvent();
   }, []);
 
+  const { title, event_date, description, zipcode, image } = event;
 
-  const { title, event_date, description, location, image, } = gathering;
+  return (
+    <>
+      <main>
+        <div>
+          <h1>{title}</h1>
+        </div>
+        <div>
+          <img src={image} alt={title}></img>
+        </div>
+        <div>
+          <h2>Date</h2>
+          <p>{event_date}</p>
+        </div>
+        <div>
+          <h2>About</h2>
+          <p>{description}</p>
+        </div>
 
-
-  return<>
-  <main>
-    <div>
-      <h1>{title}</h1>
-    </div>
-    <div>
-      <img src={image} alt ={title} ></img>
-    </div>
-    <div>
-      <h2>
-        Date
-      </h2>
-      <p>{event_date}</p>
-    </div>
-    <div>
-      <h2>About</h2>
-      <p>{description}</p>
-    </div>
-
-    <div>
-      <p>{location}</p>
-    </div>
-  </main>
-  </>
-}
-export default EventsProfile
+        <div>
+          <p>{zipcode}</p>
+        </div>
+      </main>
+    </>
+  );
+};
+export default EventsProfile;
