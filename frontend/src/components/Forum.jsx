@@ -37,7 +37,7 @@ function Forum({ query }) {
   const handleNewPostBodyChange = (e) => setNewPostBody(e.target.value);
 
   return (
-    <div className="bg-yellow max-w-[80vw] flex flex-col items-center p-6 rounded-t-xl h-full min-h-[70vh] mb-0 relative">
+    <div className="bg-yellow max-w-[80vw] w-[65vw] flex flex-col items-center p-6 rounded-t-xl h-full min-h-screen mb-0 relative">
             <p className='text-white bg-white bg-opacity-30 rounded-full px-4'>Community</p>
       <div className="-forum">
         {currentUser && (

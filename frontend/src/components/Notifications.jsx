@@ -47,15 +47,17 @@ const Notifications = () => {
         const formattedTime = amPmConverter(comment.created_at);
 
         return (
-          <div key={index} className="h-screen w-48 bg-yellow flex-row">
-            <img
+          <div key={index} className="m-4 h-20 w-48 p-5 rounded-lg bg-white flex-row">
+            {/* <img
               src={comment.user.image}
               alt={comment.user.display_name}
               className="w-10 h-10 border-4 border-bright-orange rounded-full mr-3"
-            />
-            <strong>{comment.user.username}</strong>{' '}
-            <strong>left a comment:</strong> {commentSnippet}{' '}
-            <span>{formattedTime}</span>
+            /> */}
+            <div className='text-sm relative'>
+            <strong className='text-bright-orange'>{comment.user.username}</strong>{' '}
+            <strong className='text-bright-orange'>left a comment:</strong> {commentSnippet}{' '}
+            <span className='absalute right-2'>{formattedTime}</span>
+            </div>
           </div>
         );
       })}

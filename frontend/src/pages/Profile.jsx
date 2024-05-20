@@ -8,6 +8,7 @@ import { UploadButton } from '../uploadthing';
 import GardenCard from '../components/GardenCard';
 import EventCard from '../components/EventsCard';
 import Post from '../components/Post';
+import Post from '../components/Post';
 
 const Profile = () => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
@@ -95,7 +96,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-yellow mt-6 mr-6 ml-6 rounded-3xl">
+    <div className="flex flex-col items-center justify-center h-screen bg-yellow mt-6 mr-6 ml-6 rounded-t-3xl">
       <div className="flex flex-col items-center">
         {!editMode && (
           <img
@@ -187,8 +188,8 @@ const Profile = () => {
           )}
         </div>
       </div>
-      <div className="mt-10 bg-white rounded-lg p-6 w-2/3">
-        <label htmlFor="contributionType" className="font-bold">
+      <div className="mt-10 bg-white bg-opacity-90 rounded-lg p-6 w-2/3">
+        <label htmlFor="contributionType" className="font-bold text-bright-orange">
           Contributions:{' '}
         </label>
         <select
