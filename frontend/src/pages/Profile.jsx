@@ -5,11 +5,15 @@ import { getEventsByUserId } from '../adapters/event-adapter';
 import { getGardensByUserId } from '../adapters/garden-adapter';
 import { updateUser } from '../adapters/user-adapter';
 import { UploadButton } from '../uploadthing';
+import GardenCard from '../components/GardenCard';
+import EventCard from '../components/EventsCard';
+import Post from '../components/Post';
 
 const Profile = () => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [contributionType, setContributionType] = useState('posts');
   const [contributions, setContributions] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [image, setImage] = useState(currentUser.image);
   const [editData, setEditData] = useState({
@@ -20,6 +24,7 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUserContributions = async () => {
+      setLoading(true);
       let data;
       switch (contributionType) {
         case 'posts':
@@ -35,6 +40,7 @@ const Profile = () => {
           data = [];
       }
       setContributions(data);
+      setLoading(false);
     };
     fetchUserContributions();
   }, [contributionType]);
@@ -55,6 +61,7 @@ const Profile = () => {
     setEditMode(false);
   };
   const renderContributions = () => {
+    if (loading) return <div>Loading...</div>;
     if (contributions.length === 0) {
       return (
         <p>
@@ -68,13 +75,21 @@ const Profile = () => {
     }
     return (
       <ul>
-        {contributions.map((contribution, index) => (
-          <li key={index}>
-            {contributionType === 'gardens'
-              ? contribution.name
-              : contribution.title}
-          </li>
-        ))}
+        {contributions.map((contribution, index) => {
+          return (
+            <li key={index}>
+              {contribution.user_id ? (
+                <Post post={contribution} />
+              ) : contribution.host_id ? (
+                <EventCard event={contribution} />
+              ) : contribution.owner_id ? (
+                <GardenCard garden={contribution} />
+              ) : (
+                <div>ERROR</div>
+              )}
+            </li>
+          );
+        })}
       </ul>
     );
   };
@@ -116,7 +131,7 @@ const Profile = () => {
                   },
                   allowedContent() {
                     return <div></div>;
-                  }
+                  },
                 }}
               />
               <label htmlFor="username">Username</label>
