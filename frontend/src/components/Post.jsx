@@ -56,12 +56,18 @@ function Post({ post }) {
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (commentText.trim() !== '') {
-      const comment = await createComment({
+      await createComment({
         body: commentText,
         post_id: post.id,
       });
-      // TODO: figure out why only passing in the wrong user works??????
-      setComments([...comments, { ...comment, user }]);
+      const comments = await getCommentsByPostId(post.id);
+      const commentsWithUser = await Promise.all(
+        comments.map(async (comment) => {
+          const user = await getUser(comment.user_id);
+          return { ...comment, user };
+        })
+      );
+      setComments(commentsWithUser);
       setCommentText('');
       setCommentsUpdated(!commentsUpdated);
     }
