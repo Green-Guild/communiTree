@@ -76,9 +76,8 @@ export default function SignUpPage() {
             </h2>
 
             {/* TODO: make pfp auto update on file upload */}
-            <img src={image} alt="HI" className="h-4 w-4" />
             <UploadButton
-              className="ut-button:rounded-full ut-button:h-12 ut-button:w-12"
+              className="ut-button:rounded-full ut-button:h-12 ut-button:w-12 ut-allowed-content:h-0"
               endpoint="imageUploader"
               skipPolling
               onClientUploadComplete={async (files) => {
@@ -98,6 +97,9 @@ export default function SignUpPage() {
                     <p className="text-black">Uploading...</p>
                   );
                 },
+                allowedContent() {
+                  return <div></div>;
+                }
               }}
             />
 

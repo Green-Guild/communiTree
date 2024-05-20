@@ -94,7 +94,7 @@ const Profile = () => {
           {editMode ? (
             <form className="space-y-4" onSubmit={handleEditSubmit}>
               <UploadButton
-                className="ut-button:rounded-full ut-button:border-4 ut-button:border-yellow ut-button:w-20 ut-button:h-20 ut-button:shadow-md"
+                className="ut-button:rounded-full ut-button:border-4 ut-button:border-yellow ut-button:w-20 ut-button:h-20 ut-button:shadow-md ut-allowed-content:h-0"
                 endpoint="imageUploader"
                 skipPolling
                 onClientUploadComplete={(files) => {
@@ -114,6 +114,9 @@ const Profile = () => {
                       <p className="text-black">Uploading...</p>
                     );
                   },
+                  allowedContent() {
+                    return <div></div>;
+                  }
                 }}
               />
               <label htmlFor="username">Username</label>
