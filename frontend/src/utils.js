@@ -56,6 +56,18 @@ export const amPmConverter = (time) => {
   return `${hour}:${minute} ${suffix}`;
 };
 
+export const formatDate = (isoString) => {
+  const date = new Date(isoString);
+  const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+  const time = date.toLocaleTimeString('en-US', options);
+  const dateString = date.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+  });
+  return `${time} on ${dateString}`;
+}
+
 
 
 export const getLocationByZip = async (zipCode) => {

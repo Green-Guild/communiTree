@@ -1,25 +1,28 @@
-import { useContext, useEffect, useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import UserContext from './contexts/current-user-context';
+import { useContext, useEffect, useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import UserContext from "./contexts/current-user-context";
 
-import SiteHeadingAndNav from './components/SiteHeadingAndNav';
-import { checkForLoggedInUser } from './adapters/auth-adapter';
-import LoginPage from './pages/Login';
-import NotFoundPage from './pages/NotFound';
-import UsersPage from './pages/Users';
-import UserPage from './pages/User';
-import SignUpPage from './pages/SignUp';
-import HomePage from './pages/Home';
-import Profile from './pages/Profile';
+import SiteHeadingAndNav from "./components/SiteHeadingAndNav";
+import { checkForLoggedInUser } from "./adapters/auth-adapter";
+import LoginPage from "./pages/Login";
+import NotFoundPage from "./pages/NotFound";
+import UsersPage from "./pages/Users";
+import UserPage from "./pages/User";
+import SignUpPage from "./pages/SignUp";
+import HomePage from "./pages/Home";
+import Profile from "./pages/Profile";
 
-import Settings from './pages/Settings';
-import Gardens from './pages/Gardens';
-import GardenProfile from './pages/GardenProfile';
-import Community from './pages/Community';
-import PrivateRoutes from './components/PrivateRoutes';
-import Events from './pages/Events';
-import EventsProfile from './pages/EventsProfile';
+import Settings from "./pages/Settings";
+import Gardens from "./pages/Gardens";
+import GardenProfile from "./pages/GardenProfile";
+import Community from "./pages/Community";
+import PrivateRoutes from "./components/PrivateRoutes";
+import Events from "./pages/Events";
+import EventsProfile from "./pages/EventsProfile";
+import Notifications from "./components/Notifications";
+import Post from "./components/Post";
+import PostProfile from "./components/PostProfile";
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -35,6 +38,10 @@ export default function App() {
     };
     checkForUser();
   }, [setCurrentUser]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]); // This useEffect will run every time the location changes
 
   return (
     <div className="flex-col">
@@ -63,6 +70,9 @@ export default function App() {
               <Route path="*" element={<NotFoundPage />} />
               <Route path="/events" element={<Events />} />
               <Route path="/events/:id" element={<EventsProfile />} />
+
+              <Route path="/post/:postId" element={<PostProfile />} />
+              <Route path="/notifications" element={<Notifications />} />
             </Routes>
           </CSSTransition>
         </TransitionGroup>

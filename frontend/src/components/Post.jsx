@@ -9,14 +9,15 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { capitalizeFirstChar } from '../utils';
 dayjs.extend(relativeTime);
 
-function Post({ post }) {
+function Post({ post, commentsOpen = false }) {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
-  const [isCommentsVisible, setIsCommentsVisible] = useState(false);
+  const [isCommentsVisible, setIsCommentsVisible] = useState(commentsOpen);
   const [isCommentInputVisible, setIsCommentInputVisible] = useState(false);
   const [commentsUpdated, setCommentsUpdated] = useState(false);
   const [user, setUser] = useState({});
   const [location, setLocation] = useState("");
+
 
   useEffect(() => {
     const fetch = async () => {
@@ -25,7 +26,7 @@ function Post({ post }) {
         setUser(userRes);
 
         const [data, err] = await fetchHandler(
-          `http://ZiptasticAPI.com/${userRes.zipcode}`
+          `https://ZiptasticAPI.com/${userRes.zipcode}`
         );
         if (err) throw new Error(err);
 
@@ -87,7 +88,7 @@ function Post({ post }) {
           <img
             src={user.image}
             alt={user.display_name}
-            className="w-10 h-10 border-4 border-bright-orange rounded-full mr-3"
+            className="w-10 h-10 border-4 object-cover border-bright-orange rounded-full mr-3"
           />
           <div>
             <p className="font-bold text-yellow">{user.display_name}</p>

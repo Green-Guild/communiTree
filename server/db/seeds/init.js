@@ -69,7 +69,7 @@ export const seed = async (knex) => {
   const user5 = await User.createLocalUser({
     username: "zo_mans",
     display_name: "Zo Manzour",
-    zipcode: "",
+    zipcode: "11230",
     image:
       "https://media.licdn.com/dms/image/D4E03AQEo4z5joZu2KQ/profile-displayphoto-shrink_800_800/0/1709920678047?e=1721865600&v=beta&t=e32PXyjqPa2KmC5YVeN6aPLdMN8uK8wwMTUoZ_PrDrE",
     password: "1234",
@@ -356,7 +356,7 @@ export const seed = async (knex) => {
     zipcode: "07030",
     address: "100 Hudson St, Hoboken, NJ",
     image:
-      "https://media.timeout.com/images/105632365/image.jpg",
+      "https://www.verywellfamily.com/thmb/m4Gz5vPrFZ7s7pL-MTV1p6lS9Do=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/hispanic-father-and-daughter-gardening-together-463247401-58a390123df78c475830f5f5.jpg",
     description: "Liberty Community Garden in Hoboken provides a green oasis for local residents. It focuses on sustainable gardening practices and community engagement. The garden hosts events, workshops, and offers plots for individual use.",
     is_public: true,
     owner_id: user7.id,
@@ -367,7 +367,7 @@ export const seed = async (knex) => {
     zipcode: "10027",
     address: "Riverside Dr & W 138th St, New York, NY",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGdZabxS1-anhFGoHQK3yIKd9pzuv1Sstb9LAS6iNJ7w&s",
+      "https://www.usda.gov/sites/default/files/nrcs-welcome-peoples-garden-blog-080322.jpg",
     description: "Riverside Valley Community Garden is a peaceful green space in Harlem. It offers educational programs, volunteer opportunities, and community events. The garden emphasizes environmental sustainability and local engagement.",
     is_public: true,
     owner_id: user8.id,
@@ -418,7 +418,7 @@ export const seed = async (knex) => {
     host_id: user2.id,
     garden_id: garden2.id,
     event_date: "2024-05-10 15:00:00",
-    image: "https://i.ibb.co/zZj8b3t/ra1.png",
+    image: "https://www.usda.gov/sites/default/files/nrcs-welcome-peoples-garden-blog-080322.jpg",
     title: "Sustainable Splash",
   });
 
@@ -478,7 +478,7 @@ export const seed = async (knex) => {
   const post1 = await Post.create({
     title: "Best time to plant tomatoes?",
     body: "I'm new to gardening and want to plant tomatoes. What's the best time of year to start? #gardening #tomatoes #planting",
-    user_id: user1.id
+    user_id: user12.id
   });
   
   const comment1_1 = await Comment.create({
@@ -642,5 +642,108 @@ export const seed = async (knex) => {
     body: "Consider vertical gardening to maximize space. Hanging planters and trellises can help you grow more in a limited area.",
     user_id: user1.id,
   });
+
+  const post13 = await Post.create({
+    title: "Hydrangea care in colder climates?",
+    body: "Can hydrangeas thrive in the tri-state area, or should I consider another plant for my garden? #gardening #hydrangeas",
+    user_id: user13.id
+});
+
+const post14 = await Post.create({
+    title: "Organic pest control methods?",
+    body: "Looking for eco-friendly ways to manage pests in my vegetable garden. Any suggestions? #gardening #pestcontrol #organic",
+    user_id: user14.id
+});
+
+const comment14_1 = await Comment.create({
+    post_id: post14.id,
+    body: "Neem oil is great for handling pests naturally and it's safe for plants!",
+    user_id: user3.id,
+});
+
+const post15 = await Post.create({
+    title: "Best soil for indoor herbs?",
+    body: "What type of soil should I use for growing herbs indoors in pots? #gardening #herbs #indoorgardening",
+    user_id: user15.id
+});
+
+const comment15_1 = await Comment.create({
+    post_id: post15.id,
+    body: "A light, well-draining potting mix works best for herbs. Make sure it's not too dense!",
+    user_id: user4.id,
+});
+
+const post16 = await Post.create({
+    title: "Starting a butterfly garden",
+    body: "Any tips on starting a butterfly garden? What plants should I include? #gardening #butterflies",
+    user_id: user16.id
+});
+
+const comment16_1 = await Comment.create({
+    post_id: post16.id,
+    body: "Plant native flowering plants like milkweed and lavender to attract butterflies.",
+    user_id: user5.id,
+});
+
+const post17 = await Post.create({
+    title: "Dealing with shady gardens",
+    body: "Half of my garden is in deep shade. What plants can I grow there? #gardening #shadeplants",
+    user_id: user17.id
+});
+
+const post18 = await Post.create({
+    title: "Composting basics?",
+    body: "I'm new to composting. Can someone explain the basics? #gardening #composting",
+    user_id: user18.id
+});
+
+const comment18_1 = await Comment.create({
+    post_id: post18.id,
+    body: "Start with kitchen scraps, leaves, and grass clippings. Avoid meat and dairy products!",
+    user_id: user6.id,
+});
+
+const post19 = await Post.create({
+    title: "Watering frequency for succulents?",
+    body: "How often should I water my succulents during the winter? #gardening #succulents",
+    user_id: user19.id
+});
+
+const comment19_1 = await Comment.create({
+    post_id: post19.id,
+    body: "Succulents need less water in the winter. Once a month should be sufficient.",
+    user_id: user7.id,
+});
+
+const post20 = await Post.create({
+    title: "Best vegetables for a rooftop garden?",
+    body: "What are the best vegetables to grow in a rooftop garden in NYC? #gardening #rooftopgarden",
+    user_id: user20.id
+});
+
+const comment20_1 = await Comment.create({
+    post_id: post20.id,
+    body: "Tomatoes, peppers, and leafy greens do well on rooftops due to their sun exposure.",
+    user_id: user8.id,
+});
+
+const post21 = await Post.create({
+    title: "Growing fruit trees in containers?",
+    body: "Is it possible to grow fruit trees in containers? What should I consider? #gardening #fruittrees #containers",
+    user_id: user21.id
+});
+
+const comment21_1 = await Comment.create({
+    post_id: post21.id,
+    body: "Choose dwarf varieties and ensure you have big enough pots to accommodate the roots.",
+    user_id: user9.id,
+});
+
+const post22 = await Post.create({
+    title: "Herb garden pests",
+    body: "My herb garden is being overrun by pests. What can I do? #gardening #herbs #pestcontrol",
+    user_id: user22.id
+});
+
   
 };
