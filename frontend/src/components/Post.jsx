@@ -25,7 +25,7 @@ function Post({ post }) {
         setUser(userRes);
 
         const [data, err] = await fetchHandler(
-          `http://ZiptasticAPI.com/${userRes.zipcode}`
+          `https://ZiptasticAPI.com/${userRes.zipcode}`
         );
         if (err) throw new Error(err);
 
@@ -74,7 +74,7 @@ function Post({ post }) {
 
   const renderPostBody = (text) => {
     return text.split(' ').map((word, index) => (
-      word.includes('#') 
+      word.includes('#')
         ? <span key={index} className="text-yellow">{word} </span>
         : word + ' '
     ));
@@ -103,8 +103,8 @@ function Post({ post }) {
         {/* In this p tag, any word that has a # in it should be yellow (text-yellow)*/}
         {/* <p className="text-black mb-2 pr-6 pl-6">{post.body}</p> */}
         <p className="text-black mb-2 pr-6 pl-6">
-        {renderPostBody(post.body)}
-      </p>
+          {renderPostBody(post.body)}
+        </p>
 
         <div className="mb-2 rounded-lg border-none">
           {isCommentInputVisible && (
