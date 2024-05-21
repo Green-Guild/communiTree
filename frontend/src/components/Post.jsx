@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { getUser } from '../adapters/user-adapter';
-import Comment from './Comment';
-import { getCommentsByPostId } from '../adapters/comment-adapter';
-import { createComment } from '../adapters/comment-adapter';
-import { capitalizeWords, fetchHandler } from '../utils';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import { capitalizeFirstChar } from '../utils';
+import { useEffect, useState } from "react";
+import { getUser } from "../adapters/user-adapter";
+import Comment from "./Comment";
+import { getCommentsByPostId } from "../adapters/comment-adapter";
+import { createComment } from "../adapters/comment-adapter";
+import { capitalizeWords, fetchHandler } from "../utils";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { capitalizeFirstChar } from "../utils";
 dayjs.extend(relativeTime);
 
 function Post({ post, commentsOpen = false }) {
@@ -17,7 +17,6 @@ function Post({ post, commentsOpen = false }) {
   const [commentsUpdated, setCommentsUpdated] = useState(false);
   const [user, setUser] = useState({});
   const [location, setLocation] = useState("");
-
 
   useEffect(() => {
     const fetch = async () => {
@@ -74,11 +73,15 @@ function Post({ post, commentsOpen = false }) {
   };
 
   const renderPostBody = (text) => {
-    return text.split(' ').map((word, index) => (
-      word.includes('#')
-        ? <span key={index} className="text-yellow">{word} </span>
-        : word + ' '
-    ));
+    return text.split(" ").map((word, index) =>
+      word.includes("#") ? (
+        <span key={index} className="text-yellow">
+          {word}{" "}
+        </span>
+      ) : (
+        word + " "
+      )
+    );
   };
 
   return (
@@ -100,12 +103,7 @@ function Post({ post, commentsOpen = false }) {
         </div>
 
         <h3 className="text-xl font-semibold mb-2 pr-6 pl-6">{post.title}</h3>
-
-        {/* In this p tag, any word that has a # in it should be yellow (text-yellow)*/}
-        {/* <p className="text-black mb-2 pr-6 pl-6">{post.body}</p> */}
-        <p className="text-black mb-2 pr-6 pl-6">
-          {renderPostBody(post.body)}
-        </p>
+        <p className="text-black mb-2 pr-6 pl-6">{renderPostBody(post.body)}</p>
 
         <div className="mb-2 rounded-lg border-none">
           {isCommentInputVisible && (
@@ -121,7 +119,7 @@ function Post({ post, commentsOpen = false }) {
                 className="border p-2 rounded-md w-full pr-6 pl-6"
               />
               <button
-                className="px-3 p-1 bg-bright-orange text-white rounded-full button-bulge"
+                className="px-3 p-1 bg-bright-orange text-white font-medium rounded-full button-bulge"
                 type="submit"
               >
                 Reply
@@ -133,8 +131,7 @@ function Post({ post, commentsOpen = false }) {
               className="absolute button-bulge right-0 flex"
               onClick={handleToggleCommentInput}
             >
-              <img src="/chat.svg" alt="Chat Icon" className="w-10 h-10" />
-              {/* <span className="ml-2">{isCommentInputVisible ? "Hide comment input" : "Add a comment"}</span> */}
+              <img src="/chat.svg" alt="Comment Icon" className="w-10 h-10" />
             </button>
           </div>
         </div>

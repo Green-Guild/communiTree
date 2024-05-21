@@ -1,17 +1,17 @@
-import { useContext, useEffect, useState } from 'react';
-import Post from './Post';
+import { useContext, useEffect, useState } from "react";
+import Post from "./Post";
 import {
   getAllPosts,
   createPost,
   searchPosts,
   getPostsByHashtag,
-} from '../adapters/post-adapter';
-import CurrentUserContext from '../contexts/current-user-context';
+} from "../adapters/post-adapter";
+import CurrentUserContext from "../contexts/current-user-context";
 
 function Forum({ query }) {
   const [isAddPostVisible, setIsAddPostVisible] = useState(false);
-  const [newPostTitle, setNewPostTitle] = useState('');
-  const [newPostBody, setNewPostBody] = useState('');
+  const [newPostTitle, setNewPostTitle] = useState("");
+  const [newPostBody, setNewPostBody] = useState("");
   const [postsUpdated, setPostsUpdated] = useState(false);
   const [posts, setPosts] = useState([]);
   const { currentUser } = useContext(CurrentUserContext);
@@ -20,7 +20,7 @@ function Forum({ query }) {
     const fetchPosts = async () => {
       if (query) {
         setPosts(
-          query.startsWith('#')
+          query.startsWith("#")
             ? await getPostsByHashtag(query.slice(1))
             : await searchPosts(query)
         );
@@ -37,8 +37,8 @@ function Forum({ query }) {
     });
     const updatedPosts = await getAllPosts();
     setPosts(updatedPosts);
-    setNewPostTitle('');
-    setNewPostBody('');
+    setNewPostTitle("");
+    setNewPostBody("");
     setIsAddPostVisible(false);
     setPostsUpdated(!postsUpdated);
   };
@@ -47,8 +47,10 @@ function Forum({ query }) {
   const handleNewPostTitleChange = (e) => setNewPostTitle(e.target.value);
   const handleNewPostBodyChange = (e) => setNewPostBody(e.target.value);
 
+  
+
   return (
-    <div className="bg-yellow max-w-[80vw] w-[65vw] flex flex-col items-center p-6 rounded-t-xl h-full min-h-screen mb-0 relative">
+    <div className=" bg-yellow max-w-[80vw] w-[65vw] flex flex-col items-center p-8 rounded-t-xl h-full min-h-screen mb-0 relative">
       <p className="text-white bg-white bg-opacity-30 rounded-full px-4">
         Community
       </p>
@@ -78,9 +80,7 @@ function Forum({ query }) {
               placeholder="Post title"
               className="mb-2 border-0 p-2 rounded-md w-full"
             />
-            <label htmlFor="body">
-              Body
-              </label>
+            <label htmlFor="body">Body</label>
             <textarea
               id="body"
               name="body"
@@ -97,23 +97,25 @@ function Forum({ query }) {
             </button>
           </form>
         )}
-
+  
+        <div>
         {posts.length > 0 ? (
           posts.map((post) => <Post key={post.id} post={post} />)
         ) : (
           <div className="text-center text-white mt-24">
             <p>
-              It's a little quiet here.{' '}
+              It's a little quiet here.{" "}
               <span
                 className="text-dark-orange cursor-pointer"
                 onClick={handleAddPostToggle}
               >
                 create a post
-              </span>{' '}
+              </span>{" "}
               on this topic!
             </p>
           </div>
         )}
+        </div>
       </div>
     </div>
   );

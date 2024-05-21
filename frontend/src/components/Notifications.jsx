@@ -5,7 +5,7 @@ const Notifications = ({ notifications }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-full bg-opacity-70 w-[25vw] flex flex-col items-center bg-yellow p-6 rounded-t-xl mb-0">
+    <div className="h-screen bg-opacity-65 w-[25vw] flex flex-col items-center bg-yellow p-6 rounded-t-xl mb-0">
       <p className="text-white bg-white bg-opacity-30 rounded-full px-4">
         Notifications
       </p>

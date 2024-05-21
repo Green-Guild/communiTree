@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const EventsCard = ({ event }) => {
   const { id, title, image, event_date, address } = event;
@@ -23,9 +23,6 @@ const EventsCard = ({ event }) => {
             <p className="text-sm  text-yellow font-thin ubuntu-light-italic">
               {address}
             </p>
-            {/* <p className="text-sm text-yellow font-thin ubuntu-light-italic">
-              Date and Time: {event_date}
-            </p> */}
           </div>
         </Link>
       </main>
