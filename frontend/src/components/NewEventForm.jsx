@@ -7,7 +7,7 @@ import { FiAlertCircle } from 'react-icons/fi';
 const NewEventForm = () => {
   const [showForm, setShowForm] = useState(false);
   const [image, setImage] = useState(
-    "https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
+    "https://t4.ftcdn.net/jpg/05/65/22/41/360_F_565224180_QNRiRQkf9Fw0dKRoZGwUknmmfk51SuSS.jpg"
   );
 
   const toggleForm = () => {
@@ -25,7 +25,7 @@ const NewEventForm = () => {
       {showForm && (
         <div className="bg-white p-8 mt-6 rounded-lg shadow-md">
           <UploadButton
-            className="ut-button:rounded-md ut-button:border-4 ut-button:border-yellow ut-button:w-32 ut-button:h-20 ut-button:shadow-md ut-allowed-content:h-0"
+            className="ut-button:rounded-md ut-button:border-4 ut-button:border-yellow ut-button:w-24 ut-button:h-20  ut-allowed-content:h-0 button-bulge"
             endpoint="imageUploader"
             skipPolling
             onClientUploadComplete={(files) => {
@@ -98,7 +98,7 @@ const NewEventForm = () => {
             <div className="w-full flex items-center justify-end">
               <button
                 type="submit"
-                className="w-[30%] bg-bright-orange text-white p-2 rounded-full shadow hover:bg-bright-orange transition duration-300"
+                className="w-[30%] bg-bright-orange text-white p-2 rounded-full font-medium button-bulge hover:bg-bright-orange transition duration-300"
               >
                 Create Event
               </button>

@@ -72,7 +72,7 @@ export const formatDate = (isoString) => {
 
 export const getLocationByZip = async (zipCode) => {
   const zipString = String(zipCode);
-  const url = `http://ZiptasticAPI.com/${zipString}`;
+  const url = `https://ZiptasticAPI.com/${zipString}`;
 
   try {
       const response = await fetch(url);
@@ -84,9 +84,9 @@ export const getLocationByZip = async (zipCode) => {
       const locationData = await response.json();
 
       if (locationData && locationData.city && locationData.state) {
-          console.log(`${locationData.city}, ${locationData.state}`);
+          return `${locationData.city}, ${locationData.state}`;
       } else {
-          console.log('Location data not available');
+          return 'Location data not available';
       }
   } catch (error) {
       console.error('Error fetching data:', error.message);

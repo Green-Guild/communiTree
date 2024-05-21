@@ -221,3 +221,34 @@ form {
 .button-bulge:not(:hover) {
   animation: bounce-back 0.5s ease-out;
 }
+
+::-webkit-scrollbar-track{
+  border: none;
+  width: 5px;
+  opacity: 50%;
+}
+
+::-webkit-scrollbar{
+background: none;
+width: 5px;
+opacity: 50%;
+}
+
+::-webkit-scrollbar-thumb{
+  background: white;
+  width: 5px;
+  border-radius: 10px;
+  opacity: 50%;
+}
+
+@layer components {
+  .fade-top-edge::before {
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px; 
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+    pointer-events: none;
+  }
+}

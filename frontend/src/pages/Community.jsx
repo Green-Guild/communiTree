@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import Forum from '../components/Forum';
-import Notifications from '../components/Notifications';
+import { useState } from "react";
+import Forum from "../components/Forum";
+import Notifications from "../components/Notifications";
 
 const Community = () => {
   const [showNotifications, setShowNotifications] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
@@ -20,8 +20,11 @@ const Community = () => {
   };
 
   return (
-    <>
-      <form className="border-none flex rounded-full" onSubmit={handleSearch}>
+    <div>
+      <form
+        className="border-none mb-0 mt-0 flex rounded-full"
+        onSubmit={handleSearch}
+      >
         <input
           type="text"
           className="rounded-full p-1 px-3"
@@ -36,24 +39,29 @@ const Community = () => {
         </button>
       </form>
 
-      <button className="notification-button" onClick={toggleNotifications}>
+      <button
+        className="z-50 notification-button"
+        onClick={toggleNotifications}
+      >
         <img className="w-6 h-6" src="/notification.svg" alt="Notifications" />
       </button>
       <div
         className={`flex flex-row mt-6 mr-6 ml-6 ${
-          showNotifications ? 'justify-start' : 'justify-center'
+          showNotifications ? "justify-start" : "justify-center"
         }`}
       >
         <div className="flex justify-center flex-auto">
           <Forum query={searchQuery} />
         </div>
         {showNotifications && (
-          <div className="flex justify-center">
-            <Notifications />
+          <div className="relative z-10 flex justify-center ml-56 right-32">
+            <div className="fixed">
+              <Notifications />
+            </div>
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 export default Community;
