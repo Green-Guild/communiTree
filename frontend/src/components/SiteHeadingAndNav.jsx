@@ -51,10 +51,10 @@ const SiteHeadingAndNav = () => {
       ];
 
   return (
-    <div className="z-50 fixed px-4 w-full top-0 py-2 flex justify-between items-center bg-white">
+    <div className="z-50 fixed px-4 w-full top-0 py-2 flex justify-between items-center dark:bg-black bg-white">
       <a className="pulse" id="logo" href="/">
         <img
-          src="https://i.ibb.co/7vhXpqq/new-logo.png"
+          src={document.documentElement.classList.contains("dark") ? "https://i.ibb.co/6F91JfP/Favicon.png" : "https://i.ibb.co/7vhXpqq/new-logo.png"}
           alt="logo"
           style={{ width: '3.5vw', height: '3.5vw' }}
         />
@@ -123,7 +123,7 @@ const Chip = ({ text, selected, setSelected }) => {
       className={`relative px-2.5 py-0.5 rounded-md transition-colors text-sm ${
         selected
           ? 'text-white font-medium'
-          : 'text-bright-orange hover:bg-slate-700 font-medium'
+          : 'text-bright-orange hover:bg-slate-700 dark:text-white font-medium'
       }`}
     >
       <span className="relative z-10">{text}</span>
@@ -131,7 +131,7 @@ const Chip = ({ text, selected, setSelected }) => {
         <motion.span
           layoutId="pill-tab"
           transition={{ type: 'spring', duration: 0.5 }}
-          className="absolute inset-0 z-0 bg-gradient-to-r from-bright-orange to-bright-orange rounded-full"
+          className="absolute inset-0 z-0 bg-gradient-to-r dark:from-yellow dark:to-yellow from-bright-orange to-bright-orange rounded-full"
         ></motion.span>
       )}
     </button>

@@ -6,7 +6,7 @@ const EventsCard = ({ event }) => {
 
   return (
     <>
-      <main className="flex flex-col w-60 h-60 min-w-50 min-h-50 rounded-xl shadow-sm bg-white hover:scale-105 hover:shadow-lg transition duration-300 ease-in-out">
+      <main className="flex flex-col w-60 h-60 min-w-50 min-h-50 rounded-xl shadow-sm dark:bg-black bg-white hover:scale-105 hover:shadow-lg transition duration-300 ease-in-out">
         <Link to={`/events/${id}`} className="flex flex-col items-center mb-3">
           <div className="w-[100%]">
             <img
@@ -17,7 +17,7 @@ const EventsCard = ({ event }) => {
           </div>
 
           <div className="p-4 text-wrap text-center flex flex-col items-center">
-            <h1 className="text-xl  text-bright-orange font-semibold">
+            <h1 className="text-xl dark:text-white  text-bright-orange font-semibold">
               {title}
             </h1>
             <p className="text-sm  text-yellow font-thin ubuntu-light-italic">

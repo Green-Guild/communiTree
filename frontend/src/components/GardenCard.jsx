@@ -6,7 +6,7 @@ const GardenCard = ({ garden }) => {
 
   return (
     <div>
-      <main className="bg-white rounded-2xl m-6 flex shadow-sm hover:scale-105 hover:shadow-lg hover:shadow-light-yellow transition duration-300 ease-in-out">
+      <main className="bg-white dark:bg-black rounded-2xl m-6 flex shadow-sm hover:scale-105 hover:shadow-sm hover:shadow-light-yellow transition duration-300 ease-in-out">
         <div>
           <img
             src={image}
@@ -16,10 +16,10 @@ const GardenCard = ({ garden }) => {
         </div>
         {/* skew-x-6 */}
 
-        <div className="bg-white -skew-x-6 -ml-4 rounded-r-2xl p-6 border-l-8 border-yellow ">
+        <div className="bg-white dark:bg-black -skew-x-6 -ml-4 rounded-r-2xl p-6 border-l-8 border-yellow ">
           <div className="skew-x-[6deg]">
             <Link to={`/gardens/${id}`}>
-              <h1 className="font-extrabold text-bright-orange text-2xl">
+              <h1 className="font-extrabold dark:text-white text-bright-orange text-2xl">
                 {name}
               </h1>
             </Link>

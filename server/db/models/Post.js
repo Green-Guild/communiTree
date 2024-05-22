@@ -26,7 +26,8 @@ export default class Post {
   static async list() {
     const query = `
     SELECT * 
-    FROM posts`;
+    FROM posts
+    ORDER BY created_at DESC`;
     const { rows } = await knex.raw(query);
 
     return rows.map((posts) => new Post(posts));
@@ -46,7 +47,8 @@ export default class Post {
     const query = `
     SELECT * 
     FROM posts 
-    WHERE user_id = ?`;
+    WHERE user_id = ?
+    ORDER BY created_at DESC`;
     const { rows } = await knex.raw(query, [user_id]);
     return rows.map((post) => new Post(post));
   }
@@ -55,7 +57,8 @@ export default class Post {
     const searchQuery = `
       SELECT * 
       FROM posts 
-      WHERE title ILIKE ? OR body ILIKE ?`;
+      WHERE title ILIKE ? OR body ILIKE ?
+      ORDER BY created_at DESC`;
 
     const { rows } = await knex.raw(searchQuery, [`%${query}%`, `%${query}%`]);
     return rows.map((post) => new Post(post));
@@ -65,7 +68,8 @@ export default class Post {
     const query = `
     SELECT * 
     FROM posts 
-    WHERE ? = ANY(hashtags)`;
+    WHERE ? = ANY(hashtags)
+    ORDER BY created_at DESC`;
     const { rows } = await knex.raw(query, [hashtag]);
     return rows.map((post) => new Post(post));
   }

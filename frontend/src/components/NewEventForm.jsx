@@ -54,7 +54,7 @@ const NewEventForm = ({ ownerId, onEventCreated}) => {
   return (
     <>
       <button
-        className="absolute top-0 right-0 m-6 p-3 py-1 bg-bright-orange text-white border-dotted rounded-md button-bulge"
+        className="absolute top-0 right-0 m-6 p-3 py-1 dark:bg-yellow bg-bright-orange text-white border-dotted rounded-md button-bulge"
         onClick={toggleForm}
       >
         {showForm ? "-" : "+"}
