@@ -11,8 +11,8 @@ export const createEvent = async ({
   title,
   description,
   zipcode,
+  address,
   event_date,
-  garden_id,
   image,
 }) => {
   const [data, err] = await fetchHandler(
@@ -21,8 +21,8 @@ export const createEvent = async ({
       title,
       description,
       zipcode,
+      address,
       event_date,
-      garden_id,
       image,
     })
   );
