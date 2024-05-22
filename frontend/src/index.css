@@ -11,6 +11,7 @@ body {
   margin: 0;
   background-color: #f8f7f4;
   scroll-behavior: smooth;
+  width: 100%;
 
   @apply dark:bg-black;
 }

@@ -91,7 +91,7 @@ function Parallax() {
       tl.to(
         sun.current,
         {
-          y: '+=100',
+          y: '+=90',
         },
         0
       );
@@ -116,13 +116,13 @@ function Parallax() {
   }, []);
 
   return (
-    <div className="overflow-hidden -mt-12">
+    <div className="overflow-hidden w-screen -mt-12">
       <div
         ref={parallaxRef}
         style={{
           background: `linear-gradient(#F8F7F4 ${background}%, #F48437 )`,
         }}
-        className="relative border-none h-[100vh] w-full"
+        className="relative border-none h-[100vh] w-screen"
       >
         <img
           ref={mountain3}
@@ -141,7 +141,7 @@ function Parallax() {
         />
         <img
           ref={sun}
-          className="absolute bottom-[-5%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/5"
+          className="absolute bottom-[0] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/5"
           src="/parallax/sun.svg"
         />
         <img

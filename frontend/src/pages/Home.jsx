@@ -22,7 +22,7 @@ function FadeInSection({ children }) {
 
 function HomePage() {
   return (
-    <div>
+    <div className="w-screen">
       <Parallax />
       <div className="bg-about-green text-white flex-col gap-5 ">
         <FadeInSection>

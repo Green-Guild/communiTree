@@ -1,36 +1,38 @@
-import { useState, useContext } from 'react';
-import { logout } from '../adapters/auth-adapter';
-import CurrentUserContext from '../contexts/current-user-context';
-import { updatePassword } from '../adapters/user-adapter';
+import { useState, useContext } from "react";
+import { logout } from "../adapters/auth-adapter";
+import CurrentUserContext from "../contexts/current-user-context";
+import { updatePassword } from "../adapters/user-adapter";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 
 const Settings = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
     if (!isDarkMode) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
   };
-  
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'currentPassword') setCurrentPassword(value);
-    if (name === 'newPassword') setNewPassword(value);
-    if (name === 'confirmPassword') setConfirmPassword(value);
+    if (name === "currentPassword") setCurrentPassword(value);
+    if (name === "newPassword") setNewPassword(value);
+    if (name === "confirmPassword") setConfirmPassword(value);
   };
 
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     if (newPassword !== confirmPassword) {
-      alert('New password and confirm password do not match');
+      alert("New password and confirm password do not match");
       return;
     }
     await updatePassword({
@@ -45,18 +47,21 @@ const Settings = () => {
       {/* <div className={`bg-${isDarkMode ? 'black' : 'yellow'} rounded-t-2xl flex flex-col items-center w-4 mt-5 py-14 h-screen px-40 shadow-lg border-none justify-center`}> */}
       <div
         className={
-          'bg-yellow rounded-t-2xl bg-opacity-80 flex flex-col items-center w-4 mt-5 py-14 h-screen px-40 shadow-lg border-none justify-center'
+          "bg-yellow rounded-t-2xl bg-opacity-80 flex flex-col items-center w-4 mt-5 py-14 h-screen px-40 shadow-lg border-none justify-center"
         }
       >
         {/* <h2 className="text-center text-bright-orange">Settings</h2> */}
 
         {/* Light/Dark Mode Toggle */}
-        <button
+        {/* <button
           className="text-white text-center bg-bright-orange hover:text-bright-orange hover:bg-white hover:shadow-md shadow-inner hover:shadow-inner-white font-thin text-sm rounded-2xl px-2.5 py-0.5"
           onClick={toggleTheme}
         >
           {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-        </button>
+        </button> */}
+        <FormGroup className="font-ubuntu">
+          <FormControlLabel control={<Switch size="medium"  onClick={toggleTheme} color={'yellow'}/>} className="font-ubuntu text-white" label="Dark Mode" />
+        </FormGroup>
 
         {/* Change Password Form */}
         <div className="bg-yellow shadow-sm rounded-3xl p-2 m-4">
@@ -109,7 +114,7 @@ const Settings = () => {
           onClick={async () => {
             await logout();
             setCurrentUser(null);
-            navigate('/');
+            navigate("/");
           }}
         >
           Log Out

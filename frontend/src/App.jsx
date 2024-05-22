@@ -44,9 +44,9 @@ export default function App() {
   }, [location]); // This useEffect will run every time the location changes
 
   return (
-    <div className="flex-col">
+    <div className="w-screen flex-col">
       <SiteHeadingAndNav />
-      <main className="bg-white dark:bg-black mt-[10vh]">
+      <main className="bg-white w-screen dark:bg-black mt-[10vh]">
         <TransitionGroup>
           <CSSTransition key={location.key} timeout={300} classNames="page">
             <Routes location={location}>
