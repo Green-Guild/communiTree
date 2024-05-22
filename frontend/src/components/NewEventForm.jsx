@@ -1,16 +1,53 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createEvent } from '../adapters/event-adapter';
 import { UploadButton } from '../uploadthing';
 
-const NewEventForm = () => {
+
+const NewEventForm = ({ ownerId, onEventCreated}) => {
   const [showForm, setShowForm] = useState(false);
   const [image, setImage] = useState(
     'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg'
   );
+  const [title, setTitle] = useState('');
+  const [zipcode, setZipcode] = useState('');
+  const [address, setAddress] = useState('');
+  const [description, setDescription] = useState('');
+  const [eventDate, setEventDate] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const toggleForm = () => {
     setShowForm((prevState) => !prevState);
-  };
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const newEvent = {
+      title,
+      zipcode,
+      address,
+      description,
+      host_id: ownerId,
+      event_date: eventDate,
+      image,
+    };
+
+    try {
+      const data = await createEvent(newEvent);
+      setMessage('Event created successfully');
+      setTimeout(() => {
+        setMessage('');
+        // navigate(`/events/${data.id}`);
+
+      }, 2000);
+      onEventCreated()
+    } catch (error) {
+      console.error('Error creating event:', error);
+    }
+  }
+
   return (
     <>
       <button
@@ -20,23 +57,45 @@ const NewEventForm = () => {
         +
       </button>
       {showForm && (
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label>
               Title:
-              <input type="text" required />
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required 
+              />
             </label>
           </div>
           <div>
-            <label>
-              Location (Zipcode):
-              <input type="text" required />
-            </label>
+            <label>Zipcode:
+                <input 
+                  type="text"
+                  value={zipcode}
+                  onChange={(e) => setZipcode(e.target.value)}
+                  required
+                />
+              </label>
           </div>
           <div>
-            <label>
-              Description:
-              <textarea required></textarea>
+          <label>Address:
+                <input 
+                  type="text"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  required
+                />
+              </label>
+          </div>
+          <div>
+          <label>Description:
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              ></textarea>
             </label>
           </div>
           <div>
@@ -70,12 +129,17 @@ const NewEventForm = () => {
             </label>
           </div>
           <div>
-            <label>
-              Date and Time:
-              <input type="datetime" required />
+          <label>Date and Time:
+              <input 
+                type="datetime-local"
+                value={eventDate}
+                onChange={(e) => setEventDate(e.target.value)}
+                required 
+              />
             </label>
           </div>
           <button type="submit">Submit</button>
+          {message && <p className="success-message">{message}</p>}
         </form>
       )}
     </>
