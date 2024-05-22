@@ -66,7 +66,7 @@ function Forum({ query }) {
 
         {currentUser && isAddPostVisible && (
           <form
-            className="mt-4 p-4 border-none bg-white rounded-md shadow-sm"
+            className="mt-4 p-4 w-96 border-none dark:bg-black dark:text-white bg-white rounded-md shadow-sm"
             aria-labelledby="Create Post Form"
             onSubmit={handleFormSubmit}
           >
@@ -78,7 +78,7 @@ function Forum({ query }) {
               value={newPostTitle}
               onChange={handleNewPostTitleChange}
               placeholder="Post title"
-              className="mb-2 border-0 p-2 rounded-md w-full"
+              className="mb-2 dark:bg-white dark:bg-opacity-10 border-0 p-2 rounded-md w-full"
             />
             <label htmlFor="body">Body</label>
             <textarea
@@ -87,10 +87,10 @@ function Forum({ query }) {
               value={newPostBody}
               onChange={handleNewPostBodyChange}
               placeholder="Post body"
-              className="mb-2 border-0 p-2 rounded-md w-full"
+              className="mb-2  dark:bg-white dark:bg-opacity-10 border-0 p-2 rounded-md w-full"
             />
             <button
-              className="px-4 py-1 bg-bright-orange text-white rounded-full button-bulge"
+              className="px-4 py-1 dark:bg-yellow bg-bright-orange text-white rounded-full button-bulge"
               type="submit"
             >
               Post

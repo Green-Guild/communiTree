@@ -60,12 +60,12 @@ const NewEventForm = ({ ownerId, onEventCreated}) => {
         {showForm ? "-" : "+"}
       </button>
       {showForm && (
-        <div className="bg-white p-8 mt-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-black dark:text-white p-8 mt-6 rounded-lg shadow-md">
           <form className="space-y-4 w-[50vw] border-0" onSubmit=
           {handleSubmit}>
             <div>
               <UploadButton
-              className="ut-button:rounded-md ut-button:border-4 ut-button:border-yellow ut-button:w-24 ut-button:h-20  ut-allowed-content:h-0 button-bulge"
+              className="ut-button:rounded-md ut-button:w-24 ut-button:h-20  ut-allowed-content:h-0 button-bulge"
               endpoint="imageUploader"
               skipPolling
               onClientUploadComplete={(files) => {
@@ -95,8 +95,8 @@ const NewEventForm = ({ ownerId, onEventCreated}) => {
               }}
             />
           </div>
-            <div>
-              <label className="block text-black font-semibold">
+            <div className="dark:text-white">
+              <label className="block dark:text-white text-black font-semibold">
                 Event Title
                 <input
                   type="text"
@@ -108,7 +108,7 @@ const NewEventForm = ({ ownerId, onEventCreated}) => {
               </label>
             </div>
             <div>
-              <label className="block text-black font-semibold">
+              <label className="block dark:text-white text-black font-semibold">
                 Address
                 <input 
                   type="text"
@@ -120,7 +120,7 @@ const NewEventForm = ({ ownerId, onEventCreated}) => {
               </label>
             </div>
             <div>
-              <label className="block text-black font-semibold" >
+              <label className="block dark:text-white text-black font-semibold" >
                 Zipcode
                 <input 
                   type="text"
@@ -132,7 +132,7 @@ const NewEventForm = ({ ownerId, onEventCreated}) => {
               </label>
             </div>
             <div>
-              <label className="block text-black font-semibold">
+              <label className="block dark:text-white text-black font-semibold">
                 Description
                 <textarea
                   value={description}
@@ -143,7 +143,7 @@ const NewEventForm = ({ ownerId, onEventCreated}) => {
               </label>
             </div>
             <div>
-              <label className="block text-black font-semibold">
+              <label className="block dark:text-white text-black font-semibold">
                 Date and Time
                 <input
                   type="datetime-local"
@@ -158,11 +158,11 @@ const NewEventForm = ({ ownerId, onEventCreated}) => {
             <div className="w-full flex items-center justify-end">
               <button
                 type="submit"
-                className="w-[30%] bg-bright-orange text-white p-2 rounded-full font-medium button-bulge hover:bg-bright-orange transition duration-300"
+                className="w-[30%] dark:bg-yellow bg-bright-orange text-white p-2 rounded-full font-medium button-bulge hover:bg-bright-orange transition duration-300"
               >
                 Create Event
               </button>
-              {message && <p className="success-message">{message}</p>}
+              {/* {message && <p className="success-message">{message}</p>} */}
             </div>
           </form>
         </div>

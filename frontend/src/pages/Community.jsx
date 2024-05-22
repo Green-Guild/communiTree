@@ -75,7 +75,7 @@ const Community = () => {
       >
         <input
           type="text"
-          className="rounded-full p-1 px-3"
+          className="dark:bg-yellow dark:bg-opacity-10 dark:placeholder-white dark:placeholder-opacity-40 dark:text-white rounded-full p-1 px-3"
           name="garden"
           placeholder="Search"
           aria-label="Browse through Posts by entering query"
@@ -83,7 +83,7 @@ const Community = () => {
           onChange={handleSearchChange}
         />
         <button className="mb-4 -ml-6" aria-label="Submit query" type="submit">
-          <img className="w-4 h-4" src="/search.svg" alt="search" />
+          <img className="w-4 h-4 dark:invert" src="/search.svg" alt="search" />
         </button>
       </form>
 

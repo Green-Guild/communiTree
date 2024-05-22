@@ -48,7 +48,7 @@ const Gardens = () => {
         >
           <input
             type="text"
-            className="rounded-full p-1 px-3"
+            className="dark:bg-yellow dark:bg-opacity-10 dark:placeholder-white dark:placeholder-opacity-40 dark:text-white rounded-full p-1 px-3"
             value={searchQuery}
             onChange={handleSearchChange}
             name="garden"
@@ -60,7 +60,7 @@ const Gardens = () => {
             aria-label="Submit zipcode"
             type="submit"
           >
-            <img className="w-4 h-4" src="/search.svg" alt="search" />
+            <img className="w-4 h-4 dark:invert" src="/search.svg" alt="search" />
           </button>
           </form>
 

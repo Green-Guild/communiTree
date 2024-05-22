@@ -138,7 +138,7 @@ function Post({ post, commentsOpen = false }) {
                 className="absolute button-bulge right-0 flex"
                 onClick={handleToggleCommentInput}
               >
-                <img src="/chat.svg" alt="Comment Icon" className="w-10 h-10" />
+                <img src="/chat.svg" alt="Comment Icon" className="w-10 h-10 dark:mix-blend-luminosity" />
               </button>
             )}
           </div>
