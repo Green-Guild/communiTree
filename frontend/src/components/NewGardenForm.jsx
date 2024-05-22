@@ -16,14 +16,14 @@ const NewGardenForm = ({ ownerId }) => {
     <>
       <div className="relative">
         <button
-          className="absolute top-0 right-0 p-3 py-1 bg-bright-orange text-white border-dotted rounded-md button-bulge"
+          className="absolute dark:bg-yellow top-0 right-0 p-3 py-1 bg-bright-orange text-white border-dotted rounded-md button-bulge"
           onClick={toggleForm}
         >
           {showForm ? "-" : "+"}
         </button>
       </div>
       {showForm && (
-        <div className="flex justify-center items-center w-full">
+        <div className="flex m-6 justify-center items-center w-full">
           <div className="bg-white w-[50vw] p-8 mt-6 rounded-lg shadow-md">
             <UploadButton
               className="ut-button:rounded-md ut-button:border-4 ut-button:border-yellow ut-button:w-24 ut-button:h-20  ut-allowed-content:h-0 button-bulge"

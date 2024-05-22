@@ -86,12 +86,12 @@ function Post({ post, commentsOpen = false }) {
 
   return (
     <div className="flex-col w-[50vw] m-9 rounded-xl shadow-sm">
-      <div className="post bg-white p-4 flex-col rounded-t-xl">
+      <div className="post bg-white dark:bg-black p-4 flex-col rounded-t-xl">
         <div className="flex items-center mb-3">
           <img
             src={user.image}
             alt={user.display_name}
-            className="w-10 h-10 border-4 object-cover border-bright-orange rounded-full mr-3"
+            className="w-10 h-10 border-4 object-cover dark:border-yellow border-bright-orange rounded-full mr-3"
           />
           <div>
             <p className="font-bold text-yellow">{user.display_name}</p>
@@ -102,8 +102,8 @@ function Post({ post, commentsOpen = false }) {
           </div>
         </div>
 
-        <h3 className="text-xl font-semibold mb-2 pr-6 pl-6">{post.title}</h3>
-        <p className="text-black mb-2 pr-6 pl-6">{renderPostBody(post.body)}</p>
+        <h3 className="text-xl dark:text-white font-semibold mb-2 pr-6 pl-6">{post.title}</h3>
+        <p className="text-black dark:text-white mb-2 pr-6 pl-6">{renderPostBody(post.body)}</p>
 
         <div className="mb-2 rounded-lg border-none">
           {isCommentInputVisible && (
@@ -142,7 +142,7 @@ function Post({ post, commentsOpen = false }) {
           ))}
       </div>
       <button
-        className="text-white bg-light-yellow w-full p-1 rounded-b-lg"
+        className="text-white dark:bg-yellow bg-light-yellow w-full p-1 rounded-b-lg"
         onClick={handleToggleComments}
       >
         {isCommentsVisible ? "Collapse comments" : "View all comments"}

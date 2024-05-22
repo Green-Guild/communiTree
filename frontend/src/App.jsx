@@ -46,7 +46,7 @@ export default function App() {
   return (
     <div className="flex-col">
       <SiteHeadingAndNav />
-      <main className="bg-white mt-[10vh]">
+      <main className="bg-white dark:bg-black mt-[10vh]">
         <TransitionGroup>
           <CSSTransition key={location.key} timeout={300} classNames="page">
             <Routes location={location}>

@@ -2,6 +2,7 @@
 import { withUt } from 'uploadthing/tw';
 
 export default withUt({
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {

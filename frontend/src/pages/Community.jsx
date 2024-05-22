@@ -63,6 +63,8 @@ const Community = () => {
     setSearchQuery(e.target.value);
   };
 
+  
+
   return (
     <div>
       <form

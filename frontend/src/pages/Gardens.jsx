@@ -66,8 +66,8 @@ const Gardens = () => {
           {/* <button aria-label='Clear Results' type="submit" onClick={handleClearSearch}>Clear</button> */}
         </form>
 
-        <div className="bg-yellow p-5 flex-col justify-center align-middle items-center h-full rounded-t-xl m-16 mb-0">
-          <p className=" ml-[38%] absolute text-white w-24 bg-white bg-opacity-30 rounded-full px-4">
+        <div className="bg-yellow dark:bg-opacity-30 p-5 flex-col justify-center align-middle items-center h-full rounded-t-xl m-16 mb-0">
+          <p className=" ml-[38%] mb-5 absolute text-white w-24 bg-white bg-opacity-30 rounded-full px-4">
             Gardens
           </p>
 

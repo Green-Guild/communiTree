@@ -50,14 +50,14 @@ function Forum({ query }) {
   
 
   return (
-    <div className=" bg-yellow max-w-[80vw] w-[65vw] flex flex-col items-center p-8 rounded-t-xl h-full min-h-screen mb-0 relative">
+    <div className=" bg-yellow dark:bg-opacity-30 max-w-[80vw] w-[65vw] flex flex-col items-center p-8 rounded-t-xl h-full min-h-screen mb-0 relative">
       <p className="text-white bg-white bg-opacity-30 rounded-full px-4">
         Community
       </p>
       <div className="-forum">
         {currentUser && (
           <button
-            className="absolute top-0 right-0 m-6 p-3 py-1 bg-bright-orange text-white border-dotted rounded-md button-bulge"
+            className="absolute top-0 right-0 m-6 p-3 py-1 dark:bg-yellow bg-bright-orange text-white border-dotted rounded-md button-bulge"
             onClick={handleAddPostToggle}
           >
             +

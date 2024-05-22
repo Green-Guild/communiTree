@@ -12,7 +12,13 @@ const Settings = () => {
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
+    if (!isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   };
+  
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
