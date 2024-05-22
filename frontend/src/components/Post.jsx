@@ -1,22 +1,24 @@
-import { useEffect, useState } from "react";
-import { getUser } from "../adapters/user-adapter";
-import Comment from "./Comment";
-import { getCommentsByPostId } from "../adapters/comment-adapter";
-import { createComment } from "../adapters/comment-adapter";
-import { capitalizeWords, fetchHandler } from "../utils";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import { capitalizeFirstChar } from "../utils";
+import { useContext, useEffect, useState } from 'react';
+import { getUser } from '../adapters/user-adapter';
+import Comment from './Comment';
+import { getCommentsByPostId } from '../adapters/comment-adapter';
+import { createComment } from '../adapters/comment-adapter';
+import { capitalizeWords, fetchHandler } from '../utils';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { capitalizeFirstChar } from '../utils';
+import CurrentUserContext from '../contexts/current-user-context';
 dayjs.extend(relativeTime);
 
 function Post({ post, commentsOpen = false }) {
   const [comments, setComments] = useState([]);
-  const [commentText, setCommentText] = useState("");
+  const [commentText, setCommentText] = useState('');
   const [isCommentsVisible, setIsCommentsVisible] = useState(commentsOpen);
   const [isCommentInputVisible, setIsCommentInputVisible] = useState(false);
   const [commentsUpdated, setCommentsUpdated] = useState(false);
   const [user, setUser] = useState({});
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState('');
+  const { currentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
     const fetch = async () => {
@@ -54,7 +56,7 @@ function Post({ post, commentsOpen = false }) {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (commentText.trim() !== "") {
+    if (commentText.trim() !== '') {
       await createComment({
         body: commentText,
         post_id: post.id,
@@ -67,19 +69,19 @@ function Post({ post, commentsOpen = false }) {
         })
       );
       setComments(commentsWithUser);
-      setCommentText("");
+      setCommentText('');
       setCommentsUpdated(!commentsUpdated);
     }
   };
 
   const renderPostBody = (text) => {
-    return text.split(" ").map((word, index) =>
-      word.includes("#") ? (
+    return text.split(' ').map((word, index) =>
+      word.includes('#') ? (
         <span key={index} className="text-yellow">
-          {word}{" "}
+          {word}{' '}
         </span>
       ) : (
-        word + " "
+        word + ' '
       )
     );
   };
@@ -96,14 +98,18 @@ function Post({ post, commentsOpen = false }) {
           <div>
             <p className="font-bold text-yellow">{user.display_name}</p>
             <p className="text-sm text-yellow font-thin ubuntu-light-italic">
-              {capitalizeWords(location)} •{" "}
+              {capitalizeWords(location)} •{' '}
               {capitalizeFirstChar(dayjs().to(dayjs(post.created_at)))}
             </p>
           </div>
         </div>
 
-        <h3 className="text-xl dark:text-white font-semibold mb-2 pr-6 pl-6">{post.title}</h3>
-        <p className="text-black dark:text-white mb-2 pr-6 pl-6">{renderPostBody(post.body)}</p>
+        <h3 className="text-xl dark:text-white font-semibold mb-2 pr-6 pl-6">
+          {post.title}
+        </h3>
+        <p className="text-black dark:text-white mb-2 pr-6 pl-6">
+          {renderPostBody(post.body)}
+        </p>
 
         <div className="mb-2 rounded-lg border-none">
           {isCommentInputVisible && (
@@ -127,12 +133,14 @@ function Post({ post, commentsOpen = false }) {
             </form>
           )}
           <div className="relative">
-            <button
-              className="absolute button-bulge right-0 flex"
-              onClick={handleToggleCommentInput}
-            >
-              <img src="/chat.svg" alt="Comment Icon" className="w-10 h-10" />
-            </button>
+            {currentUser && (
+              <button
+                className="absolute button-bulge right-0 flex"
+                onClick={handleToggleCommentInput}
+              >
+                <img src="/chat.svg" alt="Comment Icon" className="w-10 h-10" />
+              </button>
+            )}
           </div>
         </div>
 
@@ -145,7 +153,7 @@ function Post({ post, commentsOpen = false }) {
         className="text-white dark:bg-yellow bg-light-yellow w-full p-1 rounded-b-lg"
         onClick={handleToggleComments}
       >
-        {isCommentsVisible ? "Collapse comments" : "View all comments"}
+        {isCommentsVisible ? 'Collapse comments' : 'View all comments'}
       </button>
     </div>
   );

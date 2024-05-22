@@ -62,14 +62,14 @@ export default function App() {
               <Route element={<PrivateRoutes userLoading={userLoading} />}>
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/events/:id" element={<EventsProfile />} />
               </Route>
               <Route path="/community" element={<Community />} />
               <Route path="/gardens" element={<Gardens />} />
               <Route path="/gardens/:id" element={<GardenProfile />} />
 
               <Route path="*" element={<NotFoundPage />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/events/:id" element={<EventsProfile />} />
 
               <Route path="/post/:postId" element={<PostProfile />} />
               <Route path="/notifications" element={<Notifications />} />

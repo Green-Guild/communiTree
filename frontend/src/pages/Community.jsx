@@ -67,8 +67,6 @@ const Community = () => {
     setSearchQuery(e.target.value);
   };
 
-  
-
   return (
     <div>
       <form
@@ -89,15 +87,21 @@ const Community = () => {
         </button>
       </form>
 
-      <button
-        className="z-50 notification-button"
-        onClick={toggleNotifications}
-      >
-        <img className="w-6 h-6" src="/notification.svg" alt="Notifications" />
-      </button>
+      {currentUser && (
+        <button
+          className="z-50 notification-button"
+          onClick={toggleNotifications}
+        >
+          <img
+            className="w-6 h-6"
+            src="/notification.svg"
+            alt="Notifications"
+          />
+        </button>
+      )}
       <div
         className={`flex flex-row mt-6 mr-6 ml-6 ${
-          showNotifications ? "justify-start" : "justify-center"
+          showNotifications ? 'justify-start' : 'justify-center'
         }`}
       >
         <div className="flex justify-center flex-auto">
@@ -106,7 +110,7 @@ const Community = () => {
         {showNotifications && (
           <div className="relative z-10 flex justify-center ml-56 right-32">
             <div className="fixed">
-              <Notifications notifications={notifications}/>
+              <Notifications notifications={notifications} />
             </div>
           </div>
         )}
