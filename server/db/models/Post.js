@@ -122,13 +122,18 @@ export default class Post {
     return rows[0] ? new Post(rows[0]) : null;
   }
 
-  // TODO: fix delete (delete comments on post first)
-
   static async delete(id) {
-    const query = `
+    const deleteCommentsQuery = `
+    DELETE FROM comments 
+    WHERE post_id = ?`;
+    await knex.raw(deleteCommentsQuery, [id]);
+
+    const deletePostQuery = `
     DELETE FROM posts 
     WHERE id = ?`;
-    await knex.raw(query, [id]);
+    const res = await knex.raw(deletePostQuery, [id]);
+
+    return res.rowCount > 0;
   }
 
   static async deleteAll() {
