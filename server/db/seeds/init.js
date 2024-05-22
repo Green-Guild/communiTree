@@ -404,7 +404,7 @@ export const seed = async (knex) => {
       "A fun-filled day to celebrate the power of plants with music, a potluck, and networking. Reuben Ogbonna is your host, offering a chance to connect with fellow gardeners.",
     host_id: user1.id,
     garden_id: garden1.id,
-    event_date: "2024-05-10 15:00:00",
+    event_date: "2024-07-10 15:00:00",
     image:
       "https://ogden_images.s3.amazonaws.com/www.sungazette.com/images/2024/05/05162549/05022024-Day-of-Prayer-3-1100x601.jpg",
     title: "Plant Power Parade",
@@ -417,8 +417,8 @@ export const seed = async (knex) => {
       "An evening full of sustainable gardening tips and laughter. Gonzalo Romero hosts with a delightful mix of humor and gardening know-how.",
     host_id: user2.id,
     garden_id: garden2.id,
-    event_date: "2024-05-10 15:00:00",
-    image: "https://www.usda.gov/sites/default/files/nrcs-welcome-peoples-garden-blog-080322.jpg",
+    event_date: "2024-08-10 15:00:00",
+    image: "https://i.ibb.co/sqBmkzj/garden-path-royalty-free-image-1701459574.png",
     title: "Sustainable Splash",
   });
 
@@ -429,7 +429,7 @@ export const seed = async (knex) => {
       "A event focused on growing onions and other root vegetables on the East Coast. Angelica Ibarlucea shares her expertise with hands-on demos.",
     host_id: user3.id,
     garden_id: garden3.id,
-    event_date: "2024-05-10 15:00:00",
+    event_date: "2024-07-10 15:00:00",
     image: "https://i.ibb.co/Kq5xbgS/Angelica-Apples.png",
     title: "Onion Workshop",
   });
@@ -441,7 +441,7 @@ export const seed = async (knex) => {
       "Motun's Plant Meetup brings the latest plant care techniques and trends to the community. Connect with other growers and expand your network.",
     host_id: user4.id,
     garden_id: garden4.id,
-    event_date: "2024-05-10 15:00:00",
+    event_date: "2024-08-10 15:00:00",
     image:
       "https://cdn.britannica.com/42/91642-050-332E5C66/Keukenhof-Gardens-Lisse-Netherlands.jpg",
     title: "The New Eco-Summit",
@@ -454,7 +454,7 @@ export const seed = async (knex) => {
       "A party that features garden-related projects and activities. Ben Spector's event encourages creativity and networking.",
     host_id: user5.id,
     garden_id: garden5.id,
-    event_date: "2024-05-10 15:00:00",
+    event_date: "2025-05-10 15:00:00",
     image:
       "https://www.bhg.com/thmb/SdH3liapyw5vZZf-LKe_MmgvYuA=/4000x0/filters:no_upscale():strip_icc()/BHG-What-Is-a-Permaculture-Garden-3AWGe3jUq5hAt8vbh3yisf-f3d0c14454b44bf5b319234918574b9e.jpg",
     title: "Botanical Bash",
@@ -467,19 +467,19 @@ export const seed = async (knex) => {
       "An employment fair for aspiring gardeners seeking career opportunities. Jorge Hadad Rey connects job seekers with exciting new prospects.",
     host_id: user6.id,
     garden_id: garden6.id,
-    event_date: "2024-05-10 15:00:00",
+    event_date: "2025-05-10 15:00:00",
     image:
       "https://www.marthastewart.com/thmb/NbLHicUgeCrSqCtbyKS8c2vmHzI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/garden-trends-hero-d67def0ea07f4129b4011f3d04d7c3f2.jpg",
     title: "Garden Job Junction",
   });
 
   // Posts
-
   const post1 = await Post.create({
-    title: "Best time to plant tomatoes?",
-    body: "I'm new to gardening and want to plant tomatoes. What's the best time of year to start? #gardening #tomatoes #planting",
-    user_id: user12.id
-  });
+    title: "Herb garden pests",
+    body: "My herb garden is being overrun by pests. What can I do? #gardening #herbs #pestcontrol",
+    user_id: user22.id
+});
+
   
   const comment1_1 = await Comment.create({
     post_id: post1.id,
@@ -542,7 +542,7 @@ export const seed = async (knex) => {
   });
   
   const post6 = await Post.create({
-    title: "Composting basics?",
+    title: "Experience with composting?",
     body: "I'm interested in starting composting. What should I know before I begin? #sustainability",
     user_id: user6.id
   });
@@ -740,10 +740,9 @@ const comment21_1 = await Comment.create({
 });
 
 const post22 = await Post.create({
-    title: "Herb garden pests",
-    body: "My herb garden is being overrun by pests. What can I do? #gardening #herbs #pestcontrol",
-    user_id: user22.id
+  title: "Best time to plant tomatoes?",
+  body: "I'm new to gardening and want to plant tomatoes. What's the best time of year to start? #gardening #tomatoes #planting",
+  user_id: user12.id
 });
-
   
 };
