@@ -36,11 +36,15 @@ const Community = () => {
         (comment) => comment.user.id !== currentUser.id
       );
 
+      const sortedComments = otherUsersComments.sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      );
+
       setNotifications((prevNotifications) => {
-        if (otherUsersComments.length > prevNotifications.length) {
+        if (sortedComments.length > prevNotifications.length) {
           audio.play();
         }
-        return otherUsersComments;
+        return sortedComments;
       });
     };
     fetchNotifications();

@@ -30,7 +30,8 @@ export default class Event {
   static async list() {
     const query = `
     SELECT * 
-    FROM events`;
+    FROM events
+    ORDER BY created_at DESC`;
     const { rows } = await knex.raw(query);
     return rows.map((event) => new Event(event));
   }
@@ -49,7 +50,8 @@ export default class Event {
     const query = `
     SELECT * 
     FROM events
-    WHERE host_id = ?`;
+    WHERE host_id = ?
+    ORDER BY created_at DESC`;
     const { rows } = await knex.raw(query, [host_id]);
     return rows.map((event) => new Event(event));
   }
