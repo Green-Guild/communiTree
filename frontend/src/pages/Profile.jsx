@@ -103,7 +103,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center h-full bg-yellow mt-16 mr-6 ml-6 rounded-t-xl">
+    <div className="relative flex flex-col items-center justify-center h-screen pb-32 bg-yellow mt-16 mr-6 ml-6 rounded-t-xl">
       <button
         onClick={handleEditToggle}
         className="top-1 right-1 absolute bg-bright-orange rounded-lg p-1 m-4 button-bulge "
@@ -200,13 +200,13 @@ const Profile = () => {
           htmlFor="contributionType"
           className="font-bold text-bright-orange"
         >
-          Contributions:{" "}
+      {" "}
         </label>
         <select
           id="contributionType"
           value={contributionType}
           onChange={(e) => setContributionType(e.target.value)}
-          className="ml-2 rounded-lg p-2 bg-light-green text-black"
+          className="ml-2 rounded-lg p-2 bg-yellow text-white"
         >
           <option value="posts">Posts</option>
           <option value="gardens">Gardens</option>

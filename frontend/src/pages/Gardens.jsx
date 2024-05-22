@@ -64,7 +64,7 @@ const Gardens = () => {
           </button>
           </form>
 
-        <div className="bg-yellow dark:bg-opacity-30 p-5 flex-col justify-center align-middle items-center h-full rounded-t-xl m-16 mb-0">
+        <div className="bg-yellow dark:bg-opacity-30 p-5 flex-col justify-center align-middle items-center h-full min-h-[50vw] rounded-t-xl m-16 mb-0">
           <p className=" ml-[38%] mb-5 absolute text-white w-24 bg-white bg-opacity-30 rounded-full px-4">
             Gardens
           </p>
