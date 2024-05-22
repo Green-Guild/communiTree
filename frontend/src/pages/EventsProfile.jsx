@@ -23,26 +23,6 @@ const EventsProfile = () => {
 
   return (
     <>
-      {/* <main>
-        <div>
-          <h1>{title}</h1>
-        </div>
-        <div>
-          <img src={image} alt={title}></img>
-        </div>
-        <div>
-          <h2>Date</h2>
-          <p>{event_date}</p>
-        </div>
-        <div>
-          <h2>About</h2>
-          <p>{description}</p>
-        </div>
-
-        <div>
-          <p>{zipcode}</p>
-        </div>
-      </main> */}
        <main className="bg-yellow h-screen p-16 flex items-center justify-center align-middle">
       <div className="bg-white min-w-fit w-[40vw] dark:bg-black flex rounded-xl h-96 shadow-md hover:scale-105 hover:shadow-lg hover:shadow-light-yellow transition duration-300 ease-in-out">
         <img src={image} alt={title} className="h-full w-[50%] rounded-l-xl object-cover" />

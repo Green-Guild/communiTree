@@ -52,7 +52,7 @@ const Gardens = () => {
             value={searchQuery}
             onChange={handleSearchChange}
             name="garden"
-            placeholder="Search"
+            placeholder="Search By Zipcode"
             aria-label="Browse through Gardens by entering zipcode"
           />
           <button

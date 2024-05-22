@@ -56,7 +56,7 @@ const Events = () => {
               value={searchQuery}
               onChange={handleSearchChange}
               name="Event"
-              placeholder="Search"
+              placeholder="Search By Zipcode"
               aria-label="Browse through events by entering zipcode"
             />
             <button
