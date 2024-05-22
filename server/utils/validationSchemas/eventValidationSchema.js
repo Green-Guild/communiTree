@@ -1,4 +1,4 @@
-import { validateDate, validateImageUrl } from './validationHelpers.js';
+import { validateDate, validateImageUrl, validateEventDate } from './validationHelpers.js';
 
 export const createEventValidationSchema = {
   title: {
@@ -24,7 +24,7 @@ export const createEventValidationSchema = {
   },
   event_date: {
     isDateCustom: {
-      custom: validateDate,
+      custom: validateEventDate,
     },
   },
   zipcode: {
@@ -77,7 +77,7 @@ export const updateEventValidationSchema = {
   event_date: {
     optional: true,
     isDateCustom: {
-      custom: validateDate,
+      custom: validateEventDate,
     },
   },
   zipcode: {

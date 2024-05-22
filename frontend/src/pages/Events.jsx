@@ -10,13 +10,18 @@ const Events = () => {
   const [searchResults, setSearchResults] = useState([]);
   const { currentUser } = useContext(CurrentUserContext);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  
+  const fetchData = async () => {
+    try {
       const data = await getAllEvents();
       setEvent(data);
       setSearchResults(data);
-    };
-
+    } catch (error) {
+      console.error('Error fetching gardens:', error);
+    }
+  }
+ 
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -27,7 +32,7 @@ const Events = () => {
     }
 
     const filteredEvents = event.filter((event) =>
-      event.location.includes(searchQuery)
+      event.zipcode.includes(searchQuery)
     );
 
     setSearchResults(filteredEvents);
@@ -35,9 +40,6 @@ const Events = () => {
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-  };
-  const handleClearSearch = () => {
-    setSearchQuery('');
   };
 
   return (
@@ -71,7 +73,7 @@ const Events = () => {
               Events
             </p>
             <div>
-              {currentUser && <NewEventForm ownerId={currentUser.id} />}
+              {currentUser && <NewEventForm ownerId={currentUser.id} onEventCreated={fetchData}/>}
             </div>
             <div className="flex flex-wrap justify-center m-12">
               {/* <div className="overflow-auto m-12" style={{ maxHeight: '50vh' }}> */}

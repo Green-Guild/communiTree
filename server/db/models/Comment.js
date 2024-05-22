@@ -13,7 +13,8 @@ export default class Comment {
   static async list() {
     const query = `
     SELECT * 
-    FROM comments`;
+    FROM comments
+    ORDER BY created_at DESC`;
     const { rows } = await knex.raw(query);
     return rows.map((comment) => new Comment(comment));
   }
@@ -32,7 +33,8 @@ export default class Comment {
     const query = `
     SELECT * 
     FROM comments
-    WHERE post_id = ?`;
+    WHERE post_id = ?
+    ORDER BY created_at DESC`;
     const { rows } = await knex.raw(query, [post_id]);
     return rows.map((comment) => new Comment(comment));
   }

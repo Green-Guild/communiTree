@@ -28,7 +28,8 @@ export default class Garden {
   static async list() {
     const query = `
     SELECT * 
-    FROM gardens`;
+    FROM gardens
+    ORDER BY created_at DESC`;
     const { rows } = await knex.raw(query);
 
     return rows.map((garden) => new Garden(garden));
@@ -48,7 +49,8 @@ export default class Garden {
     const query = `
     SELECT * 
     FROM gardens 
-    WHERE owner_id = ?`;
+    WHERE owner_id = ?
+    ORDER BY created_at DESC`;
     const { rows } = await knex.raw(query, [owner_id]);
     return rows.map((garden) => new Garden(garden));
   }
